@@ -16,8 +16,9 @@ describe('getStonks', () => {
     expect.assertions(2)
     return db.getStonks(testDb)
       .then(stonks => {
-        expect(stonks.length).toBe(2)
+        expect(stonks).toHaveLength(2)
         expect(stonks[0].company_name).toBe('Algonquin Power & Utilities Corp.')
+        return null
       })
   })
 })
@@ -30,6 +31,7 @@ describe('getStonkBySymbol', () => {
         expect(stonk.stock_symbol).toBe('FB')
         expect(stonk.company_name).toBe('Facebook, Inc.')
         expect(stonk.esg_id).toBe(2664)
+        return null
       })
   })
 })
@@ -42,6 +44,7 @@ describe('getStonkByName', () => {
         expect(stonk.stock_symbol).toBe('AQN')
         expect(stonk.company_name).toBe('Algonquin Power & Utilities Corp.')
         expect(stonk.esg_id).toBe(11119)
+        return null
       })
   })
 })

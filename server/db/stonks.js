@@ -20,7 +20,7 @@ function getStonkBySymbol (symbol, db = connection) {
 }
 
 module.exports = {
-  getStonks,
-  getStonkByName,
-  getStonkBySymbol
+getStonks,
+getStonkByName,
+getStonkBySymbol
 }

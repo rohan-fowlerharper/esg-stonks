@@ -1,5 +1,4 @@
 import request from 'supertest'
-
 const server = require('../../server')
 const db = require('../../db/stonks')
 
@@ -16,7 +15,6 @@ describe('GET /api/v1/stonks', () => {
     stockSymbol: 'GOOG', 
     companyName: 'Google' 
   }]
-
   beforeAll(() => {
     db.getStonks.mockResolvedValue(fakeStonks)
   })
@@ -25,7 +23,7 @@ describe('GET /api/v1/stonks', () => {
     return request(server)
       .get('/api/v1/stonks')
       .expect(200)
-      .then(res => {
+      .then(() => {
       expect(db.getStonks).toHaveBeenCalled()
       return null
     })
