@@ -9,5 +9,6 @@ describe.skip('<Home />', () => {
     const heading = screen.getAllByRole('heading')
     expect(heading).toHaveTextContent('Welcome to ESG stonks')
     screen.debug()
+    expect(true).toBe(true)
   })
 })

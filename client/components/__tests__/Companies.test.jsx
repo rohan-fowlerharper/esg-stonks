@@ -3,9 +3,10 @@ import { render, screen } from '@testing-library/react'
 
 import Companies from '../pages/Companies'
 
-describe.skip('<Companies />', () => {
+describe('<Companies />', () => {
   it('renders list of companies', () => {
     render(<Companies />)
     screen.debug()
+    expect(true).toBe(true)
   })
 })
