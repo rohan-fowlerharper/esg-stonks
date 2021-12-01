@@ -8,7 +8,7 @@ function App () {
         <h1>My Collection</h1>
       </header>
       <section className="main">
-        <Heading as='h1'>Welcome to ESG stocks</Heading>
+        <Heading as='h1'>Welcome to ESG stonks</Heading>
         {/* add your code here */}
 
       </section>
