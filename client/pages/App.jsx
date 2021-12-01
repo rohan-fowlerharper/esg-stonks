@@ -1,5 +1,5 @@
 import React from 'react'
-import { Route } from 'react-router-dom'
+import { Routes, Route } from 'react-router-dom'
 
 import Home from './Home'
 import Navigation from '../components/Navigation'
@@ -9,8 +9,12 @@ function App () {
   return (
     <>
       <Navigation />
-      <Route path='/' element={<Home />} />
-      <Route path='/companies' element={<Companies />} />
+      {/* <Home /> */}
+      <Routes>
+        <Route path='/' element={<Home />} />
+        <Route path='/companies' element={<Companies />} />
+      </Routes>
+
     </>
   )
 }
