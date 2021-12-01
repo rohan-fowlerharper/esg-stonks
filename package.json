@@ -80,6 +80,7 @@
     "framer-motion": "^4.1.17",
     "knex": "^0.21.17",
     "pg": "^8.5.1",
+    "react-router": "^6.0.2",
     "superagent": "^6.1.0"
   }
 }
