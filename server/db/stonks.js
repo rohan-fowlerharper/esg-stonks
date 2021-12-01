@@ -6,22 +6,21 @@ function getStonks (db = connection) {
     .select(allQueryFields)
 }
 
-function getStonkByName (companyName, db = connection) {
+function getStonksByName (companyName, db = connection) {
   return db('stonks')
     .select(allQueryFields)
     .where('companyName', 'like', `%${companyName}%`)
-    .first()
 }
 
 function getStonkBySymbol (stockSymbol, db = connection) {
   return db('stonks')
     .select(allQueryFields)
-    .where({ stockSymbol })
+    .whereRaw('LOWER(stockSymbol) LIKE ?', stockSymbol)
     .first()
 }
 
 module.exports = {
   getStonks,
-  getStonkByName,
+  getStonksByName,
   getStonkBySymbol
 }
