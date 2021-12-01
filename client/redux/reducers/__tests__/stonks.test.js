@@ -1,5 +1,4 @@
 import stonks from '../stonks'
-import { fetchStonks } from '../../actions/stonks'
 
 it('has correct initial state', () => {
   expect(stonks(undefined, { type: '@@INIT' })).toEqual([])
