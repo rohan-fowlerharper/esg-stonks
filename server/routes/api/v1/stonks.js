@@ -1,5 +1,5 @@
 const express = require('express')
-// const checkJwt = require('../auth-util')
+
 const router = express.Router()
 
 const stonksDb = require('../../../db/stonks')
