@@ -4,7 +4,7 @@ import { Heading } from '@chakra-ui/react'
 function Home () {
   return (
     <>
-      <Heading as='h1'>Welcome to ESG stonks</Heading>
+      <Heading as='h1' size='2xl'>Welcome to ESG stonks</Heading>
     </>
   )
 }

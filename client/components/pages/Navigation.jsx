@@ -1,47 +1,43 @@
-import React, { useEffect } from 'react'
-import { Flex } from '@chakra-ui/react'
-// import { Link } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
+import React from 'react'
+import {
+  Flex,
+  Box,
+  HStack
+} from '@chakra-ui/react'
 import { useAuth0 } from '@auth0/auth0-react'
 import LoginButton from '../LoginButton'
 import LogoutButton from '../LogoutButton'
-import { fetchStonks } from '../../redux/actions/stonks'
 
 function Navigation () {
-  const dispatch = useDispatch()
-  const stonks = useSelector(state => state.stonks)
-  const { isAuthenticated, user } = useAuth0()
-
-  // TODO: ensture to pass token
-  useEffect(() => {
-    dispatch(fetchStonks())
-  }, [])
+  const { isAuthenticated } = useAuth0()
+  const links = ['Home', 'ESG scores']
 
   return (
     <>
-      <Flex as="nav" w="100%">
-        <img src="/images/esg-stonks_logo.png" />
-        {isAuthenticated ? (
-          <LogoutButton colorScheme='teal' />
-        ) : (
-          <LoginButton colorScheme='teal' />
-        )}
-      </Flex>
-      <section className="main">
-        {isAuthenticated ? (
-          <>
-            <h2>Welcome {user.nickname}</h2>
-            <p>Your email is {user.email}</p>
-            <img src={user.picture} alt={`thumbnail of ${user.nickname}`} />
-            <p>Here is some restricted content: </p>
-            {stonks.map(stonk => (
-              <p key={stonk.id}>{stonk.company_name}</p>
-            ))}
-          </>
-        ) : (
-          <p>Please log in to see your profile and restricted content</p>
-        )}
-      </section>
+      <Box bg={'gray.100'} px={6}>
+        <Flex as="nav" w="100%" h={20} alignItems={'center'} justifyContent={'space-between'}>
+          <HStack spacing={8} alignItems={'center'}>
+            <Box>
+              <img src="/images/esg-stonks_logo.png" />
+            </Box>
+            <HStack
+              as={'nav'}
+              spacing={10}
+              display={{ base: 'none', md: 'flex' }}>
+              {links.map((link) => (
+                <Box key={link}>{link}</Box>
+              ))}
+            </HStack>
+          </HStack>
+          <Flex alignItems={'center'}>
+            {isAuthenticated ? (
+              <LogoutButton bg="#95BF8F" color="white" />
+            ) : (
+              <LoginButton bg="#95BF8F" color="white" />
+            )}
+          </Flex>
+        </Flex>
+      </Box>
     </>
   )
 }
