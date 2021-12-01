@@ -1,15 +1,40 @@
 const express = require('express')
-// const checkJwt = require('../auth-util')
+
 const router = express.Router()
 
-const stonksDb = require('../../../db/stonks')
+const db = require('../../../db/stonks')
 
 router.get('/', (req, res) => {
-  stonksDb.getStonks()
+  db.getStonks()
     .then(stonks => {
       return res.json(stonks)
     })
-    .catch(err => console.error(err))
+    .catch(err => {
+      console.log(err)
+      res.status(500).send('There was an error')
+    })
+})
+
+router.get('/:symbol', (req, res) => {
+  db.getStonkBySymbol(req.params.symbol)
+    .then(stonk => {
+      return res.json(stonk)
+    })
+    .catch(err => {
+      console.log(err)
+      res.status(500).send('There was an error')
+    })
+})
+
+router.get('/:name', (req, res) => {
+  db.getStonkByName(req.params.name)
+    .then(stonk => {
+      return res.json(stonk)
+    })
+    .catch(err => {
+      console.log(err)
+      res.status(500).send('There was an error')
+    })
 })
 
 module.exports = router

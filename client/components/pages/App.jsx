@@ -1,8 +1,7 @@
 import React from 'react'
-
 import Home from './Home'
 import Navigation from './Navigation'
-import Companies from './Companies'
+import Companies from '../Companies'
 
 function App () {
   return (

@@ -5,6 +5,20 @@ function getStonks (db = connection) {
     .select()
 }
 
+function getStonkByName (name, db = connection) {
+  return db('stonks')
+    .where({ company_name: name })
+    .first()
+}
+
+function getStonkBySymbol (symbol, db = connection) {
+  return db('stonks')
+    .where({ stock_symbol: symbol })
+    .first()
+}
+
 module.exports = {
-  getStonks
+  getStonks,
+  getStonkByName,
+  getStonkBySymbol
 }
