@@ -19,6 +19,7 @@ function App () {
   console.log(stonks)
 
   useEffect(() => {
+    // TODO: ensture to pass token
     dispatch(fetchStonks())
   }, [])
 
@@ -46,6 +47,7 @@ function App () {
           <>
             <h2>Welcome {user.nickname}</h2>
             <p>Your email is {user.email}</p>
+            <img src={user.picture} alt={`thumbnail of ${user.nickname}`} />
             <p>Here is some restricted content: </p>
             {stonks.map(stonk => (
               <p key={stonk.id}>{stonk.company_name}</p>
