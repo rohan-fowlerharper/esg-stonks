@@ -2,15 +2,16 @@ import React from 'react'
 import {
   Flex,
   Box,
-  HStack
+  HStack,
+  Link
 } from '@chakra-ui/react'
 import { useAuth0 } from '@auth0/auth0-react'
 import LoginButton from './LoginButton'
 import LogoutButton from './LogoutButton'
+import { Link as RouteLink } from 'react-router-dom'
 
 function Navigation () {
   const { isAuthenticated } = useAuth0()
-  const links = ['Home', 'ESG scores']
 
   return (
     <>
@@ -24,9 +25,8 @@ function Navigation () {
               as={'nav'}
               spacing={10}
               display={{ base: 'none', md: 'flex' }}>
-              {links.map((link) => (
-                <Box key={link}>{link}</Box>
-              ))}
+              <Box><Link as={RouteLink} to='/'>Home</Link></Box>
+              <Box><Link as={RouteLink} to='/companies'>ESG scores</Link></Box>
             </HStack>
           </HStack>
           <Flex alignItems={'center'}>
