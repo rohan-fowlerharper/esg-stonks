@@ -7,10 +7,9 @@ function getStonks (db = connection) {
 }
 
 function getStonkByName (companyName, db = connection) {
-  // console.log(companyName)
   return db('stonks')
     .select(allQueryFields)
-    .where({ companyName })
+    .where('companyName', 'like', `%${companyName}%`)
     .first()
 }
 

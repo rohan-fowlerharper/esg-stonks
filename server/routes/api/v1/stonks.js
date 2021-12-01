@@ -18,12 +18,9 @@ router.get('/', (req, res) => {
 // TODO: use actual db function to get stonk by name
 router.get('/name/:name', (req, res) => {
   const name = req.params.name
-  db.getStonks()
+  db.getStonkByName(name)
     .then(stonks => {
-      const filtered = stonks.filter(stonk => {
-        return stonk.companyName.toLowerCase().includes(name.toLowerCase())
-      })
-      return res.json(filtered)
+      return res.json(stonks)
     })
     .catch(err => {
       console.log(err)

@@ -4,7 +4,7 @@ const db = require('../../db/stonks')
 
 jest.mock('../../db/stonks')
 
-describe.skip('GET /api/v1/stonks/name/:name', () => {
+describe('GET /api/v1/stonks/name/:name', () => {
   const fakeStonks = [{
     id: 1,
     stockSymbol: 'FB',
@@ -15,26 +15,24 @@ describe.skip('GET /api/v1/stonks/name/:name', () => {
     stockSymbol: 'GOOG',
     companyName: 'Google'
   }]
-  beforeAll(() => {
-    db.getStonksByName.mockResolvedValue(fakeStonks)
-  })
 
   it('calls db.getStonksByName', () => {
+    db.getStonkByName.mockResolvedValue(fakeStonks[0])
     return request(server)
       .get('/api/v1/stonks/name/facebook')
       .expect(200)
       .then(() => {
-        expect(db.getStonksByName).toHaveBeenCalled()
+        expect(db.getStonkByName).toHaveBeenCalled()
         return null
       })
   })
 
   it('returns a stonk from database that matches given name', () => {
+    db.getStonkByName.mockResolvedValue(fakeStonks[0])
     return request(server)
       .get('/api/v1/stonks/name/facebook')
       .expect(200)
       .then(res => {
-        console.log(res.body)
         expect(res.body).toEqual(fakeStonks[0])
         return null
       })
@@ -79,13 +77,15 @@ describe('GET /api/v1/stonks', () => {
 
 describe('when database does not work', () => {
   test('returns 500', () => {
-    expect.assertions(1)
+    console.log = jest.fn()
+    expect.assertions(2)
     const err = new Error('no worky')
     db.getStonks.mockImplementation(() => Promise.reject(err))
     return request(server)
       .get('/api/v1/stonks')
       .then(res => {
         expect(res.status).toBe(500)
+        expect(console.log).toHaveBeenCalledWith(err)
         return null
       })
   })
