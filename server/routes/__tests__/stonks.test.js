@@ -4,6 +4,43 @@ const db = require('../../db/stonks')
 
 jest.mock('../../db/stonks')
 
+describe.skip('GET /api/v1/stonks/name/:name', () => {
+  const fakeStonks = [{
+    id: 1,
+    stockSymbol: 'FB',
+    companyName: 'Facebook'
+  },
+  {
+    id: 2,
+    stockSymbol: 'GOOG',
+    companyName: 'Google'
+  }]
+  beforeAll(() => {
+    db.getStonksByName.mockResolvedValue(fakeStonks)
+  })
+
+  it('calls db.getStonksByName', () => {
+    return request(server)
+      .get('/api/v1/stonks/name/facebook')
+      .expect(200)
+      .then(() => {
+        expect(db.getStonksByName).toHaveBeenCalled()
+        return null
+      })
+  })
+
+  it('returns a stonk from database that matches given name', () => {
+    return request(server)
+      .get('/api/v1/stonks/name/facebook')
+      .expect(200)
+      .then(res => {
+        console.log(res.body)
+        expect(res.body).toEqual(fakeStonks[0])
+        return null
+      })
+  })
+})
+
 describe('GET /api/v1/stonks', () => {
   const fakeStonks = [{
     id: 1,

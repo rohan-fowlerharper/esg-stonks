@@ -1,19 +1,23 @@
 const connection = require('./connection')
+const allQueryFields = require('../util/db-helper')
 
 function getStonks (db = connection) {
   return db('stonks')
-    .select()
+    .select(allQueryFields)
 }
 
-function getStonkByName (name, db = connection) {
+function getStonkByName (companyName, db = connection) {
+  // console.log(companyName)
   return db('stonks')
-    .where({ company_name: name })
+    .select(allQueryFields)
+    .where({ companyName })
     .first()
 }
 
-function getStonkBySymbol (symbol, db = connection) {
+function getStonkBySymbol (stockSymbol, db = connection) {
   return db('stonks')
-    .where({ stock_symbol: symbol })
+    .select(allQueryFields)
+    .where({ stockSymbol })
     .first()
 }
 

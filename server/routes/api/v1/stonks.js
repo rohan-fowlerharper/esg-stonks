@@ -15,10 +15,15 @@ router.get('/', (req, res) => {
     })
 })
 
-router.get('/:symbol', (req, res) => {
-  db.getStonkBySymbol(req.params.symbol)
-    .then(stonk => {
-      return res.json(stonk)
+// TODO: use actual db function to get stonk by name
+router.get('/name/:name', (req, res) => {
+  const name = req.params.name
+  db.getStonks()
+    .then(stonks => {
+      const filtered = stonks.filter(stonk => {
+        return stonk.companyName.toLowerCase().includes(name.toLowerCase())
+      })
+      return res.json(filtered)
     })
     .catch(err => {
       console.log(err)
@@ -26,10 +31,15 @@ router.get('/:symbol', (req, res) => {
     })
 })
 
-router.get('/:name', (req, res) => {
-  db.getStonkByName(req.params.name)
-    .then(stonk => {
-      return res.json(stonk)
+// TODO: use actual db function to get stonk by symbol
+router.get('/symbol/:symbol', (req, res) => {
+  const symbol = req.params.symbol
+  db.getStonks()
+    .then(stonks => {
+      const filtered = stonks.filter(stonk => {
+        return stonk.stockSymbol.toLowerCase().includes(symbol.toLowerCase())
+      })
+      return res.json(filtered)
     })
     .catch(err => {
       console.log(err)
