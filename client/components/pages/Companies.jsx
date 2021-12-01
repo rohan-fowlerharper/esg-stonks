@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchStonks } from '../redux/actions/stonks'
+import { fetchStonks } from '../../redux/actions/stonks'
 
 function Companies () {
   const dispatch = useDispatch()
