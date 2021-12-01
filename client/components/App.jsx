@@ -1,9 +1,17 @@
+// React
 import React, { useEffect } from 'react'
-import { Heading } from '@chakra-ui/react'
 
+// Hooks
 import { useDispatch, useSelector } from 'react-redux'
+import { useAuth0 } from '@auth0/auth0-react'
 
+// Redux
 import { fetchStonks } from '../redux/actions/stonks'
+
+// Components
+import { Heading } from '@chakra-ui/react'
+import LoginButton from './LoginButton'
+import LogoutButton from './LogoutButton'
 
 function App () {
   const dispatch = useDispatch()
@@ -13,13 +21,17 @@ function App () {
     dispatch(fetchStonks())
   }, [])
 
+  const { isAuthenticated, user, loginWithRedirect, logout } = useAuth0()
+  console.log(isAuthenticated, user, loginWithRedirect, logout)
   return (
     <>
       <header className="header">
-        <h1>My Collection</h1>
+        <Heading as='h1'>Welcome to ESG stonks</Heading>
+        <LoginButton colorScheme='teal' />
+        <LogoutButton />
       </header>
       <section className="main">
-        <Heading as='h1'>Welcome to ESG stonks</Heading>
+
         {stonks.map(stonk => {
           return <div key={stonk.esg_id}>{stonk.company_name}</div>
         })}
