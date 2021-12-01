@@ -1,4 +1,5 @@
 import React from 'react'
+import { Heading } from '@chakra-ui/react'
 
 function App () {
   return (
@@ -7,7 +8,9 @@ function App () {
         <h1>My Collection</h1>
       </header>
       <section className="main">
+        <Heading as='h1'>Welcome to ESG stocks</Heading>
         {/* add your code here */}
+
       </section>
     </>
   )
