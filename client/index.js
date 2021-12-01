@@ -1,11 +1,10 @@
 import React from 'react'
 import { render } from 'react-dom'
-
 import { Provider } from 'react-redux'
 import { ChakraProvider } from '@chakra-ui/react'
 import { Auth0Provider } from '@auth0/auth0-react'
 
-import App from './components/App'
+import App from './components/pages/App'
 
 import store from './redux/store'
 
