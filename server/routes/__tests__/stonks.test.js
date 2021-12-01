@@ -17,20 +17,55 @@ describe('GET /api/v1/stonks/name/:name', () => {
   }]
 
   it('calls db.getStonksByName', () => {
-    db.getStonkByName.mockResolvedValue(fakeStonks[0])
+    db.getStonksByName.mockResolvedValue([fakeStonks[0]])
     return request(server)
       .get('/api/v1/stonks/name/facebook')
       .expect(200)
       .then(() => {
-        expect(db.getStonkByName).toHaveBeenCalled()
+        expect(db.getStonksByName).toHaveBeenCalled()
         return null
       })
   })
 
   it('returns a stonk from database that matches given name', () => {
-    db.getStonkByName.mockResolvedValue(fakeStonks[0])
+    db.getStonksByName.mockResolvedValue([fakeStonks[0]])
     return request(server)
       .get('/api/v1/stonks/name/facebook')
+      .expect(200)
+      .then(res => {
+        expect(res.body[0]).toEqual(fakeStonks[0])
+        return null
+      })
+  })
+})
+
+describe('GET /api/v1/stonks/symbol/:symbol', () => {
+  const fakeStonks = [{
+    id: 1,
+    stockSymbol: 'FB',
+    companyName: 'Facebook'
+  },
+  {
+    id: 2,
+    stockSymbol: 'GOOG',
+    companyName: 'Google'
+  }]
+
+  it('calls db.getStonkBySymbol', () => {
+    db.getStonkBySymbol.mockResolvedValue(fakeStonks[0])
+    return request(server)
+      .get('/api/v1/stonks/symbol/FB')
+      .expect(200)
+      .then(() => {
+        expect(db.getStonkBySymbol).toHaveBeenCalled()
+        return null
+      })
+  })
+
+  it('returns a stonk from database that matches given symbol', () => {
+    db.getStonkBySymbol.mockResolvedValue(fakeStonks[0])
+    return request(server)
+      .get('/api/v1/stonks/symbol/FB')
       .expect(200)
       .then(res => {
         expect(res.body).toEqual(fakeStonks[0])
