@@ -5,15 +5,15 @@ const db = require('../../db/stonks')
 jest.mock('../../db/stonks')
 
 describe('GET /api/v1/stonks', () => {
-  const fakeStonks = [{ 
-    id: 1, 
-    stockSymbol: 'FB', 
-    companyName: 'Facebook' 
-    }, 
-    { 
-    id:2 , 
-    stockSymbol: 'GOOG', 
-    companyName: 'Google' 
+  const fakeStonks = [{
+    id: 1,
+    stockSymbol: 'FB',
+    companyName: 'Facebook'
+  },
+  {
+    id: 2,
+    stockSymbol: 'GOOG',
+    companyName: 'Google'
   }]
   beforeAll(() => {
     db.getStonks.mockResolvedValue(fakeStonks)
@@ -24,9 +24,9 @@ describe('GET /api/v1/stonks', () => {
       .get('/api/v1/stonks')
       .expect(200)
       .then(() => {
-      expect(db.getStonks).toHaveBeenCalled()
-      return null
-    })
+        expect(db.getStonks).toHaveBeenCalled()
+        return null
+      })
   })
 
   it('returns all stonks from database', () => {
