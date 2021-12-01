@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux'
 
-// import stuff from './stuff'
+import stonks from '../reducers/stonks'
 
 export default combineReducers({
-  // stuff
+  stonks
 })
