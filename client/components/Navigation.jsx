@@ -3,7 +3,8 @@ import {
   Flex,
   Box,
   HStack,
-  Link
+  Link,
+  useColorModeValue
 } from '@chakra-ui/react'
 import { useAuth0 } from '@auth0/auth0-react'
 import LoginButton from './LoginButton'
@@ -15,7 +16,7 @@ function Navigation () {
 
   return (
     <>
-      <Box bg={'gray.100'} px={6}>
+      <Box bg={useColorModeValue('gray.100', 'gray700')} px={6}>
         <Flex as="nav" w="100%" h={20} alignItems={'center'} justifyContent={'space-between'}>
           <HStack spacing={8} alignItems={'center'}>
             <Box>

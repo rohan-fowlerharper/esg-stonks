@@ -9,7 +9,6 @@ function App () {
   return (
     <>
       <Navigation />
-      {/* <Home /> */}
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/companies' element={<Companies />} />
