@@ -14,27 +14,21 @@ function Companies () {
   }, [])
 
   return (
-
-    <>
-      {stonks.map(stonk => {
-        return <div key={stonk.esg_id}>{stonk.company_name}</div>
-      })}
-      <section className="main">
-        {isAuthenticated ? (
-          <>
-            <h2>Welcome {user.nickname}</h2>
-            <p>Your email is {user.email}</p>
-            <img src={user.picture} alt={`thumbnail of ${user.nickname}`} />
-            <p>Here is some restricted content: </p>
-            {stonks.map(stonk => (
-              <p key={stonk.id}>{stonk.company_name}</p>
-            ))}
-          </>
-        ) : (
-          <p>Please log in to see your profile and restricted content</p>
-        )}
-      </section>
-    </>
+    <section className="main">
+      {isAuthenticated ? (
+        <>
+          <h2>Welcome {user.nickname}</h2>
+          <p>Your email is {user.email}</p>
+          <img src={user.picture} alt={`thumbnail of ${user.nickname}`} />
+          <p>Here is some restricted content: </p>
+          {stonks.map(stonk => (
+            <p key={stonk.id}>{stonk.company_name}</p>
+          ))}
+        </>
+      ) : (
+        <p>Please log in to see your profile and restricted content</p>
+      )}
+    </section>
   )
 }
 
