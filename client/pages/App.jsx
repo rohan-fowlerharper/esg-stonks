@@ -5,6 +5,8 @@ import Home from './Home'
 import Navigation from '../components/Navigation'
 import Companies from './Companies'
 
+import CompanyGoals from '../components/CompanyGoals'
+
 function App () {
   return (
     <>
@@ -13,6 +15,7 @@ function App () {
         <Route path='/' element={<Home />} />
         <Route path='/companies' element={<Companies />} />
       </Routes>
+      <CompanyGoals stockSymbol='AAPL'/>
     </>
   )
 }
