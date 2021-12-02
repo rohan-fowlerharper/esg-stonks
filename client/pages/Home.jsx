@@ -1,10 +1,12 @@
 import React from 'react'
-import { Heading } from '@chakra-ui/react'
+import { Heading, Center } from '@chakra-ui/react'
 
 function Home () {
   return (
     <>
-      <Heading as='h1' size='2xl'>Welcome to ESG stonks</Heading>
+      <Center>
+        <Heading as='h1' size='2xl' m={10}>Welcome to ESG stonks</Heading>
+      </Center>
     </>
   )
 }

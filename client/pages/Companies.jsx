@@ -1,12 +1,13 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchStonks } from '../redux/actions/stonks'
-import { useAuth0 } from '@auth0/auth0-react'
+// import { useAuth0 } from '@auth0/auth0-react'
+import { Heading, Center, Box, Text } from '@chakra-ui/react'
 
 function Companies () {
   const dispatch = useDispatch()
   const stonks = useSelector(state => state.stonks)
-  const { isAuthenticated, user } = useAuth0()
+  // const { isAuthenticated, user } = useAuth0()
 
   // TODO: ensture to pass token
   useEffect(() => {
@@ -14,8 +15,20 @@ function Companies () {
   }, [])
 
   return (
-    <section className="main">
-      {isAuthenticated ? (
+    <>
+      <Center>
+        <Heading as='h1' size='2xl' m={10}>Company Listings</Heading>
+      </Center>
+      <Box>
+        <Center>
+          <Text fontSize='xl'>Select 2 companies to compare ESG scores</Text>
+        </Center>
+      </Box>
+      <section className="main">
+        {stonks.map(stonk => (
+          <p key={stonk.id}>{stonk.company_name}</p>
+        ))}
+        {/* {isAuthenticated ? (
         <>
           <h2>Welcome {user.nickname}</h2>
           <p>Your email is {user.email}</p>
@@ -27,8 +40,9 @@ function Companies () {
         </>
       ) : (
         <p>Please log in to see your profile and restricted content</p>
-      )}
-    </section>
+      )} */}
+      </section>
+    </>
   )
 }
 
