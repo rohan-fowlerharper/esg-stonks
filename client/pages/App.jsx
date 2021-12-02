@@ -4,7 +4,6 @@ import { Routes, Route } from 'react-router-dom'
 import Home from './Home'
 import Navigation from '../components/Navigation'
 import Companies from './Companies'
-// import Company from './Company'
 
 import CompanyGoals from '../components/CompanyGoals'
 

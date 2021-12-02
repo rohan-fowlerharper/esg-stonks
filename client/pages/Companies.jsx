@@ -2,9 +2,9 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchStonks } from '../redux/actions/stonks'
 // import { useAuth0 } from '@auth0/auth0-react'
-import { Heading, Box, Text } from '@chakra-ui/react'
+import { Heading, Text, SimpleGrid } from '@chakra-ui/react'
 
-import Company from './Company'
+import Company from '../components/Company'
 
 import RegularLayout from '../layouts/RegularLayout'
 
@@ -21,15 +21,12 @@ function Companies () {
   return (
     <RegularLayout>
       <Heading as='h1' size='2xl' m={10}>Company Listings</Heading>
-
-      <Box>
-        <Text fontSize='xl'>Select 2 companies to compare ESG scores</Text>
-      </Box>
-      <Box>
+      <Text fontSize='xl'>Select 2 companies to compare ESG scores</Text>
+      <SimpleGrid columns={[2, null, 3]} gap={6} width={'100%'}>
         {stonks.map(stonk => (
           <Company key={stonk.id} stonk={stonk}/>
         ))}
-      </Box>
+      </SimpleGrid>
       {/* <Box>
         {isAuthenticated ? (
         <>
