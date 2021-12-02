@@ -2,10 +2,6 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 import { ResponsivePie } from '@nivo/pie'
 
-import data from './data.json'
-
-console.log(data)
-
 // TODO: render correct values within the pie chart
 // TODO: add a legend
 // https://nivo.rocks/pie/
