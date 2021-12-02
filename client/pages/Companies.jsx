@@ -2,9 +2,11 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchStonks } from '../redux/actions/stonks'
 // import { useAuth0 } from '@auth0/auth0-react'
-import { Heading, Center, Box, Text } from '@chakra-ui/react'
+import { Heading, Box, Text } from '@chakra-ui/react'
 
 import Company from './Company'
+
+import RegularLayout from '../layouts/RegularLayout'
 
 function Companies () {
   const dispatch = useDispatch()
@@ -17,24 +19,19 @@ function Companies () {
   }, [])
 
   return (
-    <>
-      <Center>
-        <Heading as='h1' size='2xl' m={10}>Company Listings</Heading>
-      </Center>
+    <RegularLayout>
+      <Heading as='h1' size='2xl' m={10}>Company Listings</Heading>
+
       <Box>
-        <Center>
-          <Text fontSize='xl'>Select 2 companies to compare ESG scores</Text>
-        </Center>
+        <Text fontSize='xl'>Select 2 companies to compare ESG scores</Text>
       </Box>
       <Box>
         {stonks.map(stonk => (
-          <Center key={stonk.id}>
-            <Text><Company stonk={stonk}/></Text>
-          </Center>
+          <Company key={stonk.id} stonk={stonk}/>
         ))}
       </Box>
-      <Box>
-        {/* {isAuthenticated ? (
+      {/* <Box>
+        {isAuthenticated ? (
         <>
           <h2>Welcome {user.nickname}</h2>
           <p>Your email is {user.email}</p>
@@ -46,9 +43,9 @@ function Companies () {
         </>
       ) : (
         <p>Please log in to see your profile and restricted content</p>
-      )} */}
-      </Box>
-    </>
+      )}
+      </Box> */}
+    </RegularLayout>
   )
 }
 
