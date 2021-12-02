@@ -4,6 +4,8 @@ import { fetchStonks } from '../redux/actions/stonks'
 // import { useAuth0 } from '@auth0/auth0-react'
 import { Heading, Center, Box, Text } from '@chakra-ui/react'
 
+import Company from './Company'
+
 function Companies () {
   const dispatch = useDispatch()
   const stonks = useSelector(state => state.stonks)
@@ -24,10 +26,14 @@ function Companies () {
           <Text fontSize='xl'>Select 2 companies to compare ESG scores</Text>
         </Center>
       </Box>
-      <section className="main">
+      <Box>
         {stonks.map(stonk => (
-          <p key={stonk.id}>{stonk.company_name}</p>
+          <Center key={stonk.id}>
+            <Text><Company stonk={stonk}/></Text>
+          </Center>
         ))}
+      </Box>
+      <Box>
         {/* {isAuthenticated ? (
         <>
           <h2>Welcome {user.nickname}</h2>
@@ -41,7 +47,7 @@ function Companies () {
       ) : (
         <p>Please log in to see your profile and restricted content</p>
       )} */}
-      </section>
+      </Box>
     </>
   )
 }
