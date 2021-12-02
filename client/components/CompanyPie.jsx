@@ -1,10 +1,6 @@
 import React from 'react'
 import { ResponsivePie } from '@nivo/pie'
 
-import data from './data.json'
-
-console.log(data)
-
 // TODO: render correct values within the pie chart
 // TODO: add a legend
 // https://nivo.rocks/pie/
@@ -24,12 +20,14 @@ const CompanyPie = ({ stonk }) => {
     label: 'Governance',
     value: stonk.governanceScore
   }]
+
+  const angle = (stonk.totalScore / 3000) * 360
   return (
     <ResponsivePie
       data={data}
       margin={{ top: 40, right: 80, bottom: 80, left: 80 }}
       startAngle={0}
-      endAngle={360}
+      endAngle={angle}
       innerRadius={0.75}
       activeOuterRadiusOffset={8}
       colors={{ scheme: 'nivo' }}
