@@ -7,3 +7,11 @@ export function getStonks () {
     .get(`${stonksUrl}`)
     .then(res => res.body)
 }
+
+export function getGoals (stockSymbol) {
+  return request
+    .get(`${stonksUrl}/goals/${stockSymbol}`)
+    .then(res => {
+      return res.body
+    })
+}
