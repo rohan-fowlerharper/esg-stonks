@@ -3,8 +3,8 @@ const {
   fetchGoalsByStockSymbol
 } = require('../goals')
 
-describe.skip('fetchGoalsByStockSymbols', () => {
-  it('should return the goals of a company with the given stock symbol', async () => {
+describe('fetchGoalsByStockSymbols', () => {
+  it('should return the goals of a company with the given stock symbol', () => {
     const goalsData = [
       {
         company_name: 'Apple Inc.',
