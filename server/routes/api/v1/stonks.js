@@ -1,7 +1,5 @@
 const express = require('express')
-
 const router = express.Router()
-
 const db = require('../../../db/stonks')
 
 router.get('/', (req, res) => {
@@ -15,15 +13,11 @@ router.get('/', (req, res) => {
     })
 })
 
-// TODO: use actual db function to get stonk by name
 router.get('/name/:name', (req, res) => {
   const name = req.params.name
-  db.getStonks()
+  db.getStonksByName(name)
     .then(stonks => {
-      const filtered = stonks.filter(stonk => {
-        return stonk.companyName.toLowerCase().includes(name.toLowerCase())
-      })
-      return res.json(filtered)
+      return res.json(stonks)
     })
     .catch(err => {
       console.log(err)
@@ -31,16 +25,10 @@ router.get('/name/:name', (req, res) => {
     })
 })
 
-// TODO: use actual db function to get stonk by symbol
 router.get('/symbol/:symbol', (req, res) => {
   const symbol = req.params.symbol
-  db.getStonks()
-    .then(stonks => {
-      const filtered = stonks.filter(stonk => {
-        return stonk.stockSymbol.toLowerCase().includes(symbol.toLowerCase())
-      })
-      return res.json(filtered)
-    })
+  db.getStonkBySymbol(symbol)
+    .then(stonk => res.json(stonk))
     .catch(err => {
       console.log(err)
       res.status(500).send('There was an error')
