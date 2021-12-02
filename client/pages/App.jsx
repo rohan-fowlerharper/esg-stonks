@@ -8,6 +8,8 @@ import Companies from './Companies'
 
 import CompanyGoals from '../components/CompanyGoals'
 
+import MyResponsivePie from '../components/ResponsivePie'
+
 function App () {
   return (
     <>

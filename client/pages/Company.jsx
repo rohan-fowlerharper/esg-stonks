@@ -9,7 +9,6 @@ function Company ({ stonk }) {
         <Text>{stonk.environmentGrade}</Text>
         <Text>{stonk.socialGrade}</Text>
         <Text>{stonk.governanceGrade}</Text>
-        <Image src={`https://s3.polygon.io/logos/${stonk.stockSymbol.toLowerCase()}/logo.png`}></Image>
       </Center>
     </Box>
   )

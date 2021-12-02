@@ -1,5 +1,4 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
 import { ResponsivePie } from '@nivo/pie'
 
 import data from './data.json'
@@ -9,15 +8,25 @@ console.log(data)
 // TODO: render correct values within the pie chart
 // TODO: add a legend
 // https://nivo.rocks/pie/
-const MyResponsivePie = () => {
-  const stonks = useSelector(state => state.stonks)
+const CompanyPie = ({ stonk }) => {
+  const data = [{
+    id: 'Environment',
+    label: 'Environment',
+    value: stonk.environmentScore
+  },
+  {
+    id: 'Social',
+    label: 'Social',
+    value: stonk.socialScore
+  },
+  {
+    id: 'Governance',
+    label: 'Governance',
+    value: stonk.governanceScore
+  }]
   return (
     <ResponsivePie
-      data={stonks.map(stonk => ({
-        id: stonk.stockSymbol,
-        label: stonk.stockSymbol,
-        value: stonk.totalScore
-      }))}
+      data={data}
       margin={{ top: 40, right: 80, bottom: 80, left: 80 }}
       startAngle={0}
       endAngle={360}
@@ -61,4 +70,4 @@ const MyResponsivePie = () => {
   )
 }
 
-export default MyResponsivePie
+export default CompanyPie

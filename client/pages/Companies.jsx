@@ -37,11 +37,11 @@ function Companies () {
           <PieChartWithouNivo />
         </Box>
       </div>
-      <div>
-        <Box>
-          <h1>Hi</h1>
-          <MyResponsivePie />
-        </Box>
+      <div style={{
+        height: '500px',
+        width: '500px'
+      }}>
+        <MyResponsivePie />
       </div>
 
       {/* <Box>
