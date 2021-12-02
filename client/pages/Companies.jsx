@@ -5,6 +5,7 @@ import { fetchStonks } from '../redux/actions/stonks'
 import { Heading, Text, SimpleGrid } from '@chakra-ui/react'
 
 import Company from '../components/Company'
+import CompanyPie from '../components/CompanyPie'
 
 import RegularLayout from '../layouts/RegularLayout'
 
@@ -27,6 +28,7 @@ function Companies () {
           <Company key={stonk.id} stonk={stonk}/>
         ))}
       </SimpleGrid>
+
       {/* <Box>
         {isAuthenticated ? (
         <>
@@ -42,6 +44,16 @@ function Companies () {
         <p>Please log in to see your profile and restricted content</p>
       )}
       </Box> */}
+      {stonks[0] && (
+        <div
+          style={{
+            height: '500px',
+            width: '500px'
+          }}>
+          <CompanyPie stonk={stonks[1]} />
+        </div>
+
+      )}
     </RegularLayout>
   )
 }

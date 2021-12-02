@@ -1,6 +1,7 @@
 import React from 'react'
 import { Box, Center, Image, useColorModeValue, Flex, Heading, IconButton } from '@chakra-ui/react'
-import { AddIcon, CheckIcon, CloseIcon } from '@chakra-ui/icons'
+import { AddIcon } from '@chakra-ui/icons'
+// CheckIcon and CloseIcon
 
 function Company ({ stonk }) {
   const image = `https://s3.polygon.io/logos/${stonk.stockSymbol.toLowerCase()}/logo.png`
