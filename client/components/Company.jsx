@@ -1,5 +1,6 @@
 import React from 'react'
-import { Box, Center, Image, useColorModeValue, HStack, Heading } from '@chakra-ui/react'
+import { Box, Center, Image, useColorModeValue, Flex, Heading, IconButton } from '@chakra-ui/react'
+import { AddIcon, CheckIcon, CloseIcon } from '@chakra-ui/icons'
 
 function Company ({ stonk }) {
   const image = `https://s3.polygon.io/logos/${stonk.stockSymbol.toLowerCase()}/logo.png`
@@ -41,7 +42,7 @@ function Company ({ stonk }) {
           >
             {stonk.companyName}
           </Heading>
-          <HStack spacing={4}>
+          <Flex mt={2} justifyContent='space-between'>
             <Heading
               as='h5'
               fontSize='lg'
@@ -52,7 +53,14 @@ function Company ({ stonk }) {
             >
               {stonk.stockSymbol}
             </Heading>
-          </HStack>
+            {/* icon to be moved, todo: use closeicon and checkicon when it's selected */}
+            <IconButton
+              colorScheme='green'
+              rounded='full'
+              size='xs'
+              icon={<AddIcon />}
+            />
+          </Flex>
         </Box>
       </Box>
     </Center>
