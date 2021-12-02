@@ -1,41 +1,59 @@
 import React from 'react'
-import { Box, Center, Image, useColorModeValue, Stack, Heading } from '@chakra-ui/react'
+import { Box, Center, Image, useColorModeValue, HStack, Heading } from '@chakra-ui/react'
 
 function Company ({ stonk }) {
   const image = `https://s3.polygon.io/logos/${stonk.stockSymbol.toLowerCase()}/logo.png`
 
   return (
-    <Center py={12}>
+    <Center w='full'>
       <Box
-        role={'group'}
-        p={6}
-        maxW={'330px'}
-        w={'full'}
+        role='company'
+        h='350px'
+        w='300px'
         bg={useColorModeValue('white', 'gray.800')}
-        boxShadow={'2xl'}
-        rounded={'lg'}
-        pos={'relative'}
-        zIndex={1}>
-        <Center>
-          <Box
-            rounded={'lg'}
-            mt={-12}
-            pos={'relative'}
-            height={'200px'}>
+        boxShadow='2xl'
+        rounded='lg'
+        position='relative'
+      >
+        <Box
+          roundedTop='lg'
+          h={36}
+          bg='white'
+          p={4}
+        >
+          <Center w='full' h='full'>
             <Image
-              rounded={'lg'}
-              height={'auto'}
-              width={128}
-              objectFit={'cover'}
+              rounded={'sm'}
+              maxHeight='full'
+              width='auto'
               src={image}
+              alt={stonk.stockSymbol}
             />
-          </Box>
-        </Center>
-        <Stack pt={10} align={'center'}>
-          <Heading fontSize={'xl'} fontFamily={'body'} fontWeight={500}>
+          </Center>
+        </Box>
+        <Box p='6'>
+          <Heading
+            as='h4'
+            fontSize='2xl'
+            fontWeight='semibold'
+            lineHeight='tight'
+            isTruncated
+          >
             {stonk.companyName}
           </Heading>
-        </Stack>
+          <HStack spacing={4}>
+            <Heading
+              as='h5'
+              fontSize='lg'
+              fontWeight='semibold'
+              lineHeight='tight'
+              isTruncated
+              color={useColorModeValue('gray.600', 'gray.400')}
+            >
+              {stonk.stockSymbol}
+            </Heading>
+          </HStack>
+        </Box>
       </Box>
     </Center>
   )

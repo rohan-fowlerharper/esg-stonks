@@ -1,17 +1,12 @@
 import React from 'react'
-import { Container, Center, VStack } from '@chakra-ui/react'
+import { Container, VStack } from '@chakra-ui/react'
 
 const RegularLayout = ({ children }) => {
   return (
     <Container maxW='container.xl'>
-      <Center>
-        <VStack>
-
-          {children}
-
-        </VStack>
-      </Center>
-
+      <VStack w='100%'>
+        {children}
+      </VStack>
     </Container>
   )
 }
