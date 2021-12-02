@@ -1,7 +1,5 @@
 const express = require('express')
-
 const router = express.Router()
-
 const db = require('../../../db/stonks')
 
 router.get('/', (req, res) => {
@@ -15,7 +13,6 @@ router.get('/', (req, res) => {
     })
 })
 
-// TODO: use actual db function to get stonk by name
 router.get('/name/:name', (req, res) => {
   const name = req.params.name
   db.getStonksByName(name)
@@ -28,7 +25,6 @@ router.get('/name/:name', (req, res) => {
     })
 })
 
-// TODO: use actual db function to get stonk by symbol
 router.get('/symbol/:symbol', (req, res) => {
   const symbol = req.params.symbol
   db.getStonkBySymbol(symbol)
