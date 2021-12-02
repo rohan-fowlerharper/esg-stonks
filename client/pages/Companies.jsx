@@ -2,9 +2,9 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchStonks } from '../redux/actions/stonks'
 // import { useAuth0 } from '@auth0/auth0-react'
-import { Heading, Box, Text } from '@chakra-ui/react'
+import { Heading, Box, Text, SimpleGrid } from '@chakra-ui/react'
 
-import Company from './Company'
+import Company from '../components/Company'
 
 import RegularLayout from '../layouts/RegularLayout'
 
@@ -25,11 +25,11 @@ function Companies () {
       <Box>
         <Text fontSize='xl'>Select 2 companies to compare ESG scores</Text>
       </Box>
-      <Box>
+      <SimpleGrid columns={4} spacing={10}>
         {stonks.map(stonk => (
           <Company key={stonk.id} stonk={stonk}/>
         ))}
-      </Box>
+      </SimpleGrid>
       {/* <Box>
         {isAuthenticated ? (
         <>
