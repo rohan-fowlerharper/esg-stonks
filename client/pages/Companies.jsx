@@ -5,6 +5,8 @@ import { fetchStonks } from '../redux/actions/stonks'
 import { Heading, Box, Text } from '@chakra-ui/react'
 
 import Company from './Company'
+import PieChartWithouNivo from '../components/PieChart'
+import MyResponsivePie from '../components/ResponsivePie'
 
 import RegularLayout from '../layouts/RegularLayout'
 
@@ -30,6 +32,18 @@ function Companies () {
           <Company key={stonk.id} stonk={stonk}/>
         ))}
       </Box>
+      <div>
+        <Box>
+          <PieChartWithouNivo />
+        </Box>
+      </div>
+      <div>
+        <Box>
+          <h1>Hi</h1>
+          <MyResponsivePie />
+        </Box>
+      </div>
+
       {/* <Box>
         {isAuthenticated ? (
         <>
