@@ -16,7 +16,7 @@ describe('getStonks', () => {
     expect.assertions(2)
     return db.getStonks(testDb)
       .then(stonks => {
-        expect(stonks).toHaveLength(2)
+        expect(stonks).toHaveLength(6)
         expect(stonks[0].companyName).toBe('Algonquin Power & Utilities Corp.')
         return null
       })
