@@ -33,7 +33,8 @@ const CompanyPie = ({ stonk }) => {
       margin={{ top: 40, right: 80, bottom: 80, left: 80 }}
       startAngle={0}
       endAngle={360}
-      innerRadius={0.75}
+      // innerRadius={0.75}
+      innerRadius={0.50}
       activeOuterRadiusOffset={8}
       colors={['#48BB78', '#4299E1', '#F6E05E', '#E2E8F0']}
       borderWidth={1}
