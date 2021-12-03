@@ -1,21 +1,29 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { AddIcon } from '@chakra-ui/icons'
 import { IconButton } from '@chakra-ui/react'
 
 function ActiveStonkButton () {
-  function handleClick (event) {
+  const [activeStonk, setActiveStonk] = useState([])
+
+  function handleClick () {
     console.log('clicked')
-    console.log(event)
   }
 
   return (
     <IconButton
-      colorScheme='green'
+      variant='outline'
       rounded='full'
       size='xs'
       icon={<AddIcon />}
       onClick={handleClick}
     />
+    // <IconButton
+    //   colorScheme='green'
+    //   rounded='full'
+    //   size='xs'
+    //   icon={<AddIcon />}
+    //   onClick={handleClick}
+    // />
   )
 }
 
