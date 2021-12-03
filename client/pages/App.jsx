@@ -15,7 +15,7 @@ function App () {
         <Route path='/' element={<Home />} />
         <Route path='/companies' element={<Companies />} />
       </Routes>
-      <CompanyGoals stockSymbol='AAPL'/>
+      <CompanyGoals stockSymbol='AMC'/>
     </>
   )
 }
