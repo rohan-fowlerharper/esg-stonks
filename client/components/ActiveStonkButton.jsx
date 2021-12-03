@@ -1,24 +1,45 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { AddIcon, CheckIcon } from '@chakra-ui/icons'
 import { IconButton } from '@chakra-ui/react'
 
-function ActiveStonkButton () {
-  const [activeStonk, setActiveStonk] = useState(false)
+import { useSelector, useDispatch } from 'react-redux'
+import { addActiveStonk, removeActiveStonk } from '../redux/actions/activeStonks'
+
+function ActiveStonkButton ({ stockSymbol }) {
+  const dispatch = useDispatch()
+
+  const activeStonks = useSelector(state => state.activeStonks)
+  const isActive = activeStonks.includes(stockSymbol)
+  const isFull = activeStonks.every(el => el !== null)
+  // const isFull = false
 
   function handleClick () {
-    setActiveStonk(!activeStonk)
-    console.log('clicked')
+    if (isActive) {
+      dispatch(removeActiveStonk(stockSymbol))
+    } else {
+      dispatch(addActiveStonk(stockSymbol))
+    }
   }
 
   return (
     <>
-      {activeStonk ? <IconButton colorScheme='green' rounded='full' size='xs'icon={<CheckIcon />} onClick={handleClick}/> : <IconButton
-        variant='outline'
-        rounded='full'
-        size='xs'
-        icon={<AddIcon />}
-        onClick={handleClick}
-      />}
+      {isActive ? (
+        <IconButton
+          colorScheme='green'
+          rounded='full'
+          size='xs'
+          icon={<CheckIcon />}
+          onClick={handleClick}/>
+      ) : (
+        <IconButton
+          colorScheme={isFull ? 'red' : 'green'}
+          variant='outline'
+          rounded='full'
+          size='xs'
+          isDisabled={isFull}
+          icon={<AddIcon />}
+          onClick={handleClick}
+        />)}
     </>
   )
 }

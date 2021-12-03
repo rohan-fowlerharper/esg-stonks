@@ -56,7 +56,7 @@ function Company ({ stonk }) {
               {stonk.stockSymbol}
             </Heading>
             {/* icon to be moved, todo: use closeicon and checkicon when it's selected */}
-            <ActiveStonkButton />
+            <ActiveStonkButton stockSymbol={stonk.stockSymbol}/>
           </Flex>
         </Box>
       </Box>

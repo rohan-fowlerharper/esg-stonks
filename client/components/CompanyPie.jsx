@@ -30,7 +30,7 @@ const CompanyPie = ({ stonk }) => {
       endAngle={angle}
       innerRadius={0.75}
       activeOuterRadiusOffset={8}
-      colors={{ scheme: 'nivo' }}
+      colors={[{ scheme: 'nivo' }]}
       borderWidth={1}
       borderColor={{ from: 'color', modifiers: [['brighter', 0.2]] }}
       arcLinkLabelsSkipAngle={10}
