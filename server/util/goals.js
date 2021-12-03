@@ -17,6 +17,18 @@ async function fetchGoalsByStockSymbol (stockSymbol) {
   return response.body[0].goals
 }
 
+async function fetchScoresByStockSymbol (stockSymbol) {
+  const response = await request
+    .get(`${esgApiUrl}/search`)
+    .query({
+      q: `${stockSymbol}`
+    })
+    .set('x-rapidapi-key', `${esgApiKey}`)
+    .set('x-rapidapi-host', `${esgApiHost}`)
+  return response.body
+}
+
 module.exports = {
-  fetchGoalsByStockSymbol
+  fetchGoalsByStockSymbol,
+  fetchScoresByStockSymbol
 }
