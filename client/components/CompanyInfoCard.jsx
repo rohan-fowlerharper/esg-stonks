@@ -11,7 +11,7 @@ import {
 
 function Infocard ({ stonk }) {
   return (
-    <Table variant='simple'>
+    <Table size='sm' variant='simple'>
       <TableCaption>Last Processing Date: {stonk.lastProcessingDate}</TableCaption>
       <Thead>
         <Tr>
@@ -21,8 +21,8 @@ function Infocard ({ stonk }) {
       </Thead>
       <Tbody>
         <Tr>
-          <Td>insert company name</Td>
-          <Td>insert company name</Td>
+          <Td>{stonk.companyName}</Td>
+          <Td>{stonk.companyName}</Td>
         </Tr>
       </Tbody>
       <Thead>
@@ -33,8 +33,8 @@ function Infocard ({ stonk }) {
       </Thead>
       <Tbody>
         <Tr>
-          <Td>insert exchangeSymbol</Td>
-          <Td>insert exchangeSymbol</Td>
+          <Td>{stonk.exchangeSymbol}</Td>
+          <Td>{stonk.exchangeSymbol}</Td>
         </Tr>
       </Tbody>
       <Thead>
@@ -45,8 +45,8 @@ function Infocard ({ stonk }) {
       </Thead>
       <Tbody>
         <Tr>
-          <Td>insert stockSymbol</Td>
-          <Td>insert stockSymbol</Td>
+          <Td>{stonk.stockSymbol} </Td>
+          <Td>{stonk.stockSymbol} </Td>
         </Tr>
       </Tbody>
       <Thead>
@@ -57,8 +57,8 @@ function Infocard ({ stonk }) {
       </Thead>
       <Tbody>
         <Tr>
-          <Td>insert environmentGrade</Td>
-          <Td>insert environmentGrade</Td>
+          <Td>{stonk.environmentGrade}</Td>
+          <Td>{stonk.environmentGrade}</Td>
         </Tr>
       </Tbody>
       <Thead>
@@ -69,8 +69,8 @@ function Infocard ({ stonk }) {
       </Thead>
       <Tbody>
         <Tr>
-          <Td>insert environmentLevel</Td>
-          <Td>insert environmentLevel</Td>
+          <Td>{stonk.environmentLevel}</Td>
+          <Td>{stonk.environmentLevel}</Td>
         </Tr>
       </Tbody>
       <Thead>
@@ -81,8 +81,8 @@ function Infocard ({ stonk }) {
       </Thead>
       <Tbody>
         <Tr>
-          <Td>insert socialGrade</Td>
-          <Td>insert socialGrade</Td>
+          <Td>{stonk.socialGrade}</Td>
+          <Td>{stonk.socialGrade}</Td>
         </Tr>
       </Tbody>
       <Thead>
@@ -93,8 +93,8 @@ function Infocard ({ stonk }) {
       </Thead>
       <Tbody>
         <Tr>
-          <Td>insert socialLevel</Td>
-          <Td>insert socialLevel</Td>
+          <Td>{stonk.socialLevel}</Td>
+          <Td>{stonk.socialLevel}</Td>
         </Tr>
       </Tbody>
       <Thead>
@@ -105,8 +105,8 @@ function Infocard ({ stonk }) {
       </Thead>
       <Tbody>
         <Tr>
-          <Td>insert gorvernanceGrade</Td>
-          <Td>insert gorvernanceGrade</Td>
+          <Td>{stonk.governanceGrade}</Td>
+          <Td>{stonk.governanceGrade}</Td>
         </Tr>
       </Tbody>
       <Thead>
@@ -117,8 +117,8 @@ function Infocard ({ stonk }) {
       </Thead>
       <Tbody>
         <Tr>
-          <Td>insert gorvernanceLevel</Td>
-          <Td>insert gorvernanceLevel</Td>
+          <Td>{stonk.governanceLevel}</Td>
+          <Td>{stonk.governanceLevel}</Td>
         </Tr>
       </Tbody>
       <Thead>
@@ -129,8 +129,8 @@ function Infocard ({ stonk }) {
       </Thead>
       <Tbody>
         <Tr>
-          <Td>insert totalGrade</Td>
-          <Td>insert totalGrade</Td>
+          <Td>{stonk.totalGrade}</Td>
+          <Td>{stonk.totalGrade}</Td>
         </Tr>
       </Tbody>
       <Thead>
@@ -141,8 +141,8 @@ function Infocard ({ stonk }) {
       </Thead>
       <Tbody>
         <Tr>
-          <Td>insert totalLevel</Td>
-          <Td>insert totalLevel</Td>
+          <Td>{stonk.totalLevel}</Td>
+          <Td>{stonk.totalLevel}</Td>
         </Tr>
       </Tbody>
       {/* <Tr>
