@@ -1,5 +1,6 @@
 import React from 'react'
 import { Box, Center, Image, useColorModeValue, Flex, Heading } from '@chakra-ui/react'
+import RatingBar from './RatingBar'
 // CheckIcon and CloseIcon
 
 import ActiveStonkButton from './ActiveStonkButton'
@@ -11,8 +12,7 @@ function Company ({ stonk }) {
     <Center w='full'>
       <Box
         role='company'
-        h='350px'
-        w='300px'
+        w='full'
         bg={useColorModeValue('white', 'gray.800')}
         boxShadow='2xl'
         rounded='lg'
@@ -37,7 +37,7 @@ function Company ({ stonk }) {
         <Box p='6'>
           <Heading
             as='h4'
-            fontSize='2xl'
+            fontSize={['md', null, 'lg']}
             fontWeight='semibold'
             lineHeight='tight'
             isTruncated
@@ -58,6 +58,7 @@ function Company ({ stonk }) {
             {/* icon to be moved, todo: use closeicon and checkicon when it's selected */}
             <ActiveStonkButton stockSymbol={stonk.stockSymbol}/>
           </Flex>
+          <RatingBar rating={stonk.totalScore} max={3000} mt={4} />
         </Box>
       </Box>
     </Center>
