@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchStonks } from '../redux/actions/stonks'
 // import { useAuth0 } from '@auth0/auth0-react'
-import { Heading, Text, SimpleGrid } from '@chakra-ui/react'
+import { Heading, Text, SimpleGrid, GridItem } from '@chakra-ui/react'
 
 import Company from '../components/Company'
 import CompanyPie from '../components/CompanyPie'
@@ -25,7 +25,9 @@ function Companies () {
       <Text fontSize='xl'>Select 2 companies to compare ESG scores</Text>
       <SimpleGrid columns={[2, null, 3]} gap={6} width={'100%'}>
         {stonks.map(stonk => (
-          <Company key={stonk.id} stonk={stonk}/>
+          <GridItem key={stonk.id} w={['300px', '250px', '300px']}>
+            <Company stonk={stonk}/>
+          </GridItem>
         ))}
       </SimpleGrid>
 
