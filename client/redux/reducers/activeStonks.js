@@ -4,9 +4,9 @@ export const SET_SECOND_STONK = 'SET_SECOND_STONK'
 export default function activeStonks (state = [null, null], action) {
   switch (action.type) {
     case SET_FIRST_STONK:
-      return []
+      return [action.stonk, null]
     case SET_SECOND_STONK:
-      return []
+      return [action.stonk, action.stonk]
     default:
       return state
   }
