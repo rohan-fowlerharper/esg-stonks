@@ -6,31 +6,37 @@ import { ResponsivePie } from '@nivo/pie'
 // https://nivo.rocks/pie/
 const CompanyPie = ({ stonk }) => {
   const data = [{
-    id: 'Environment',
+    id: 'E',
     label: 'Environment',
     value: stonk.environmentScore
   },
   {
-    id: 'Social',
+    id: 'S',
     label: 'Social',
     value: stonk.socialScore
   },
   {
-    id: 'Governance',
+    id: 'G',
     label: 'Governance',
     value: stonk.governanceScore
+  },
+  {
+    id: 'Total',
+    label: 'Total possible score',
+    value: (3000 - stonk.totalScore)
   }]
 
-  const angle = (stonk.totalScore / 3000) * 360
+  // const angle = (stonk.totalScore / 3000) * 360
   return (
     <ResponsivePie
       data={data}
       margin={{ top: 40, right: 80, bottom: 80, left: 80 }}
       startAngle={0}
-      endAngle={angle}
-      innerRadius={0.75}
+      endAngle={360}
+      // innerRadius={0.75}
+      innerRadius={0.50}
       activeOuterRadiusOffset={8}
-      colors={{ scheme: 'nivo' }}
+      colors={['#48BB78', '#4299E1', '#F6E05E', '#E2E8F0']}
       borderWidth={1}
       borderColor={{ from: 'color', modifiers: [['brighter', 0.2]] }}
       arcLinkLabelsSkipAngle={10}
@@ -49,7 +55,8 @@ const CompanyPie = ({ stonk }) => {
           itemsSpacing: 0,
           itemWidth: 100,
           itemHeight: 18,
-          itemTextColor: '#f1f1f1',
+          // itemTextColor: '#f1f1f1',
+          itemTextColor: '#808080',
           itemDirection: 'left-to-right',
           itemOpacity: 1,
           symbolSize: 18,
@@ -58,7 +65,8 @@ const CompanyPie = ({ stonk }) => {
             {
               on: 'hover',
               style: {
-                itemTextColor: '#7c7c7c'
+                // itemTextColor: '#7c7c7c'
+                itemTextColor: '#808080'
               }
             }
           ]
