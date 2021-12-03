@@ -20,7 +20,7 @@ function Navigation () {
         <Flex as="nav" w="100%" h={20} alignItems={'center'} justifyContent={'space-between'}>
           <HStack spacing={8} alignItems={'center'}>
             <Box>
-              <img src="/images/esg-stonks_logo.png" />
+              <img src="/images/esg-stonks-logo.png" />
             </Box>
             <HStack
               as={'nav'}
