@@ -6,6 +6,7 @@ import { Heading, Text, SimpleGrid, GridItem } from '@chakra-ui/react'
 
 import Company from '../components/Company'
 import CompanyPie from '../components/CompanyPie'
+import CompanyInfoCard from '../components/CompanyInfoCard'
 
 import RegularLayout from '../layouts/RegularLayout'
 
@@ -54,7 +55,15 @@ function Companies () {
           }}>
           <CompanyPie stonk={stonks[1]} />
         </div>
-
+      )}
+      {stonks[0] && (
+        <div
+          style={{
+            height: '500px',
+            width: '500px'
+          }}>
+          <CompanyInfoCard stonk={stonks[1]} />
+        </div>
       )}
     </RegularLayout>
   )
