@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router()
 const db = require('../../../db/stonks')
 
-const { fetchGoalsByStockSymbol } = require('../../../util/goals')
+const { fetchGoalsByStockSymbol, fetchScoresByStockSymbol } = require('../../../util/goals')
 
 router.get('/', (req, res) => {
   db.getStonks()
@@ -43,6 +43,18 @@ router.get('/goals/:stockSymbol', (req, res) => {
   fetchGoalsByStockSymbol(stockSymbol)
     .then(goals => {
       return res.json(goals)
+    })
+    .catch(err => {
+      console.log(err)
+      res.status(500).send('There was an error')
+    })
+})
+
+router.get('/external/:stockSymbol', (req, res) => {
+  const stockSymbol = req.params.stockSymbol
+  fetchScoresByStockSymbol(stockSymbol)
+    .then(scoresData => {
+      return res.json(scoresData)
     })
     .catch(err => {
       console.log(err)
