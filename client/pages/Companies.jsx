@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchStonks } from '../redux/actions/stonks'
 // import { useAuth0 } from '@auth0/auth0-react'
-import { Heading, Text, SimpleGrid, GridItem } from '@chakra-ui/react'
+import { Heading, Text, Grid, useColorModeValue } from '@chakra-ui/react'
 
-import Company from '../components/Company'
+import CompanyGridItem from '../components/CompanyGridItem'
 import CompanyPie from '../components/CompanyPie'
 import CompanyInfoCard from '../components/CompanyInfoCard'
 
@@ -27,15 +27,27 @@ function Companies () {
 
   return (
     <RegularLayout>
-      <Heading as='h1' size='2xl' m={10}>Company Listings</Heading>
-      <Text fontSize='xl'>Select 2 companies to compare ESG scores</Text>
-      <SimpleGrid columns={[2, null, 3]} gap={6} width={'100%'}>
+      {/* extract as page header component */}
+      <Heading as='h1' size='2xl' my={[2, null, 6]}>
+        Company Listings
+      </Heading>
+      {/* extract as page subheader component */}
+      <Text mb={4} fontSize='xl' color={useColorModeValue('gray.800', 'gray.300')}>
+        Select 2 companies to compare ESG scores
+      </Text>
+      <Grid
+        templateColumns={[
+          'repeat(2, minmax(150px, 1fr))',
+          'repeat(3, minmax(150px, 1fr))',
+          'repeat(4, minmax(150px, 1fr))'
+        ]}
+        gap={4}
+        w='full'
+      >
         {stonks.map(stonk => (
-          <GridItem key={stonk.id} w={['300px', '250px', '300px']}>
-            <Company stonk={stonk}/>
-          </GridItem>
+          <CompanyGridItem key={stonk.id} stonk={stonk}/>
         ))}
-      </SimpleGrid>
+      </Grid>
 
       {/* <Box>
         {isAuthenticated ? (
