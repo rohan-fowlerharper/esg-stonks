@@ -1,6 +1,7 @@
 import React from 'react'
 import { Heading, Container, Stack, Text, Button, Flex, Link } from '@chakra-ui/react'
 import { ExternalLinkIcon } from '@chakra-ui/icons'
+import { Link as RouteLink } from 'react-router-dom'
 
 function Home () {
   return (
@@ -24,23 +25,28 @@ function Home () {
             Make better socially &amp; environmentally responsbile investment decisions. Compare companies sustainability performance &amp; ethics based on their ESG scores.
           </Text>
           <Stack spacing={6} direction={'row'}>
-            <Button
-              rounded={'full'}
-              px={6}
-              colorScheme={'green'}
-              bg={'green.400'}
-              _hover={{ bg: 'green.500' }}>
+            <Link as={RouteLink} to='/companies'>
+              <Button
+                rounded={'full'}
+                px={6}
+                colorScheme={'green'}
+                bg={'green.400'}
+                _hover={{ bg: 'green.500' }}>
             Get started
-            </Button>
-            <Button rounded={'full'} px={6}>
+              </Button>
+            </Link>
+            <Link href='#learnMore'>
+              <Button rounded={'full'} px={6}>
             Learn more
-            </Button>
+              </Button>
+            </Link>
           </Stack>
           <Flex w={'full'}>
             <img src="/images/esg-diagram.png" />
           </Flex>
 
           <Heading
+            id='learnMore'
             fontWeight={600}
             fontSize={{ base: '3xl', sm: '4xl', md: '6xl' }}
             lineHeight={'110%'}>
