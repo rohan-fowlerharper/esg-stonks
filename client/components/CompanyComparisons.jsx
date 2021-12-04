@@ -1,7 +1,7 @@
 import React from 'react'
 import { SimpleGrid } from '@chakra-ui/react'
 
-import CompanyInfoCard from './CompanyInfoCard'
+import CompanyComparison from './CompanyComparison'
 
 function Comparison ({ stonks, activeStonks: activeSymbols }) {
   // const stonks = useSelector(state => state.stonks)
@@ -10,11 +10,11 @@ function Comparison ({ stonks, activeStonks: activeSymbols }) {
   return (
     <SimpleGrid
       columns={2}
-      gap={4}
-      width='100%'
+      gap={6}
+      width='full'
     >
-      <CompanyInfoCard stonk={activeStonk1} />
-      <CompanyInfoCard stonk={activeStonk2} />
+      <CompanyComparison stonk={activeStonk1} />
+      <CompanyComparison stonk={activeStonk2} />
     </SimpleGrid>
   )
 }

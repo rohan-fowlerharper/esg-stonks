@@ -20,8 +20,7 @@ const CompanyGoals = ({ stockSymbol }) => {
     // TODO - add a message if there is an error
     // TODO - move height and width to parent component
     <Box
-      w='300px'
-      h='300px'
+      w='full'
     >
       <Heading as='h2' mb={2}>{stockSymbol}</Heading>
       <List spacing={4}>
