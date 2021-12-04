@@ -17,8 +17,6 @@ function Companies () {
   console.log(activeStonks)
   const isFull = activeStonks?.every(el => el !== null)
   // const { isAuthenticated, user } = useAuth0()
-  // const [stonk, setStonk] = useState([])
-  // const [isFilled, setisFilled] = useState(false)
 
   // TODO: ensture to pass token
   useEffect(() => {
