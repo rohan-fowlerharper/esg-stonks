@@ -89,6 +89,19 @@ function Home () {
             Scores are based on ESG performance and degree of transparency in reporting material ESG data publicly &amp; privately.
           </Text>
           <img src="/images/esg-score-diagram.png" />
+          <Text color={'gray.500'} maxW={'4xl'} fontSize='3xl'>
+            <Text as={'span'} color={'green.400'} fontWeight='bold'>A{' '}</Text>
+            excellent ESG performance &amp; high transparency in reporting.
+            <br/>
+            <Text as={'span'} color={'orange.300'} fontWeight='bold'>B{' '}</Text>
+            good ESG performance &amp; above-average reporting.
+            <br/>
+            <Text as={'span'} color={'yellow.300'} fontWeight='bold'>C{' '}</Text>
+            satisfactory ESG performance &amp; moderate reporting.
+            <br/>
+            <Text as={'span'} color={'red.500'} fontWeight='bold'>D{' '}</Text>
+            poor ESG performance &amp; insufficient reporting.
+          </Text>
         </Stack>
       </Container>
     </>
