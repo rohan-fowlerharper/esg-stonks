@@ -2,11 +2,10 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchStonks } from '../redux/actions/stonks'
 // import { useAuth0 } from '@auth0/auth0-react'
-import { Heading, Text, Grid, useColorModeValue } from '@chakra-ui/react'
+import { Heading, Text, Grid, useColorModeValue, Box, Center } from '@chakra-ui/react'
 
 import CompanyGridItem from '../components/CompanyGridItem'
-import CompanyPie from '../components/CompanyPie'
-import Comparison from '../components/Comparison'
+import CompanyComparisons from '../components/CompanyComparisons'
 
 import RegularLayout from '../layouts/RegularLayout'
 
@@ -62,25 +61,16 @@ function Companies () {
         <p>Please log in to see your profile and restricted content</p>
       )}
       </Box> */}
-      {stonks[0] && (
-        <div
-          style={{
-            height: '500px',
-            width: '500px'
-          }}>
-          <CompanyPie stonk={stonks[1]} />
-        </div>
-      )}
-      {isFull && (
-        <div
-          style={{
-            height: '500px',
-            width: '500px'
-          }}>
-          <h1>Please select your componany blah blah</h1>
-          <Comparison activeStonks={activeStonks} stonks={stonks} />
-        </div>
-      )}
+      {isFull ? (
+        <Box
+          mt={4}
+          w='full'
+        >
+          <CompanyComparisons activeStonks={activeStonks} stonks={stonks} />
+        </Box>
+      ) : (<Center mt={6}>
+        <Heading as='h1' fontSize='2xl' fontWeight='bold'>Please select your componany blah blah</Heading>
+      </Center>)}
     </RegularLayout>
   )
 }
