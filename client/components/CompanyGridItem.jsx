@@ -42,7 +42,7 @@ function CompanyGridItem ({ stonk }) {
           />
         </Center>
       </Box>
-      <Box p={[2, 4, 6]}>
+      <Box p={[2, null, 4]}>
         <Heading
           as='h4'
           fontSize={['md', 'lg', 'xl']}
@@ -53,10 +53,10 @@ function CompanyGridItem ({ stonk }) {
           {stonk.companyName}
         </Heading>
         <Flex mt={2} justifyContent='space-between'>
-          <HStack justifyContent='flex-start'>
+          <HStack justifyContent='flex-start' spacing={1}>
             <Heading
               as='h5'
-              fontSize={['sm', 'md', null]}
+              fontSize={['sm', '0.9rem', 'md']}
               fontWeight='semibold'
               lineHeight='tight'
               color={useColorModeValue('gray.600', 'gray.400')}
@@ -66,7 +66,7 @@ function CompanyGridItem ({ stonk }) {
             <Text color={useColorModeValue('gray.600', 'gray.400')}>|</Text>
             <Heading
               as='h5'
-              fontSize={['sm', 'md', null]}
+              fontSize={['sm', '0.9rem', 'md']}
               fontWeight='semibold'
               lineHeight='tight'
               color={useColorModeValue('gray.600', 'gray.400')}
