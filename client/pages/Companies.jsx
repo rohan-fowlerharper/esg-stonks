@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchStonks } from '../redux/actions/stonks'
 // import { useAuth0 } from '@auth0/auth0-react'
@@ -13,7 +13,12 @@ import RegularLayout from '../layouts/RegularLayout'
 function Companies () {
   const dispatch = useDispatch()
   const stonks = useSelector(state => state.stonks)
+  const activeStonks = useSelector(state => state.activeStonks)
+  console.log(activeStonks)
+  const isFull = activeStonks?.every(el => el !== null)
   // const { isAuthenticated, user } = useAuth0()
+  // const [stonk, setStonk] = useState([])
+  // const [isFilled, setisFilled] = useState(false)
 
   // TODO: ensture to pass token
   useEffect(() => {
@@ -56,15 +61,26 @@ function Companies () {
           <CompanyPie stonk={stonks[1]} />
         </div>
       )}
-      {stonks[0] && (
-        <div
-          style={{
-            height: '500px',
-            width: '500px'
-          }}>
-          <CompanyInfoCard stonk={stonks[1]} />
-        </div>
-      )}
+      <SimpleGrid columns={[1, null, 2]} gap={10} width={'75%'}>
+        {/* // if active stonks is full then render the div */}
+        {isFull && (
+          <div
+            style={{
+              height: '500px',
+              width: '500px'
+            }}>
+
+            {/* If stockSymbol within stonks matches with the stockSymbol within activeStonks then render the component */}
+
+            {stonks.map(stonk => (
+              stonk.stockSymbol === activeStonks[0] &&
+              stonk.stockSymbol === activeStonks[1] &&
+              ((
+                <CompanyInfoCard key={stonk.id} stonk={stonk} />
+              ))))}
+          </div>
+        )}
+      </SimpleGrid>
     </RegularLayout>
   )
 }
