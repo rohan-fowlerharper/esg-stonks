@@ -17,7 +17,6 @@ function App () {
         <Route path='/companies' element={<Companies />} />
         <Route path='/info' element={<CompanyInfoCard />} />
       </Routes>
-      <CompanyGoals stockSymbol='AMC'/>
     </>
   )
 }

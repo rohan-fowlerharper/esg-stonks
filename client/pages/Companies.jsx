@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchStonks } from '../redux/actions/stonks'
 // import { useAuth0 } from '@auth0/auth0-react'
-import { Heading, Text, Grid, useColorModeValue } from '@chakra-ui/react'
+import { Heading, Text, Grid, useColorModeValue, SimpleGrid } from '@chakra-ui/react'
 
 import CompanyGridItem from '../components/CompanyGridItem'
 import CompanyPie from '../components/CompanyPie'
-import CompanyInfoCard from '../components/CompanyInfoCard'
+import Comparison from '../components/Comparison'
 
 import RegularLayout from '../layouts/RegularLayout'
 
@@ -81,15 +81,8 @@ function Companies () {
               height: '500px',
               width: '500px'
             }}>
-
-            {/* If stockSymbol within stonks matches with the stockSymbol within activeStonks then render the component */}
-
-            {stonks.map(stonk => (
-              stonk.stockSymbol === activeStonks[0] &&
-              stonk.stockSymbol === activeStonks[1] &&
-              ((
-                <CompanyInfoCard key={stonk.id} stonk={stonk} />
-              ))))}
+            <h1>Please select your componany blah blah</h1>
+            <Comparison activeStonks={activeStonks} stonks={stonks} />
           </div>
         )}
       </SimpleGrid>

@@ -8,10 +8,8 @@ import { addActiveStonk, removeActiveStonk } from '../redux/actions/activeStonks
 function ActiveStonkButton ({ stockSymbol }) {
   const dispatch = useDispatch()
   const activeStonks = useSelector(state => state.activeStonks)
-  console.log(activeStonks)
   const isActive = activeStonks?.includes(stockSymbol)
   const isFull = activeStonks?.every(el => el !== null)
-  console.log(isFull)
   // const isFull = false
 
   function handleClick () {
