@@ -6,10 +6,15 @@ import {
   Tr,
   Th,
   Td,
-  TableCaption
+  TableCaption,
+  Image,
+  Center,
+  Box
 } from '@chakra-ui/react'
 
 function Infocard ({ stonk }) {
+  const image = `https://s3.polygon.io/logos/${stonk.stockSymbol.toLowerCase()}/logo.png`
+
   return (
     <Table
       size='sm'
@@ -17,6 +22,22 @@ function Infocard ({ stonk }) {
       colorScheme='gray'
     >
       <TableCaption>Last Processing Date: {stonk.lastProcessingDate}</TableCaption>
+      <Box
+        roundedTop='lg'
+        h={36}
+        bg='white'
+        p={4}
+      >
+        <Center w='full' h='full'>
+          <Image
+            rounded={'sm'}
+            maxHeight='full'
+            width='auto'
+            src={image}
+            alt={stonk.stockSymbol}
+          />
+        </Center>
+      </Box>
       <Thead>
         <Tr>
           <Th>Company Name</Th>
