@@ -5,7 +5,7 @@ import Home from './Home'
 import Navigation from '../components/Navigation'
 import Companies from './Companies'
 
-import CompanyGoals from '../components/CompanyGoals'
+// import CompanyGoals from '../components/CompanyGoals'
 import CompanyInfoCard from '../components/CompanyInfoCard'
 
 function App () {
