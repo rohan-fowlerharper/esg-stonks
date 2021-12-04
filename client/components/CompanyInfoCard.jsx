@@ -100,13 +100,11 @@ function Infocard ({ stonk }) {
       <Thead>
         <Tr>
           <Th>Governance Grade</Th>
-
         </Tr>
       </Thead>
       <Tbody>
         <Tr>
           <Td>{stonk.governanceGrade}</Td>
-
         </Tr>
       </Tbody>
       <Thead>
