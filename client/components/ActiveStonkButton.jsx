@@ -10,7 +10,6 @@ function ActiveStonkButton ({ stockSymbol }) {
   const activeStonks = useSelector(state => state.activeStonks)
   const isActive = activeStonks?.includes(stockSymbol)
   const isFull = activeStonks?.every(el => el !== null)
-  // const isFull = false
 
   function handleClick () {
     if (isActive) {
@@ -20,24 +19,28 @@ function ActiveStonkButton ({ stockSymbol }) {
     }
   }
 
+  const sharedProps = {
+    role: 'active-stonk-toggle',
+    rounded: 'full',
+    size: 'xs',
+    onClick: handleClick
+  }
+
   return (
     <>
       {isActive ? (
         <IconButton
           colorScheme='green'
-          rounded='full'
-          size='xs'
           icon={<CheckIcon />}
-          onClick={handleClick}/>
+          {...sharedProps}
+        />
       ) : (
         <IconButton
           colorScheme={isFull ? 'red' : 'green'}
           variant='outline'
-          rounded='full'
-          size='xs'
           isDisabled={isFull}
           icon={<AddIcon />}
-          onClick={handleClick}
+          {...sharedProps}
         />)}
     </>
   )

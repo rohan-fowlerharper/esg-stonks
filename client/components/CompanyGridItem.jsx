@@ -24,6 +24,7 @@ import ActiveStonkButton from './ActiveStonkButton'
 function CompanyGridItem ({ stonk }) {
   const image = `https://s3.polygon.io/logos/${stonk.stockSymbol.toLowerCase()}/logo.png`
 
+  // gray colorModeValue 600 400 is used a lot, extract it to a var
   return (
     <GridItem
       role='company'
