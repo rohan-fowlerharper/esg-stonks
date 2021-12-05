@@ -9,6 +9,9 @@ import App from './pages/App'
 
 import store from './redux/store'
 
+// optional but good practice - how can you get webpack to listen to vars in your environment when built?
+// checkout https://webpack.js.org/guides/production/
+// https://www.npmjs.com/package/dotenv-webpack
 document.addEventListener('DOMContentLoaded', () => {
   render(
     <Auth0Provider
