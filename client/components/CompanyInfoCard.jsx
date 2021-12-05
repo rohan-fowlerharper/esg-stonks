@@ -15,7 +15,7 @@ import {
 } from '@chakra-ui/react'
 
 function CompanyInfoCard ({ stonk }) {
-  const image = `https://s3.polygon.io/logos/${stonk.stockSymbol.toLowerCase()}/logo.png`
+  const image = stonk.stockSymbol ? `https://s3.polygon.io/logos/${stonk.stockSymbol.toLowerCase()}/logo.png` : 'https://raw.githubusercontent.com/koehlersimon/fallback/master/Resources/Public/Images/placeholder.jpg'
 
   const toPrint = (({ companyName, exchangeSymbol, stockSymbol, environmentGrade, environmentLevel, socialGrade, socialLevel, governanceGrade, governanceLevel, totalGrade, totalLevel }) => ({ Name: companyName, Exchange: exchangeSymbol, Symbol: stockSymbol, Environment_Grade: environmentGrade, Environment_Level: environmentLevel, Social_Grade: socialGrade, Social_Level: socialLevel, Governance_Grade: governanceGrade, Governance_Level: governanceLevel, Overall_Grade: totalGrade, Overall_Level: totalLevel }))(stonk)
 

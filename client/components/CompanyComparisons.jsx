@@ -13,8 +13,8 @@ function Comparison ({ stonks, activeStonks: activeSymbols }) {
       gap={6}
       width='full'
     >
-      <CompanyComparison stonk={activeStonk1} />
-      <CompanyComparison stonk={activeStonk2} />
+      {activeStonk1.stockSymbol && <CompanyComparison stonk={activeStonk1} />}
+      {activeStonk2.stockSymbol && <CompanyComparison stonk={activeStonk2} />}
     </SimpleGrid>
   )
 }

@@ -20,6 +20,12 @@ function ActiveStonkButton ({ stockSymbol }) {
     }
   }
 
+  const sharedProps = {
+    rounded: 'full',
+    size: 'xs',
+    onClick: handleClick
+  }
+
   // I would extract the shared props (rounded, size, onClick) in to a var and avoid some duplication. eg. <IconButton {...sharedProps} colorScheme="... etc />
 
   return (
@@ -27,19 +33,16 @@ function ActiveStonkButton ({ stockSymbol }) {
       {isActive ? (
         <IconButton
           colorScheme='green'
-          rounded='full'
-          size='xs'
           icon={<CheckIcon />}
-          onClick={handleClick}/>
+          {...sharedProps}
+        />
       ) : (
         <IconButton
           colorScheme={isFull ? 'red' : 'green'}
           variant='outline'
-          rounded='full'
-          size='xs'
           isDisabled={isFull}
           icon={<AddIcon />}
-          onClick={handleClick}
+          {...sharedProps}
         />)}
     </>
   )
