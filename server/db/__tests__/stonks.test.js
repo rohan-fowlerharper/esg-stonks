@@ -35,6 +35,14 @@ describe('getStonkBySymbol', () => {
         return null
       })
   })
+  it('returns nothing when no symbol exists', () => {
+    expect.assertions(1)
+    return db.getStonkBySymbol('NOT A SYMBOL', testDb)
+      .then(stonk => {
+        expect(stonk).toBeUndefined()
+        return null
+      })
+  })
   it('returns correct stock regardless of case in params', () => {
     expect.assertions(4)
     return db.getStonkBySymbol('fb', testDb)
@@ -57,6 +65,14 @@ describe('getStonksByName', () => {
         expect(stonks[0].stockSymbol).toBe('AQN')
         expect(stonks[0].companyName).toBe('Algonquin Power & Utilities Corp.')
         expect(stonks[0].esgId).toBe(11119)
+        return null
+      })
+  })
+  it('returns nothing when no name exists', () => {
+    expect.assertions(1)
+    return db.getStonksByName('NOT A NAME', testDb)
+      .then(stonks => {
+        expect(stonks).toHaveLength(0)
         return null
       })
   })
