@@ -13,7 +13,6 @@ function Companies () {
   const dispatch = useDispatch()
   const stonks = useSelector(state => state.stonks)
   const activeStonks = useSelector(state => state.activeStonks)
-  console.log(stonks)
   const isFull = activeStonks?.every(el => el !== null)
   // const { isAuthenticated, user } = useAuth0()
 
@@ -69,7 +68,6 @@ function Companies () {
           <CompanyComparisons activeStonks={activeStonks} stonks={stonks} />
         </Box>
       ) : (<Center mt={6}>
-        <Heading as='h1' fontSize='2xl' fontWeight='bold'>Please select your componany blah blah</Heading>
       </Center>)}
     </RegularLayout>
   )
