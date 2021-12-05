@@ -1,6 +1,6 @@
 import React from 'react'
 import { ResponsivePie } from '@nivo/pie'
-import { Box, useBreakpointValue } from '@chakra-ui/react'
+import { Box } from '@chakra-ui/react'
 
 // TODO: render correct values within the pie chart
 // TODO: add a legend
