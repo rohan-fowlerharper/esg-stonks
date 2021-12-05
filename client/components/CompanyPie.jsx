@@ -26,17 +26,14 @@ const CompanyPie = ({ stonk, ...rest }) => {
     label: 'Total possible score',
     value: (3000 - stonk.totalScore)
   }]
-  console.log(rest)
-  // const angle = (stonk.totalScore / 3000) * 360
+
   return (
     <Box {...rest} >
-
       <ResponsivePie
         data={data}
         margin={{ top: 40, right: 80, bottom: 80, left: 80 }}
         startAngle={0}
         endAngle={360}
-        // innerRadius={0.75}
         innerRadius={0.50}
         activeOuterRadiusOffset={8}
         colors={['#48BB78', '#4299E1', '#F6E05E', '#a7aeb8']}
@@ -48,6 +45,23 @@ const CompanyPie = ({ stonk, ...rest }) => {
         arcLinkLabelsColor={{ from: 'color' }}
         arcLabelsSkipAngle={10}
         arcLabelsTextColor={{ from: 'color', modifiers: [['brighter', 1.2]] }}
+        legends={[
+          {
+            anchor: 'bottom',
+            direction: 'row',
+            justify: false,
+            translateX: 0,
+            translateY: 56,
+            itemsSpacing: 0,
+            itemWidth: 100,
+            itemHeight: 18,
+            itemTextColor: '#999',
+            itemDirection: 'left-to-right',
+            itemOpacity: 1,
+            symbolSize: 18,
+            symbolShape: 'circle'
+          }
+        ]}
       />
     </Box>
   )
