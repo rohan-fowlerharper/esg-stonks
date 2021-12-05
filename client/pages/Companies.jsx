@@ -13,7 +13,7 @@ function Companies () {
   const dispatch = useDispatch()
   const stonks = useSelector(state => state.stonks)
   const activeStonks = useSelector(state => state.activeStonks)
-  console.log(stonks)
+
   const isFull = activeStonks?.every(el => el !== null)
   // const { isAuthenticated, user } = useAuth0()
 
