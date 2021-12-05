@@ -1,3 +1,4 @@
+/* eslint-disable jest/no-mocks-import */
 import '@testing-library/jest-dom'
 import React from 'react'
 import { render } from '@testing-library/react'
@@ -65,6 +66,6 @@ describe('<CompanyComparison', () => {
   test('testing', () => {
     const { container } = render(<Provider store={fakeStore}><CompanyComparison stonk={stonk} /></Provider>)
     expect(container).toBeInTheDocument()
-    // TODO: Clean up warnings when taking snapshot
+    // TODO: Clean up warnings printWarnings in order to add more assertions
   })
 })

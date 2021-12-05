@@ -1,3 +1,4 @@
+/* eslint-disable react/display-name */
 import React from 'react'
 
 const MockCompanyInfoCard = CompanyInfoCard => ({ children, ...props }) => {
