@@ -28,7 +28,7 @@ function CompanyGridItem ({ stonk }) {
     <GridItem
       role='company'
       bg={useColorModeValue('white', 'gray.800')}
-      boxShadow={['base', 'xl', '2xl']}
+      boxShadow={['base', 'xl', null]}
       rounded='lg'
     >
       <Box
