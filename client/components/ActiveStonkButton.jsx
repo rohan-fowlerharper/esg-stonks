@@ -10,7 +10,6 @@ function ActiveStonkButton ({ stockSymbol }) {
   const activeStonks = useSelector(state => state.activeStonks)
   const isActive = activeStonks?.includes(stockSymbol)
   const isFull = activeStonks?.every(el => el !== null)
-  // const isFull = false
 
   function handleClick () {
     if (isActive) {
@@ -21,12 +20,11 @@ function ActiveStonkButton ({ stockSymbol }) {
   }
 
   const sharedProps = {
+    role: 'active-stonk-toggle',
     rounded: 'full',
     size: 'xs',
     onClick: handleClick
   }
-
-  // I would extract the shared props (rounded, size, onClick) in to a var and avoid some duplication. eg. <IconButton {...sharedProps} colorScheme="... etc />
 
   return (
     <>
