@@ -38,6 +38,7 @@ router.get('/symbol/:symbol', (req, res) => {
 })
 
 router.get('/goals/:stockSymbol', (req, res) => {
+  // if this is still TODO then it would be good to have a brief comment about what needs doing, as it looks done to me
   // TODO
   const stockSymbol = req.params.stockSymbol
   fetchGoalsByStockSymbol(stockSymbol)

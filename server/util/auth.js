@@ -1,6 +1,7 @@
 const jwt = require('express-jwt')
 const jwks = require('jwks-rsa')
 
+// I would extract core variables into a .env file so the app can be configured without making a commit
 const checkJwt = jwt({
   secret: jwks.expressJwtSecret({
     cache: true,

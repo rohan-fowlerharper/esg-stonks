@@ -7,6 +7,7 @@ import { Heading, Text, Grid, useColorModeValue, Box, Center } from '@chakra-ui/
 import CompanyGridItem from '../components/CompanyGridItem'
 import CompanyComparisons from '../components/CompanyComparisons'
 
+// I like the use of a wrapping layout
 import RegularLayout from '../layouts/RegularLayout'
 
 function Companies () {
@@ -16,7 +17,7 @@ function Companies () {
   const isFull = activeStonks?.every(el => el !== null)
   // const { isAuthenticated, user } = useAuth0()
 
-  // TODO: ensture to pass token
+  // TODO: ensure to pass token
   useEffect(() => {
     dispatch(fetchStonks())
   }, [])
