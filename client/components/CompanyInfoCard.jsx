@@ -1,7 +1,6 @@
 import React from 'react'
 import {
   Table,
-  Thead,
   Tbody,
   Tr,
   Th,
@@ -9,19 +8,21 @@ import {
   TableCaption,
   Image,
   Center,
-  Box
+  Box,
+  useBreakpointValue,
+  useColorModeValue
 } from '@chakra-ui/react'
 
-function Infocard ({ stonk }) {
+function CompanyInfoCard ({ stonk }) {
   const image = `https://s3.polygon.io/logos/${stonk.stockSymbol.toLowerCase()}/logo.png`
 
+  const toPrint = (({ companyName, exchangeSymbol, stockSymbol, environmentGrade, environmentLevel, socialGrade, socialLevel, governanceGrade, governanceLevel, totalGrade, totalLevel }) => ({ Name: companyName, Exchange: exchangeSymbol, Symbol: stockSymbol, Environment_Grade: environmentGrade, Environment_Level: environmentLevel, Social_Grade: socialGrade, Social_Level: socialLevel, Governance_Grade: governanceGrade, Governance_Level: governanceLevel, Overall_Grade: totalGrade, Overall_Level: totalLevel }))(stonk)
+
   return (
-    <Table
-      size='sm'
-      variant='striped'
-      colorScheme='gray'
+    <Box
+      boxShadow='base'
+      rounded='lg'
     >
-      <TableCaption>Last Processing Date: {stonk.lastProcessingDate}</TableCaption>
       <Box
         roundedTop='lg'
         h={36}
@@ -38,128 +39,41 @@ function Infocard ({ stonk }) {
           />
         </Center>
       </Box>
-      <Thead>
-        <Tr>
-          <Th>Company Name</Th>
-        </Tr>
-      </Thead>
-      <Tbody>
-        <Tr>
-          <Td>{stonk.companyName}</Td>
-        </Tr>
-      </Tbody>
+      <Table
+        size='sm'
+        variant='striped'
+        colorScheme='gray'
+      >
+        <TableCaption
+          color={useColorModeValue('gray.600', 'gray.400')}
+        >Last Processing Date: {stonk.lastProcessingDate}</TableCaption>
 
-      <Thead>
-        <Tr>
-          <Th>Exchange Symbol</Th>
-        </Tr>
-      </Thead>
-      <Tbody>
-        <Tr>
-          <Td>{stonk.exchangeSymbol}</Td>
-        </Tr>
-      </Tbody>
+        {Object.entries(toPrint).map(([key, value]) => {
+          return useBreakpointValue({
+            base: (
+              <>
+                <Th>{key.replace('_', ' ')}</Th>
+                <Tbody key={`${stonk.id}-${key}`}>
+                  <Tr>
+                    <Td><b>{value}</b></Td>
+                  </Tr>
+                </Tbody>
+              </>
 
-      <Thead>
-        <Tr>
-          <Th>Stock Symbol</Th>
-        </Tr>
-      </Thead>
-      <Tbody>
-        <Tr>
-          <Td>{stonk.stockSymbol} </Td>
-        </Tr>
-      </Tbody>
-
-      <Thead>
-        <Tr>
-          <Th>Environment Grade</Th>
-        </Tr>
-      </Thead>
-      <Tbody>
-        <Tr>
-          <Td>{stonk.environmentGrade}</Td>
-        </Tr>
-      </Tbody>
-
-      <Thead>
-        <Tr>
-          <Th>Environment Level</Th>
-        </Tr>
-      </Thead>
-      <Tbody>
-        <Tr>
-          <Td>{stonk.environmentLevel}</Td>
-        </Tr>
-      </Tbody>
-
-      <Thead>
-        <Tr>
-          <Th>Social Grade</Th>
-        </Tr>
-      </Thead>
-      <Tbody>
-        <Tr>
-          <Td>{stonk.socialGrade}</Td>
-        </Tr>
-      </Tbody>
-
-      <Thead>
-        <Tr>
-          <Th>Social Level</Th>
-        </Tr>
-      </Thead>
-      <Tbody>
-        <Tr>
-          <Td>{stonk.socialLevel}</Td>
-        </Tr>
-      </Tbody>
-
-      <Thead>
-        <Tr>
-          <Th>Governance Grade</Th>
-        </Tr>
-      </Thead>
-      <Tbody>
-        <Tr>
-          <Td>{stonk.governanceGrade}</Td>
-        </Tr>
-      </Tbody>
-
-      <Thead>
-        <Tr>
-          <Th>Governance Level</Th>
-        </Tr>
-      </Thead>
-      <Tbody>
-        <Tr>
-          <Td>{stonk.governanceLevel}</Td>
-        </Tr>
-      </Tbody>
-
-      <Thead>
-        <Tr>
-          <Th>Total Grade</Th>
-        </Tr>
-      </Thead>
-      <Tbody>
-        <Tr>
-          <Td>{stonk.totalGrade}</Td>
-        </Tr>
-      </Tbody>
-
-      <Thead>
-        <Tr>
-          <Th>Total Level</Th>
-        </Tr>
-      </Thead>
-      <Tbody>
-        <Tr>
-          <Td>{stonk.totalLevel}</Td>
-        </Tr>
-      </Tbody>
-    </Table>
+            ),
+            md: (
+              <Tbody key={`${stonk.id}-${key}`}>
+                <Tr>
+                  <Th minW='50%'>{key.replace('_', ' ')}</Th>
+                  <Td><b>{value}</b></Td>
+                </Tr>
+              </Tbody>
+            )
+          })
+        })}
+      </Table>
+    </Box>
   )
 }
 
-export default Infocard
+export default CompanyInfoCard

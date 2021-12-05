@@ -7,6 +7,9 @@ import { ExternalLinkIcon } from '@chakra-ui/icons'
 
 const CompanyGoals = ({ stockSymbol }) => {
   const [goals, setGoals] = useState([])
+  const [showMore, setShowMore] = useState(false)
+
+  const goalsToShow = goals.length > 10 ? showMore === true ? goals : goals.slice(0, 10) : goals
 
   useEffect(() => {
     getGoals(stockSymbol)
@@ -24,8 +27,7 @@ const CompanyGoals = ({ stockSymbol }) => {
     >
       <Heading as='h2' mb={2}>{stockSymbol}</Heading>
       <List spacing={4}>
-
-        {goals.map((goal, idx) => {
+        {goalsToShow.map((goal, idx) => {
           return (
             <ListItem key={`goal-${stockSymbol}-${idx}`}>
 
@@ -44,8 +46,6 @@ const CompanyGoals = ({ stockSymbol }) => {
 
               <HStack justifyContent='space-between'>
                 <Text>{goal.sdg.replace(/ - U.N. SDG$/gm, '')}</Text>
-
-                {/* Can convert tooltip to a popover */}
 
                 <Tooltip
                   hasArrow
@@ -69,6 +69,23 @@ const CompanyGoals = ({ stockSymbol }) => {
           )
         })}
       </List>
+      {goals.length > 10 && (
+        <Box
+          mt={2}
+          display='flex'
+          justifyContent='center'
+          alignItems='center'
+        >
+          <Text
+            fontSize='sm'
+            color='gray.500'
+            onClick={() => setShowMore(!showMore)}
+            cursor='pointer'
+          >
+            {showMore ? 'Show Less' : `Show ${goals.length - 10} More`}
+          </Text>
+        </Box>
+      )}
     </Box>
   )
 }
