@@ -1,6 +1,7 @@
 import React from 'react'
 import {
   Table,
+  Thead,
   Tbody,
   Tr,
   Th,
@@ -52,8 +53,13 @@ function CompanyInfoCard ({ stonk }) {
           return useBreakpointValue({
             base: (
               <>
-                <Th>{key.replace('_', ' ')}</Th>
-                <Tbody key={`${stonk.id}-${key}`}>
+                <Thead key={`${stonk.id}-${key}`}>
+                  <Tr>
+                    <Th>{key.replace('_', ' ')}</Th>
+                  </Tr>
+                </Thead>
+
+                <Tbody key={`${stonk.id}-${key}-${value}`}>
                   <Tr>
                     <Td><b>{value}</b></Td>
                   </Tr>
