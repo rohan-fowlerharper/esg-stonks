@@ -9,16 +9,20 @@ import {
   Image,
   Center,
   Box,
-  useBreakpointValue
+  useBreakpointValue,
+  useColorModeValue
 } from '@chakra-ui/react'
 
-function Infocard ({ stonk }) {
+function CompanyInfoCard ({ stonk }) {
   const image = `https://s3.polygon.io/logos/${stonk.stockSymbol.toLowerCase()}/logo.png`
 
   const toPrint = (({ companyName, exchangeSymbol, stockSymbol, environmentGrade, environmentLevel, socialGrade, socialLevel, governanceGrade, governanceLevel, totalGrade, totalLevel }) => ({ Name: companyName, Exchange: exchangeSymbol, Symbol: stockSymbol, Environment_Grade: environmentGrade, Environment_Level: environmentLevel, Social_Grade: socialGrade, Social_Level: socialLevel, Governance_Grade: governanceGrade, Governance_Level: governanceLevel, Overall_Grade: totalGrade, Overall_Level: totalLevel }))(stonk)
 
   return (
-    <>
+    <Box
+      boxShadow='base'
+      rounded='lg'
+    >
       <Box
         roundedTop='lg'
         h={36}
@@ -40,7 +44,9 @@ function Infocard ({ stonk }) {
         variant='striped'
         colorScheme='gray'
       >
-        <TableCaption>Last Processing Date: {stonk.lastProcessingDate}</TableCaption>
+        <TableCaption
+          color={useColorModeValue('gray.600', 'gray.400')}
+        >Last Processing Date: {stonk.lastProcessingDate}</TableCaption>
 
         {Object.entries(toPrint).map(([key, value]) => {
           return useBreakpointValue({
@@ -58,7 +64,7 @@ function Infocard ({ stonk }) {
             md: (
               <Tbody key={`${stonk.id}-${key}`}>
                 <Tr>
-                  <Th>{key.replace('_', ' ')}</Th>
+                  <Th minW='50%'>{key.replace('_', ' ')}</Th>
                   <Td><b>{value}</b></Td>
                 </Tr>
               </Tbody>
@@ -66,8 +72,8 @@ function Infocard ({ stonk }) {
           })
         })}
       </Table>
-    </>
+    </Box>
   )
 }
 
-export default Infocard
+export default CompanyInfoCard
