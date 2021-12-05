@@ -14,7 +14,6 @@ function Companies () {
   const dispatch = useDispatch()
   const stonks = useSelector(state => state.stonks)
   const activeStonks = useSelector(state => state.activeStonks)
-
   const isFull = activeStonks?.every(el => el !== null)
   // const { isAuthenticated, user } = useAuth0()
 
@@ -71,7 +70,7 @@ function Companies () {
         </Box>
       ) : (
         <Center mt={6}>
-          <Heading as='h1' fontSize='2xl' fontWeight='bold'>Please select your componany blah blah</Heading>
+          <Heading as='h1' fontSize='2xl' fontWeight='bold'>Please select your company blah blah</Heading>
         </Center>
       )}
     </RegularLayout>
