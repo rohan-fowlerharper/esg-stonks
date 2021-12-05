@@ -68,9 +68,11 @@ function Companies () {
         >
           <CompanyComparisons activeStonks={activeStonks} stonks={stonks} />
         </Box>
-      ) : (<Center mt={6}>
-        <Heading as='h1' fontSize='2xl' fontWeight='bold'>Please select your componany blah blah</Heading>
-      </Center>)}
+      ) : (
+        <Center mt={6}>
+          <Heading as='h1' fontSize='2xl' fontWeight='bold'>Please select your componany blah blah</Heading>
+        </Center>
+      )}
     </RegularLayout>
   )
 }
