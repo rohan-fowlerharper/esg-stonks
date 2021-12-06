@@ -5,7 +5,7 @@ const RatingBar = ({ rating, max, ...rest }) => {
   const value = Math.floor((rating / max) * 100)
   const color = _getColor(value)
   return (
-    <Box w='full' height='10px' bg='gray.700' rounded='full' {...rest}>
+    <Box role='rating-bar' w='full' height='10px' bg='gray.700' rounded='full' {...rest}>
       <Box width={`${value}%`} height='10px' bg={color} rounded='full' />
     </Box>
 
