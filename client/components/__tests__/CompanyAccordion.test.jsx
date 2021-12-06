@@ -1,8 +1,6 @@
 import React from 'react'
 import '@testing-library/jest-dom'
-import { screen, render } from '@testing-library/react'
-import { Provider } from 'react-redux'
-import { BrowserRouter as Router } from 'react-router-dom'
+import { screen, render, fireEvent } from '@testing-library/react'
 
 import CompanyAccordion from '../CompanyAccordion'
 
@@ -27,23 +25,21 @@ const stonk = {
   totalScore: 1312
 }
 
-const fakeStore = {
-  getState: () => ({ stonk }),
-  dispatch: jest.fn(),
-  subscribe: jest.fn()
-}
-
 describe('<CompanyAccordion />', () => {
   beforeEach(() => {
-    render(<Provider store={fakeStore}><Router><CompanyAccordion stonk={stonk} /></Router></Provider>)
+    render(<CompanyAccordion stonk={stonk} />)
   })
   it('renders correct ESG total grade', () => {
-    // const textDiv = screen.getAllByRole('div')
     const textDiv = screen.getByLabelText('total-grade')
     expect(textDiv).toHaveTextContent('A')
   })
-  it('can open accordion button to see contents', () => {
-    const button = screen.getByRole('button')
-    expect(button).toBeVisible()
+  it('check that accordion button is closed by default', () => {
+    const button = screen.getByRole('button', 'button', { expanded: false })
+    expect(button).toHaveAttribute('aria-expanded', 'false')
+  })
+  it('check that accordion button expands when clicked', () => {
+    const button = screen.getByRole('button', { expanded: false })
+    fireEvent.click(button)
+    expect(button).toHaveAttribute('aria-expanded', 'true')
   })
 })
