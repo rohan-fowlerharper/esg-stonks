@@ -23,6 +23,8 @@ import {
 } from '@chakra-ui/icons'
 import { Link as RouteLink } from 'react-router-dom'
 import ThemeToggleButton from './ThemeToggleButton'
+import LoginButton from './LoginButton'
+import LogoutButton from './LogoutButton'
 
 // TODO: use sign in/out buttons
 
@@ -68,6 +70,8 @@ export default function WithSubnavigation () {
           direction={'row'}
           spacing={2}>
           <ThemeToggleButton />
+          <LoginButton />
+          <LogoutButton />
         </Stack>
       </Flex>
 

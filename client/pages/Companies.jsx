@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react'
+import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchStonks } from '../redux/actions/stonks'
-// import { useAuth0 } from '@auth0/auth0-react'
+import { useAuth0 } from '@auth0/auth0-react'
 import { Heading, Text, Grid, useColorModeValue, Box, Center } from '@chakra-ui/react'
 
 import CompanyGridItem from '../components/CompanyGridItem'
@@ -16,7 +17,7 @@ function Companies () {
   const stonks = useSelector(state => state.stonks)
   const activeStonks = useSelector(state => state.activeStonks)
   const isFull = activeStonks?.every(el => el !== null)
-  // const { isAuthenticated, user } = useAuth0()
+  const { isAuthenticated, user } = useAuth0()
 
   // TODO: ensure to pass token
   useEffect(() => {
@@ -25,6 +26,22 @@ function Companies () {
 
   return (
     <RegularLayout>
+      <Box>
+        {isAuthenticated ? (
+          <>
+            <Link to={'/profile'}>
+              <h2>Welcome {user.name}</h2>
+              <p>Here is some restricted content: </p>
+              {stonks.map(stonk => (
+                <p key={stonk.id}>{stonk.company_name}</p>
+              ))}
+            </Link>
+          </>
+        ) : (
+          <p>Please log in to see your profile and restricted content</p>
+
+        )}
+      </Box>
       {/* extract as page header component */}
       <Heading as='h1' size='2xl' my={[2, null, 6]}>
         Company Listings
@@ -46,22 +63,6 @@ function Companies () {
           <CompanyGridItem key={stonk.id} stonk={stonk}/>
         ))}
       </Grid>
-
-      {/* <Box>
-        {isAuthenticated ? (
-        <>
-          <h2>Welcome {user.nickname}</h2>
-          <p>Your email is {user.email}</p>
-          <img src={user.picture} alt={`thumbnail of ${user.nickname}`} />
-          <p>Here is some restricted content: </p>
-          {stonks.map(stonk => (
-            <p key={stonk.id}>{stonk.company_name}</p>
-          ))}
-        </>
-      ) : (
-        <p>Please log in to see your profile and restricted content</p>
-      )}
-      </Box> */}
       {isFull ? (
         <Box
           mt={4}
