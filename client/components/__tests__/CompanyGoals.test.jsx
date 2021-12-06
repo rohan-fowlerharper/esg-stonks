@@ -20,8 +20,11 @@ jest.mock('react', () => ({
 //   )
 // }
 describe('<CompanyGoals />', () => {
-  getGoals.mockImplementation(() => Promise.resolve([{ sasb: 'goal1', sdg: 'goal1' }, { sasb: 'goal2', sdg: 'goal2' }, { sasb: 'goal3', sdg: 'goal3' }])
-  )
+  getGoals.mockImplementation(() => Promise.resolve([
+    { sasb: 'goal1', sdg: 'goal1' },
+    { sasb: 'goal2', sdg: 'goal2' },
+    { sasb: 'goal3', sdg: 'goal3' }
+  ]))
   // useEffect.mockImplentation(React.useLayoutEffect)
   // React.useEffect.mockImplementation(f => f())
   it('should render the goals of the respective company', async () => {
