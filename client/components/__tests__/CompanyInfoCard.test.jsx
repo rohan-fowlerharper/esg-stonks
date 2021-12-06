@@ -3,6 +3,7 @@ import React from 'react'
 import { render, screen } from '@testing-library/react'
 import { BrowserRouter as Router } from 'react-router-dom'
 import { Provider } from 'react-redux'
+import { ChakraProvider } from '@chakra-ui/react'
 import CompanyInfoCard from '../CompanyInfoCard'
 
 // jest.mock('@chakra-ui/react', () => ({
@@ -68,13 +69,14 @@ describe('<CompanyInfoCard />', () => {
     subscribe: jest.fn()
   }
   it('displays a table of information for a given company', () => {
-    render(<Provider store={fakeStore}><Router><CompanyInfoCard stonk={stonk} /></Router></Provider>)
+    render(
+      <ChakraProvider>
+        <Provider store={fakeStore}>
+          <Router><CompanyInfoCard stonk={stonk} /></Router>
+        </Provider>
+      </ChakraProvider>)
     const table = screen.getByRole('table')
-    // const rows = table.querySelectorAll('tr')
-    // screen.debug()
     expect(table).toBeInTheDocument()
     expect(table).toHaveTextContent(/Last Processing Date:/i)
-    // expect(rows).toHaveLength(22)
-    // expect(rows[0]).toHaveTextContent(/Company Name/i)
   })
 })
