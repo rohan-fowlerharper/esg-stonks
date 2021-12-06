@@ -22,7 +22,7 @@ function CompanyAccordion ({ stonk }) {
         <AccordionPanel>
           <HStack justifyContent='space-between'>
             <Text fontWeight='semibold' color={useColorModeValue('gray.600', 'gray.400')}>Overall Grade:</Text>
-            <Text fontWeight='semibold'>{stonk.totalGrade}</Text>
+            <Text fontWeight='semibold' aria-label='total-grade'>{stonk.totalGrade}</Text>
           </HStack>
           <Text fontWeight='semibold' color={useColorModeValue('gray.600', 'gray.400')}>Environment:</Text>
           <RatingBar rating={stonk.environmentScore} max={1000} mb={2} />
