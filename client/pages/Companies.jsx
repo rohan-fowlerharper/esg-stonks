@@ -6,6 +6,7 @@ import { Heading, Text, Grid, useColorModeValue, Box, Center } from '@chakra-ui/
 
 import CompanyGridItem from '../components/CompanyGridItem'
 import CompanyComparisons from '../components/CompanyComparisons'
+import CompanyRadar from '../components/CompanyRadar'
 
 // I like the use of a wrapping layout
 import RegularLayout from '../layouts/RegularLayout'
@@ -70,9 +71,13 @@ function Companies () {
         </Box>
       ) : (
         <Center mt={6}>
-          <Heading as='h1' fontSize='2xl' fontWeight='bold'>Please select your company blah blah</Heading>
+          <Heading as='h1' fontSize='2xl' fontWeight='bold'>Your comparison will appear here.</Heading>
         </Center>
       )}
+
+      { stonks[0] && stonks[1] &&
+        <CompanyRadar stonk1={stonks[0]} stonk2={stonks[1]} width='full' height='500px' />
+      }
     </RegularLayout>
   )
 }
