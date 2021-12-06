@@ -20,7 +20,7 @@ function Comparison ({ stonks, activeStonks: activeSymbols }) {
       </SimpleGrid>
       <Container>
         {activeStonk1 && activeStonk2 &&
-        <CompanyRadar stonk1={activeStonk1} stonk2={activeStonk2} width='full' height='600px' />}
+        <CompanyRadar stonk1={activeStonk1} stonk2={activeStonk2} width='full' height='500px' />}
       </Container>
     </>
   )
