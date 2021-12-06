@@ -70,7 +70,7 @@ function CompanyInfoCard ({ stonk }) {
             md: (
               <Tbody key={`${stonk.id}-${key}`}>
                 <Tr>
-                  <Th minW='50%'>{key.replace('_', ' ')}</Th>
+                  <Th minW='40%'>{key.replace('_', ' ')}</Th>
                   <Td><b>{value}</b></Td>
                 </Tr>
               </Tbody>
