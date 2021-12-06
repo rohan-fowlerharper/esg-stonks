@@ -22,6 +22,7 @@ import {
   ChevronRightIcon
 } from '@chakra-ui/icons'
 import { Link as RouteLink } from 'react-router-dom'
+import { useAuth0 } from '@auth0/auth0-react'
 import ThemeToggleButton from './ThemeToggleButton'
 import LoginButton from './LoginButton'
 import LogoutButton from './LogoutButton'
@@ -30,6 +31,7 @@ import LogoutButton from './LogoutButton'
 
 export default function WithSubnavigation () {
   const { isOpen, onToggle } = useDisclosure()
+  const { isAuthenticated } = useAuth0()
 
   return (
     <Box>
@@ -70,8 +72,7 @@ export default function WithSubnavigation () {
           direction={'row'}
           spacing={2}>
           <ThemeToggleButton />
-          <LoginButton />
-          <LogoutButton />
+          {isAuthenticated ? <LogoutButton /> : <LoginButton />}
         </Stack>
       </Flex>
 
