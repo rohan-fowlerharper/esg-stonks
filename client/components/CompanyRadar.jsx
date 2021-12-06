@@ -35,7 +35,7 @@ function CompanyRadar ({ stonk1, stonk2, ...rest }) {
         dotColor={{ theme: 'background' }}
         dotBorderWidth={2}
         colors={['#805AD5', '#DD6B20']}
-        blendMode="multiply"
+        blendMode="mutiply"
         motionConfig="wobbly"
         legends={[
           {
