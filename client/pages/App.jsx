@@ -5,6 +5,7 @@ import Home from './Home'
 import Navigation from '../components/Navigation'
 import Companies from './Companies'
 import CompanyInfoCard from '../components/CompanyInfoCard'
+import Footer from '../components/Footer'
 
 function App () {
   return (
@@ -15,6 +16,7 @@ function App () {
         <Route path='/companies' element={<Companies />} />
         <Route path='/info' element={<CompanyInfoCard />} />
       </Routes>
+      <Footer />
     </>
   )
 }
