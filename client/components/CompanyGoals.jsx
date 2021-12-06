@@ -35,7 +35,7 @@ const CompanyGoals = ({ stockSymbol }) => {
               <Heading
                 as='h5'
                 fontWeight='semibold'
-                fontSize='lg'
+                fontSize={['md', null, 'lg']}
               >
                 {goal.sasb.replace(/ - SASB$/gm, '')}
               </Heading>
@@ -46,7 +46,9 @@ const CompanyGoals = ({ stockSymbol }) => {
               />
 
               <HStack justifyContent='space-between'>
-                <Text>{goal.sdg.replace(/ - U.N. SDG$/gm, '')}</Text>
+                <Text
+                  fontSize={['sm', 'md', null]}
+                >{goal.sdg.replace(/ - U.N. SDG$/gm, '')}</Text>
 
                 <Tooltip
                   hasArrow
@@ -78,7 +80,7 @@ const CompanyGoals = ({ stockSymbol }) => {
           alignItems='center'
         >
           <Text
-            fontSize='sm'
+            fontSize={['xs', 'sm']}
             color='gray.500'
             onClick={() => setShowMore(!showMore)}
             cursor='pointer'
