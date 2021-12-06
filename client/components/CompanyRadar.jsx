@@ -5,19 +5,19 @@ import { Box } from '@chakra-ui/react'
 function CompanyRadar ({ stonk1, stonk2, ...rest }) {
   const data = [
     {
-      esg: 'environment',
-      company1: stonk1.environmentScore,
-      company2: stonk2.environmentScore
+      esg: 'Environment',
+      [stonk1.companyName]: stonk1.environmentScore,
+      [stonk2.companyName]: stonk2.environmentScore
     },
     {
-      esg: 'social',
-      company1: stonk1.socialScore,
-      company2: stonk2.socialScore
+      esg: 'Social',
+      [stonk1.companyName]: stonk1.socialScore,
+      [stonk2.companyName]: stonk2.socialScore
     },
     {
-      esg: 'governance',
-      company1: stonk1.governanceScore,
-      company2: stonk2.governanceScore
+      esg: 'Governance',
+      [stonk1.companyName]: stonk1.governanceScore,
+      [stonk2.companyName]: stonk2.governanceScore
     }
   ]
 
@@ -25,7 +25,7 @@ function CompanyRadar ({ stonk1, stonk2, ...rest }) {
     <Box {...rest}>
       <ResponsiveRadar
         data={data}
-        keys={['company1', 'company2']}
+        keys={[stonk1.companyName, stonk2.companyName]}
         indexBy={['esg']}
         valueFormat=">-.2f"
         margin={{ top: 70, right: 80, bottom: 40, left: 80 }}
@@ -34,7 +34,7 @@ function CompanyRadar ({ stonk1, stonk2, ...rest }) {
         dotSize={10}
         dotColor={{ theme: 'background' }}
         dotBorderWidth={2}
-        colors={{ scheme: 'nivo' }}
+        colors={['#805AD5', '#DD6B20']}
         blendMode="multiply"
         motionConfig="wobbly"
         legends={[
