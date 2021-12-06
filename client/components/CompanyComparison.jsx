@@ -9,7 +9,7 @@ const CompanyComparison = ({ stonk }) => {
     <Box>
       <CompanyInfoCard stonk={stonk} />
 
-      <CompanyPie stonk={stonk} w='full' height='500px' />
+      <CompanyPie stonk={stonk} />
 
       <CompanyGoals stockSymbol={stonk.stockSymbol} />
     </Box>
