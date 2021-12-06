@@ -1,8 +1,8 @@
 const express = require('express')
-
 const router = express.Router()
-
 const db = require('../../../db/stonks')
+
+const { fetchGoalsByStockSymbol, fetchScoresByStockSymbol } = require('../../../util/goals')
 
 router.get('/', (req, res) => {
   db.getStonks()
@@ -15,15 +15,11 @@ router.get('/', (req, res) => {
     })
 })
 
-// TODO: use actual db function to get stonk by name
 router.get('/name/:name', (req, res) => {
   const name = req.params.name
-  db.getStonks()
+  db.getStonksByName(name)
     .then(stonks => {
-      const filtered = stonks.filter(stonk => {
-        return stonk.companyName.toLowerCase().includes(name.toLowerCase())
-      })
-      return res.json(filtered)
+      return res.json(stonks)
     })
     .catch(err => {
       console.log(err)
@@ -31,15 +27,35 @@ router.get('/name/:name', (req, res) => {
     })
 })
 
-// TODO: use actual db function to get stonk by symbol
 router.get('/symbol/:symbol', (req, res) => {
   const symbol = req.params.symbol
-  db.getStonks()
-    .then(stonks => {
-      const filtered = stonks.filter(stonk => {
-        return stonk.stockSymbol.toLowerCase().includes(symbol.toLowerCase())
-      })
-      return res.json(filtered)
+  db.getStonkBySymbol(symbol)
+    .then(stonk => res.json(stonk))
+    .catch(err => {
+      console.log(err)
+      res.status(500).send('There was an error')
+    })
+})
+
+router.get('/goals/:stockSymbol', (req, res) => {
+  // if this is still TODO then it would be good to have a brief comment about what needs doing, as it looks done to me
+  // TODO
+  const stockSymbol = req.params.stockSymbol
+  fetchGoalsByStockSymbol(stockSymbol)
+    .then(goals => {
+      return res.json(goals)
+    })
+    .catch(err => {
+      console.log(err)
+      res.status(500).send('There was an error')
+    })
+})
+
+router.get('/external/:stockSymbol', (req, res) => {
+  const stockSymbol = req.params.stockSymbol
+  fetchScoresByStockSymbol(stockSymbol)
+    .then(scoresData => {
+      return res.json(scoresData)
     })
     .catch(err => {
       console.log(err)

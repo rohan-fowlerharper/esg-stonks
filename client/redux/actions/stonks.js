@@ -9,6 +9,13 @@ export function setStonks (stonks) {
   }
 }
 
+export function setError (message) {
+  return {
+    type: 'SET_ERROR',
+    message
+  }
+}
+
 // todo: add token to this
 export function fetchStonks () {
   return dispatch => {
@@ -17,8 +24,6 @@ export function fetchStonks () {
         dispatch(setStonks(stonks))
         return null
       })
-      .catch(err => {
-        console.log(err)
-      })
+      .catch(err => dispatch(setError(err)))
   }
 }

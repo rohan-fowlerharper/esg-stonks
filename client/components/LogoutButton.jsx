@@ -9,6 +9,7 @@ const LogoutButton = (styleProps) => {
 
   return (
     <Button
+      role='logout-button'
       onClick={() => logout({ returnTo: window.location.origin })}
       {...styleProps}
     >
