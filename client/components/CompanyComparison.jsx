@@ -3,7 +3,6 @@ import { Box } from '@chakra-ui/react'
 import CompanyInfoCard from './CompanyInfoCard'
 import CompanyPie from './CompanyPie'
 import CompanyGoals from './CompanyGoals'
-import CompanyRadar from './CompanyRadar'
 
 const CompanyComparison = ({ stonk }) => {
   return (
@@ -13,8 +12,6 @@ const CompanyComparison = ({ stonk }) => {
       <CompanyPie stonk={stonk} w='full' height='500px' />
 
       <CompanyGoals stockSymbol={stonk.stockSymbol} />
-
-      <CompanyRadar stonk={stonk} w='full' height='500px' />
     </Box>
   )
 }
