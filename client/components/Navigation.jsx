@@ -230,7 +230,15 @@ const NAV_ITEMS = [
     href: '/'
   },
   {
+    label: 'About',
+    href: '#'
+  },
+  {
     label: 'ESG Scores',
     href: '/companies'
+  },
+  {
+    label: 'Contact',
+    href: '#'
   }
 ]
