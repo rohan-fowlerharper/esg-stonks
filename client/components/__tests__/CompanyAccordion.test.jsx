@@ -39,6 +39,7 @@ describe('<CompanyAccordion />', () => {
   })
   it('check that accordion button expands when clicked', () => {
     const button = screen.getByRole('button', { expanded: false })
+    expect(button).toHaveAttribute('aria-expanded', 'false')
     fireEvent.click(button)
     expect(button).toHaveAttribute('aria-expanded', 'true')
   })
