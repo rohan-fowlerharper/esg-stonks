@@ -17,7 +17,6 @@ const CompanyGoals = ({ stockSymbol }) => {
       .catch(err => console.error(err))
   }, [stockSymbol])
 
-  console.log(goals)
   return (
     // TODO - add a skeleton while loading
     // TODO - add a message if there are no goals
