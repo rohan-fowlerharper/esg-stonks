@@ -1,11 +1,10 @@
 /* eslint-disable jest/no-mocks-import */
 import '@testing-library/jest-dom'
-import React, { useLayoutEffect } from 'react'
-import { render, screen, fireEvent } from '@testing-library/react'
+import React from 'react'
+import { render, screen } from '@testing-library/react'
 
 import { getGoals } from '../../apis/stonks'
 import CompanyGoals from '../CompanyGoals'
-import { act } from 'react-dom/test-utils'
 
 jest.mock('../../apis/stonks')
 
