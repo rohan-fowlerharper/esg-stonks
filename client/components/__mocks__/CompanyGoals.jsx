@@ -3,7 +3,7 @@ import React from 'react'
 
 const MockCompanyGoals = CompanyGoals => ({ children, ...props }) => {
   return (
-    <CompanyGoals {...{ '[mockComponent]': true }} {...props}>
+    <CompanyGoals {...props}>
       {children}
     </CompanyGoals>
   )
