@@ -77,12 +77,7 @@ describe('<CompanyComparisons />', () => {
     })
   })
 
-  //   jest.mock('../CompanyComparison', () => {
-  //     const MockCompanyComparison = require('../__mocks__/CompanyComparison').default
-  //     return MockCompanyComparison('CompanyComparison')
-  //   })
-
-  it('renders each company side-by-side', () => {
+  it('renders information from two companies', () => {
     render(
       <ChakraProvider>
         <Provider store={fakeStore}>
@@ -90,17 +85,14 @@ describe('<CompanyComparisons />', () => {
         </Provider>
       </ChakraProvider>
     )
-    const tables = screen.getAllByRole('table')
-    console.log(tables[0])
-    // const lists = screen.getAllByRole('list')
+    const tableCaptions = screen.getAllByRole('table')
     const companyLogo = screen.getAllByRole('img')
     const headings = screen.getAllByRole('heading')
-    // expect(tables[0]).toBeInTheDocument()
-    // expect(lists[0]).toBeInTheDocument()
+    expect(tableCaptions[0]).toHaveTextContent('Last Processing Date: 01-12-2021')
+    expect(tableCaptions[1]).toHaveTextContent('Last Processing Date: 03-11-2021')
     expect(companyLogo[0].src).toContain('pfe')
     expect(companyLogo[1].src).toContain('tsla')
     expect(headings[0]).toHaveTextContent('PFE')
     expect(headings[1]).toHaveTextContent('TSLA')
-    screen.debug()
   })
 })
