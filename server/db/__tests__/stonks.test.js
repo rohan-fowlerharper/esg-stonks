@@ -91,3 +91,21 @@ describe('getUserStonks', () => {
       })
   })
 })
+
+describe('addUserStonks', () => {
+  const id = 'auth0|619abd1de3a44d00699e917d'
+  const stonksId = 6
+  it('adds a new stonk to the users favourite stonks', () => {
+    return db.addUserStonks(id, stonksId, testDb)
+      .then(() => {
+        expect(stonksId).toBe(6)
+        return db.getUserStonks(id, testDb)
+      })
+      .then(stonks => {
+        expect(stonks).toHaveLength(6)
+        expect(stonks[5].stockSymbol).toBe('PFE')
+        expect(stonks[5].companyName).toBe('Pfizer Inc.')
+        return null
+      })
+  })
+})

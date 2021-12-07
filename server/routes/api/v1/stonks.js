@@ -64,13 +64,27 @@ router.get('/external/:stockSymbol', (req, res) => {
     })
 })
 
-// TODO: Complete test for this route
 router.get('/user/stonks', checkJwt, (req, res) => {
   const userId = req.user?.sub
   db.getUserStonks(userId)
     .then(stonks => {
       console.log(stonks)
       return res.json(stonks)
+    })
+    .catch(err => {
+      console.log(err)
+      return res.status(500).send('There was an error')
+    })
+})
+
+router.post('/user/stonks', checkJwt, (req, res) => {
+  const userId = req.user?.sub
+  const stonkId = req.body.stonkId
+  console.log(userId)
+  console.log(stonkId)
+  db.addUserStonks(userId, stonkId)
+    .then(() => {
+      return res.sendStatus(200)
     })
     .catch(err => {
       console.log(err)

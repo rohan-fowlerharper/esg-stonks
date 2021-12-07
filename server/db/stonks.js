@@ -26,9 +26,19 @@ function getUserStonks (id, db = connection) {
     .select(allQueryFields)
 }
 
+function addUserStonks (id, stonksId, db = connection) {
+  return db('favourite_stonks')
+    .insert({
+      user_id: id,
+      stonk_id: stonksId
+    })
+    .then(() => getUserStonks(id, db))
+}
+
 module.exports = {
   getUserStonks,
   getStonks,
   getStonksByName,
-  getStonkBySymbol
+  getStonkBySymbol,
+  addUserStonks
 }

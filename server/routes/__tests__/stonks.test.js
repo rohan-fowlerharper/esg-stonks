@@ -263,7 +263,7 @@ describe('ERROR handling', () => {
   })
 })
 
-describe('getUserStonks', () => {
+describe('GET /api/v1/stonks/user/stonks', () => {
   checkJwt.mockImplementation((req, res, next) => {
     req.user = {
       sub: 'auth0|12345'
@@ -311,6 +311,41 @@ describe('getUserStonks', () => {
       .then(res => {
         console.log(res)
         expect(res.body).toEqual(fakeStonks)
+        return null
+      })
+  })
+})
+
+describe('POST /api/v1/stonks/user/stonks', () => {
+  checkJwt.mockImplementation((req, res, next) => {
+    req.user = {
+      sub: 'auth0|12345'
+    }
+    next()
+  })
+
+  const fakeStonk = {
+    id: 6,
+    companyName: 'Pfizer Inc.',
+    stockSymbol: 'PFE'
+  }
+  db.addUserStonks.mockResolvedValue(fakeStonk)
+
+  it('calls checkJwt', () => {
+    return request(server)
+      .post('/api/v1/stonks/user/stonks')
+      .expect(200)
+      .then(() => {
+        expect(checkJwt).toHaveBeenCalled()
+        return null
+      })
+  })
+  it('calls addUserStonks', () => {
+    return request(server)
+      .post('/api/v1/stonks/user/stonks')
+      .expect(200)
+      .then(() => {
+        expect(db.addUserStonks).toHaveBeenCalledWith('auth0|12345', fakeStonk.id)
         return null
       })
   })
