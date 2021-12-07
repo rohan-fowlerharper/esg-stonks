@@ -4,41 +4,14 @@ import {
   Center,
   Image,
   useColorModeValue,
-  Flex,
-  Heading,
-  HStack,
-  Text
+  Heading
 } from '@chakra-ui/react'
 
-import RatingBar from '../components/RatingBar'
-import Rating from '../components/Rating'
-// CheckIcon and CloseIcon
+import RatingBar from './RatingBar'
+import Rating from './Rating'
+import TickersLabel from './TickersLabel'
 
-// const stonk = {
-//   id: 1,
-//   esg_id: 11119,
-//   companyName: 'Apple Inc.',
-//   exchangeSymbol: 'TSE',
-//   stockSymbol: 'AAPL',
-//   environmentGrade: 'AA',
-//   environment_level: 'Excellent',
-//   socialGrade: 'BB',
-//   socialLevel: 'Medium',
-//   governanceGrade: 'BB',
-//   governance_level: 'Medium',
-//   totalGrade: 'A',
-//   total_level: 'High',
-//   lastProcessingDate: '04-11-2021',
-//   environmentScore: 671,
-//   socialScore: 341,
-//   governanceScore: 300,
-//   total_score: 1312
-// }
-
-function StonkInformation ({ stonk }) {
-  console.log(stonk)
-  const grayResponsive = useColorModeValue('gray.600', 'gray.400')
-
+function UserCompanyTile ({ stonk }) {
   const image = stonk.stockSymbol && `https://s3.polygon.io/logos/${stonk.stockSymbol.toLowerCase()}/logo.png`
 
   return (
@@ -68,33 +41,14 @@ function StonkInformation ({ stonk }) {
       <Box p={[2, null, 4]}>
         <Heading
           as='h4'
-          fontSize={['md', 'lg', 'xl']}
+          fontSize={['sm', 'md', 'lg']}
           fontWeight='bold'
           lineHeight='tight'
+          isTruncated
         >
           {stonk.companyName}
         </Heading>
-        <Flex mb={2} justifyContent='space-between'>
-          <HStack justifyContent='flex-start' spacing={1} color={grayResponsive}>
-            <Heading
-              as='h5'
-              fontSize={['sm', '0.9rem', 'md']}
-              fontWeight='semibold'
-              lineHeight='tight'
-            >
-              {stonk.stockSymbol}
-            </Heading>
-            <Text>|</Text>
-            <Heading
-              as='h5'
-              fontSize={['sm', '0.9rem', 'md']}
-              fontWeight='semibold'
-              lineHeight='tight'
-            >
-              {stonk.exchangeSymbol}
-            </Heading>
-          </HStack>
-        </Flex>
+        <TickersLabel exchangeSymbol={stonk.exchangeSymbol} stockSymbol={stonk.stockSymbol} />
         <Rating
           rating={stonk.totalGrade}
           label='Overall'
@@ -139,4 +93,4 @@ function StonkInformation ({ stonk }) {
   )
 }
 
-export default StonkInformation
+export default UserCompanyTile
