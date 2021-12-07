@@ -26,8 +26,7 @@ function Companies () {
   }, [])
 
   useEffect(() => {
-    if (searchTerm === '') return
-    console.log(searchTerm)
+    if (searchTerm === '') return true
   }, [searchTerm])
 
   function filterStonks ({ stockSymbol }) {
