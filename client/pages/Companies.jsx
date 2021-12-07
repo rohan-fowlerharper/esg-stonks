@@ -13,15 +13,20 @@ import RegularLayout from '../layouts/RegularLayout'
 
 function Companies () {
   const dispatch = useDispatch()
-  const stonks = useSelector(state => state.stonks)
-  const activeStonks = useSelector(state => state.activeStonks)
+  const { stonks, activeStonks } = useSelector(state => state)
   const isFull = activeStonks?.every(el => el !== null)
-  const { isAuthenticated, user } = useAuth0()
+  const { isAuthenticated, getAccessTokenSilently, user } = useAuth0()
 
-  // TODO: ensure to pass token
   useEffect(() => {
-    dispatch(fetchStonks())
-  }, [])
+    (async () => {
+      try {
+        const token = await getAccessTokenSilently()
+        dispatch(fetchStonks(token))
+      } catch (err) {
+        console.error(err)
+      }
+    })()
+  }, [getAccessTokenSilently])
 
   return (
     <RegularLayout>
@@ -70,7 +75,7 @@ function Companies () {
           <CompanyComparisons activeStonks={activeStonks} stonks={stonks} />
         </Box>
       ) : (
-        <Center mt={6}>
+        <Center mt={12}>
           <Heading as='h1' fontSize='2xl' fontWeight='bold'>Your comparison will appear here.</Heading>
         </Center>
       )}
