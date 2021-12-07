@@ -22,3 +22,10 @@ export function getGoals (stockSymbol) {
       return res.body
     })
 }
+
+export function addUserStonks (stockSymbol) {
+  return request
+    .post(`${stonksUrl}/user/stonks`)
+    .send({ stockSymbol })
+    .then(res => res.body)
+}

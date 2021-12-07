@@ -1,5 +1,5 @@
 import nock from 'nock'
-import { getStonks, getGoals, getUserStonks } from '../stonks'
+import { getStonks, getGoals, getUserStonks, addUserStonks } from '../stonks'
 
 describe('getStonks', () => {
   const stonks = [
@@ -72,7 +72,7 @@ describe('getGoals', () => {
   })
 })
 
-describe('getserStonks', () => {
+describe('getUserStonks', () => {
   const token = '12345'
   const userStonks = [
     {
@@ -120,6 +120,62 @@ describe('getserStonks', () => {
 
   it('returns the user stonks', () => {
     return getUserStonks(token)
+      .then(res => {
+        scope.done()
+        expect(res).toEqual(userStonks)
+        expect(res).toHaveLength(2)
+        return null
+      })
+  })
+})
+
+describe('addUserStonks', () => {
+  const userStonks = [
+    {
+      esgId: 2994,
+      companyName: 'GameStop Corp.',
+      exchangeSymbol: 'NYSE',
+      stockSymbol: 'GME',
+      environmentGrade: 'BB',
+      environmentLevel: 'Medium',
+      socialGrade: 'B',
+      socialLevel: 'Medium',
+      governanceGrade: 'BB',
+      governanceLevel: 'Medium',
+      totalGrade: 'BB',
+      totalLevel: 'Medium',
+      lastProcessingDate: '30-11-2021',
+      environmentScore: 335,
+      socialScore: 226,
+      governanceScore: 300,
+      totalScore: 861
+    },
+    {
+      esgId: 7009,
+      companyName: 'Tesla, Inc.',
+      exchangeSymbol: 'NASDAQ',
+      stockSymbol: 'TSLA',
+      environmentGrade: 'A',
+      environmentLevel: 'High',
+      socialGrade: 'CC',
+      socialLevel: 'Low',
+      governanceGrade: 'CCC',
+      governanceLevel: 'Low',
+      totalGrade: 'BB',
+      totalLevel: 'Medium',
+      lastProcessingDate: '03-11-2021',
+      environmentScore: 580,
+      socialScore: 146,
+      governanceScore: 155,
+      totalScore: 881
+    }
+  ]
+  const scope = nock('http://localhost')
+    .post('/api/v1/stonks/user/stonks')
+    .reply(200, userStonks)
+
+  it('adds the user stonks', () => {
+    return addUserStonks(userStonks)
       .then(res => {
         scope.done()
         expect(res).toEqual(userStonks)

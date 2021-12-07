@@ -10,14 +10,12 @@ import RegularLayout from '../layouts/RegularLayout'
 
 function UserProfile () {
   const { user, isAuthenticated, getAccessTokenSilently } = useAuth0()
-  console.log({ user })
   const [userStonks, setUserStonks] = useState([])
 
   useEffect(() => {
     (async () => {
       try {
         const token = await getAccessTokenSilently()
-        console.log(token)
         const response = await getUserStonks(token)
         setUserStonks(response)
       } catch (err) {

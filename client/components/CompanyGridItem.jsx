@@ -15,6 +15,7 @@ import RatingBar from './RatingBar'
 // CheckIcon and CloseIcon
 
 import ActiveStonkButton from './ActiveStonkButton'
+import FavouriteStonkButton from './FavouriteStonkButton'
 
 import CompanyAccordion from './CompanyAccordion'
 
@@ -79,10 +80,10 @@ function CompanyGridItem ({ stonk }) {
           </HStack>
           {/* icon to be moved, todo: use closeicon and checkicon when it's selected */}
           <ActiveStonkButton justifyContent='flex-end' stockSymbol={stonk.stockSymbol} />
+          <FavouriteStonkButton justifyContent='flex-end' stockSymbol={stonk.stockSymbol} />
         </Flex>
 
         <RatingBar rating={stonk.totalScore} max={3000} mt={4} />
-
       </Box>
       <CompanyAccordion stonk={stonk}/>
     </GridItem>
