@@ -19,7 +19,6 @@ function Companies () {
   const [searchTerm, setSearchTerm] = useState('')
   const { isAuthenticated, getAccessTokenSilently, user } = useAuth0()
 
-
   useEffect(() => {
     (async () => {
       try {
