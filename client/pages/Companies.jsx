@@ -8,6 +8,7 @@ import { Heading, Text, Grid, useColorModeValue, Box, Center } from '@chakra-ui/
 import CompanyGridItem from '../components/CompanyGridItem'
 import CompanyComparisons from '../components/CompanyComparisons'
 import SearchBar from '../components/SearchBar'
+import InfoCardModal from '../components/InfoCardModal'
 
 // I like the use of a wrapping layout
 import RegularLayout from '../layouts/RegularLayout'
@@ -87,6 +88,10 @@ function Companies () {
           mt={4}
           w='full'
         >
+          <Center>
+            <InfoCardModal />
+          </Center>
+          <br/>
           <CompanyComparisons activeStonks={activeStonks} stonks={stonks} />
         </Box>
       ) : (
