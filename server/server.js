@@ -12,7 +12,6 @@ server.use(express.static(path.join(__dirname, 'public')))
 // server.use(checkJwt)
 
 server.use('/api/v1/stonks', require('./routes/api/v1/stonks'))
-server.use('/api/v2/users', require('./routes/api/v2/users'))
 
 server.get('*', (req, res) => {
   res.sendFile(path.resolve('server/public/index.html'))

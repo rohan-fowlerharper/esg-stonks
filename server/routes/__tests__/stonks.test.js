@@ -271,7 +271,18 @@ describe('getUserStonks', () => {
     next()
   })
 
-  db.getUserStonks.mockResolvedValue('auth0|12345')
+  const fakeStonks = [{
+    esgId: 1,
+    stockSymbol: 'FB',
+    companyName: 'Facebook'
+  },
+  {
+    esgId: 2,
+    stockSymbol: 'GOOG',
+    companyName: 'Google'
+  }]
+
+  db.getUserStonks.mockResolvedValue(fakeStonks)
 
   it('calls checkJwt', () => {
     return request(server)
@@ -288,18 +299,18 @@ describe('getUserStonks', () => {
       .get('/api/v1/stonks/user/stonks')
       .expect(200)
       .then(() => {
-        expect(db.getUserStonks).toHaveBeenCalled()
+        expect(db.getUserStonks).toHaveBeenCalledWith('auth0|12345')
         return null
       })
   })
 
-  it('returns req.user on the res.body', () => {
+  it('returns stonks when called', () => {
     return request(server)
       .get('/api/v1/stonks/user/stonks')
       .expect(200)
       .then(res => {
         console.log(res)
-        expect(res.body).toEqual('auth0|12345')
+        expect(res.body).toEqual(fakeStonks)
         return null
       })
   })
