@@ -8,8 +8,11 @@ export function getStonks () {
     .then(res => res.body)
 }
 
-export function getUserStonks () {
-  return null
+export function getUserStonks (token) {
+  return request
+    .get(`${stonksUrl}/user/stonks`)
+    .set('Authorization', `Bearer ${token}`)
+    .then(res => res.body)
 }
 
 export function getGoals (stockSymbol) {
