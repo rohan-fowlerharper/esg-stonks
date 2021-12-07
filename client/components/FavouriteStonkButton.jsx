@@ -1,13 +1,26 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { AiOutlineStar, AiFillStar } from 'react-icons/ai'
-import { addUserStonks } from '../apis/stonks'
+import { useAuth0 } from '@auth0/auth0-react'
+import { addUserStonks, getUserStonks } from '../apis/stonks'
 
 function FavouriteStonkButton ({ stockSymbol }) {
   const [isFavourite, setIsFavourite] = useState(false)
+  const { getAccessTokenSilently } = useAuth0()
 
-  function handleClick () {
-    setIsFavourite(true)
-    return null
+  useEffect(() => {
+    getUserStonks(getAccessTokenSilently)
+      .then(({ data }) => {
+        const { favourites } = data
+        setIsFavourite(favourites.includes(stockSymbol))
+        return null
+      })
+      .catch(err => console.log(err))
+  })
+
+  const handleClick = () => {
+    if (isFavourite) {
+      addUserStonks(stockSymbol)
+    }
   }
 
   return (
