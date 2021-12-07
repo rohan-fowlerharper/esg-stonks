@@ -41,6 +41,6 @@ describe('<SearchBar />', () => {
     )
     const inputValue = screen.getByPlaceholderText('Symbol... (e.g. AAPL)')
     expect(inputValue.value).toBe('')
-    screen.debug()
+    // screen.debug()
   })
 })
