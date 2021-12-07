@@ -6,7 +6,7 @@ function InfoCardModal () {
 
   return (
     <>
-      <Button onClick={onOpen}>Click for scores explained</Button>
+      <Button onClick={onOpen}>ESG scores explained</Button>
 
       <Modal blockScrollOnMount={false} isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
