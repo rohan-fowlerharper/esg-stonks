@@ -7,6 +7,7 @@ import { Heading, Text, Grid, useColorModeValue, Box, Center } from '@chakra-ui/
 
 import CompanyGridItem from '../components/CompanyGridItem'
 import CompanyComparisons from '../components/CompanyComparisons'
+import SearchBar from '../components/SearchBar'
 
 // I like the use of a wrapping layout
 import RegularLayout from '../layouts/RegularLayout'
@@ -49,6 +50,8 @@ function Companies () {
       <Text mb={4} fontSize='xl' color={useColorModeValue('gray.800', 'gray.300')}>
         Select 2 companies to compare ESG scores
       </Text>
+      <SearchBar />
+      <br />
       <Grid
         templateColumns={[
           'repeat(2, minmax(150px, 1fr))',
