@@ -6,7 +6,7 @@ import CompanyInfoCard from './CompanyInfoCard'
 import CompanyPie from './CompanyPie'
 import CompanyGoals from './CompanyGoals'
 
-function Comparison ({ stonks, activeStonks: activeSymbols, stonk }) {
+function Comparison ({ stonks, activeStonks: activeSymbols }) {
   const activeStonk1 = stonks.find(stonk => stonk.stockSymbol === activeSymbols[0])
   const activeStonk2 = stonks.find(stonk => stonk.stockSymbol === activeSymbols[1])
 
@@ -36,7 +36,7 @@ function Comparison ({ stonks, activeStonks: activeSymbols, stonk }) {
         gap={[2, 4, 6]}
         width='full'
       >
-        {activeStonk1.stockSymbol && <CompanyGoals stockSymbol1={activeStonk1.stockSymbol} />}
+        {activeStonk1.stockSymbol && <CompanyGoals stockSymbol={activeStonk1.stockSymbol} />}
         {activeStonk2.stockSymbol && <CompanyGoals stockSymbol={activeStonk2.stockSymbol} />}
       </SimpleGrid>
     </>
