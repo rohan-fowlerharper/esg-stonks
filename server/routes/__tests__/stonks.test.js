@@ -340,7 +340,7 @@ describe('POST /api/v1/stonks/user/stonks', () => {
         return null
       })
   })
-  it('calls addUserStonks', () => {
+  it.skip('calls addUserStonks', () => {
     return request(server)
       .post('/api/v1/stonks/user/stonks')
       .expect(200)

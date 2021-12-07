@@ -77,11 +77,10 @@ router.get('/user/stonks', checkJwt, (req, res) => {
     })
 })
 
+// TODO: Finish remaining tests for this route
 router.post('/user/stonks', checkJwt, (req, res) => {
   const userId = req.user?.sub
   const stonkId = req.body.stonkId
-  console.log(userId)
-  console.log(stonkId)
   db.addUserStonks(userId, stonkId)
     .then(() => {
       return res.sendStatus(200)

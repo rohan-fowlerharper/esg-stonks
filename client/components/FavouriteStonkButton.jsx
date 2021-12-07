@@ -6,22 +6,18 @@ function FavouriteStonkButton ({ stockSymbol }) {
   const [isFavourite, setIsFavourite] = useState(false)
 
   function handleClick () {
-    addUserStonks(stockSymbol)
-      .then(() => {
-        setIsFavourite(true)
-        return null
-      })
-      .catch(() => {
-        setIsFavourite(false)
-      })
+    setIsFavourite(true)
+    return null
   }
 
   return (
     <>
-      { isFavourite
+      {/* { isFavourite
         ? <AiFillStar onClick={handleClick} />
         : <AiOutlineStar onClick={handleClick} />
-      }
+      } */}
+      {isFavourite && <AiFillStar onClick={handleClick} />}
+      {!isFavourite && <AiOutlineStar onClick={handleClick} />}
     </>
   )
 }
