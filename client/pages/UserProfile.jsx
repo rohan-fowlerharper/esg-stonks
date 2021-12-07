@@ -1,11 +1,12 @@
 import React from 'react'
-import { Heading, Container, Image, Text, Button, Flex, Link } from '@chakra-ui/react'
+import { Container, Image, Text, Button, Link } from '@chakra-ui/react'
 import { useAuth0 } from '@auth0/auth0-react'
 
 // import EditProfile from '../components/EditProfile'
 
 function UserProfile () {
   const { user, isAuthenticated } = useAuth0()
+  console.log({ user })
 
   return (
     <Container maxW={'5xl'} centerContent>
