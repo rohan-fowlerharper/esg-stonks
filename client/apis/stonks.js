@@ -8,6 +8,10 @@ export function getStonks () {
     .then(res => res.body)
 }
 
+export function getUserStonks () {
+  return null
+}
+
 export function getGoals (stockSymbol) {
   return request
     .get(`${stonksUrl}/goals/${stockSymbol}`)
