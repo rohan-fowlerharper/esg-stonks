@@ -1,8 +1,11 @@
 import React from 'react'
 import { render } from '@testing-library/react'
 import { Provider } from 'react-redux'
+import { useAuth0 } from '@auth0/auth0-react'
 
 import Companies from '../Companies'
+
+jest.mock('@auth0/auth0-react')
 
 const stonks = [
   {
@@ -53,6 +56,11 @@ describe('<Companies />', () => {
     dispatch: jest.fn(),
     subscribe: jest.fn()
   }
+  beforeEach(() => {
+    useAuth0.mockReturnValue({
+      getAccessTokenSilently: jest.fn()
+    })
+  })
   it('renders list of companies', () => {
     render(<Provider store={fakeStore}><Companies /></Provider>)
     // screen.debug()
