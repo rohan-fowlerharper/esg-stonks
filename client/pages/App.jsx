@@ -21,7 +21,7 @@ function App () {
         <Route path='/profile' element={<UserProfile />} />
         <Route path='/edit-profile' element={<EditProfile />} />
       </Routes>
-      <Footer />
+      <Footer mt={48} />
     </>
   )
 }
