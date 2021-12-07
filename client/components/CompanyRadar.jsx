@@ -21,6 +21,16 @@ function CompanyRadar ({ stonk1, stonk2, ...rest }) {
     }
   ]
 
+  const LabelComponent = ({ id, x, y, anchor }) => (
+    <g transform={`translate(${x}, ${y})`}>
+      <g transform={`translate(${anchor === 'end' ? -60 : anchor === 'middle' ? -30 : 0}, -0)`}>
+        <text style={{
+          fill: '#999'
+        }}>{id}</text>
+      </g>
+    </g>
+  )
+
   return (
     <Box {...rest}>
       <ResponsiveRadar
@@ -31,6 +41,7 @@ function CompanyRadar ({ stonk1, stonk2, ...rest }) {
         margin={{ top: 70, right: 80, bottom: 40, left: 80 }}
         borderColor={{ from: 'color' }}
         gridLabelOffset={36}
+        gridLabel={LabelComponent}
         dotSize={10}
         dotColor={{ theme: 'background' }}
         dotBorderWidth={2}
