@@ -1,22 +1,23 @@
 import React from 'react'
 import '@testing-library/jest-dom'
-import { render } from '@testing-library/react'
+import { render, screen } from '@testing-library/react'
 import { Provider } from 'react-redux'
 
 import CompanyComparisons from '../CompanyComparisons'
-import { ChakraProvider } from '@chakra-ui/react'
-
 import CompanyGoals from '../CompanyGoals'
 import CompanyPie from '../CompanyPie'
 import CompanyInfoCard from '../CompanyInfoCard'
+import CompanyRadar from '../CompanyRadar'
 
 jest.mock('../CompanyGoals')
 jest.mock('../CompanyPie')
 jest.mock('../CompanyInfoCard')
+jest.mock('../CompanyRadar')
 
 CompanyGoals.mockImplementation(() => <div>CompanyGoals</div>)
 CompanyPie.mockImplementation(() => <div>CompanyPie</div>)
 CompanyInfoCard.mockImplementation(() => <div>CompanyInfoCard</div>)
+CompanyRadar.mockImplementation(() => <div>CompanyRadar</div>)
 
 const stonks = [
   {
@@ -73,14 +74,26 @@ const activeStonks = [
 ]
 
 describe('<CompanyComparisons />', () => {
-  it('renders information from two companies', () => {
+  beforeEach(() => {
     render(
-      <ChakraProvider>
-        <Provider store={fakeStore}>
-          <CompanyComparisons activeStonks={activeStonks} stonks={stonks} />
-        </Provider>
-      </ChakraProvider>
+      <Provider store={fakeStore}>
+        <CompanyComparisons activeStonks={activeStonks} stonks={stonks} />
+      </Provider>
     )
-    expect(true).toBe(true)
+  })
+  it('renders information from two companies', () => {
+    const companyInfoCard = screen.getAllByText('CompanyInfoCard')
+    const companyPie = screen.getAllByText('CompanyPie')
+    const companyGoals = screen.getAllByText('CompanyGoals')
+    expect(companyInfoCard[0]).toHaveTextContent('CompanyInfoCard')
+    expect(companyInfoCard).toHaveLength(2)
+    expect(companyPie[0]).toHaveTextContent('CompanyPie')
+    expect(companyPie).toHaveLength(2)
+    expect(companyGoals[0]).toHaveTextContent('CompanyGoals')
+    expect(companyGoals).toHaveLength(2)
+  })
+  it('CompanyRadar appears once on the page', () => {
+    const companyRadar = screen.getByText('CompanyRadar')
+    expect(companyRadar).toHaveTextContent('CompanyRadar')
   })
 })
