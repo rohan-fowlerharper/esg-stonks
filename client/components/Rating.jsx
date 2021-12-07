@@ -7,14 +7,14 @@ const Rating = ({ label, rating }) => {
       <Text
         fontWeight='semibold'
         color={useColorModeValue('gray.600', 'gray.400')}
-        fontSize={['md', 'lg', null]}
+        fontSize={['sm', 'md', 'lg']}
       >
         {label}:
       </Text>
       <Text
         fontWeight='semibold'
         color={useColorModeValue('gray.600', 'gray.400')}
-        fontSize={['md', 'lg', null]}
+        fontSize={['sm', 'md', 'lg']}
       >
         {rating}
       </Text>
