@@ -1,5 +1,6 @@
 const express = require('express')
 const router = express.Router()
+const checkJwt = require('../../../util/auth')
 const db = require('../../../db/stonks')
 
 const { fetchGoalsByStockSymbol, fetchScoresByStockSymbol } = require('../../../util/goals')
@@ -60,6 +61,20 @@ router.get('/external/:stockSymbol', (req, res) => {
     .catch(err => {
       console.log(err)
       res.status(500).send('There was an error')
+    })
+})
+
+// TODO: Complete test for this route
+router.get('/user/stonks', checkJwt, (req, res) => {
+  const userId = req.user?.sub
+  db.getUserStonks(userId)
+    .then(stonks => {
+      console.log(stonks)
+      return res.json(stonks)
+    })
+    .catch(err => {
+      console.log(err)
+      return res.status(500).send('There was an error')
     })
 })
 
