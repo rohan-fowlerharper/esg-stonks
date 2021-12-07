@@ -8,8 +8,8 @@ import { Heading, Text, Grid, useColorModeValue, Box, Center } from '@chakra-ui/
 import CompanyGridItem from '../components/CompanyGridItem'
 import CompanyComparisons from '../components/CompanyComparisons'
 import SearchBar from '../components/SearchBar'
+import InfoCardModal from '../components/InfoCardModal'
 
-// I like the use of a wrapping layout
 import RegularLayout from '../layouts/RegularLayout'
 
 function Companies () {
@@ -49,9 +49,6 @@ function Companies () {
             <Link to={'/profile'}>
               <h2>Welcome {user.name}</h2>
               <p>Here is some restricted content: </p>
-              {stonks.map(stonk => (
-                <p key={stonk.id}>{stonk.company_name}</p>
-              ))}
             </Link>
           </>
         ) : (
@@ -87,6 +84,10 @@ function Companies () {
           mt={4}
           w='full'
         >
+          <Center>
+            <InfoCardModal />
+          </Center>
+          <br/>
           <CompanyComparisons activeStonks={activeStonks} stonks={stonks} />
         </Box>
       ) : (
