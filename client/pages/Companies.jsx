@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchStonks } from '../redux/actions/stonks'
@@ -18,11 +18,23 @@ function Companies () {
   const activeStonks = useSelector(state => state.activeStonks)
   const isFull = activeStonks?.every(el => el !== null)
   const { isAuthenticated, user } = useAuth0()
+  const [searchTerm, setSearchTerm] = useState('')
 
   // TODO: ensure to pass token
   useEffect(() => {
     dispatch(fetchStonks())
   }, [])
+
+  useEffect(() => {
+    if (searchTerm === '') return
+    console.log(searchTerm)
+  }, [searchTerm])
+
+  function filterStonks ({ stockSymbol }) {
+    if (searchTerm === '') return true
+    if (stockSymbol.match(new RegExp(searchTerm, 'i'))) return true
+    return false
+  }
 
   return (
     <RegularLayout>
@@ -50,7 +62,7 @@ function Companies () {
       <Text mb={4} fontSize='xl' color={useColorModeValue('gray.800', 'gray.300')}>
         Select 2 companies to compare ESG scores
       </Text>
-      <SearchBar />
+      <SearchBar setSearchTerm={setSearchTerm}/>
       <br />
       <Grid
         templateColumns={[
@@ -61,7 +73,7 @@ function Companies () {
         gap={4}
         w='full'
       >
-        {stonks.map(stonk => (
+        {stonks.filter(filterStonks).map(stonk => (
           <CompanyGridItem key={stonk.id} stonk={stonk}/>
         ))}
       </Grid>

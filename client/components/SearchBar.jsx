@@ -1,35 +1,18 @@
-import React, { useState } from 'react'
-import { HStack, InputGroup, InputLeftElement, Input, Button } from '@chakra-ui/react'
+import React from 'react'
+import { HStack, InputGroup, InputLeftElement, Input } from '@chakra-ui/react'
 import { SearchIcon } from '@chakra-ui/icons'
 
-function SearchBar ({ setSearchTerm, ...rest }) {
-  const [value, setValue] = useState('')
-
-  function handleSubmit (evt) {
-    evt.preventDefault()
-    if (value !== '') {
-      setSearchTerm(value)
-      setValue('')
-    } else {
-      console.log('empty')
-    }
-  }
-
+function SearchBar ({ searchTerm, setSearchTerm, ...rest }) {
   return (
     <HStack {...rest}>
-      {/* // <Container> */}
       <InputGroup>
         <InputLeftElement
           pointerEvents="none"
           // eslint-disable-next-line react/no-children-prop
           children={<SearchIcon color='gray.400'/>}
         />
-        <Input placeholder='Symbol... (e.g. AAPL)' onChange={evt => setValue(evt.target.value)} value={value} maxWidth='40%' />
+        <Input placeholder='Symbol... (e.g. AAPL)' onChange={evt => setSearchTerm(evt.target.value)} value={searchTerm} />
       </InputGroup>
-      <Button onClick={handleSubmit}>
-            Go
-      </Button>
-      {/* </Container> */}
     </HStack>
   )
 }
