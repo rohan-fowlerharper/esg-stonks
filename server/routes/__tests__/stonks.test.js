@@ -1,10 +1,12 @@
 const request = require('supertest')
 const { fetchGoalsByStockSymbol, fetchScoresByStockSymbol } = require('../../util/goals')
 const server = require('../../server')
+const checkJwt = require('../../util/auth')
 const db = require('../../db/stonks')
 
 jest.mock('../../db/stonks')
 jest.mock('../../util/goals')
+jest.mock('../../util/auth')
 
 describe('GET /api/v1/stonks/name/:name', () => {
   const fakeStonks = [{
@@ -256,6 +258,59 @@ describe('ERROR handling', () => {
       .then(res => {
         expect(res.status).toBe(500)
         expect(console.log).toHaveBeenCalledWith(err)
+        return null
+      })
+  })
+})
+
+describe('getUserStonks', () => {
+  checkJwt.mockImplementation((req, res, next) => {
+    req.user = {
+      sub: 'auth0|12345'
+    }
+    next()
+  })
+
+  const fakeStonks = [{
+    esgId: 1,
+    stockSymbol: 'FB',
+    companyName: 'Facebook'
+  },
+  {
+    esgId: 2,
+    stockSymbol: 'GOOG',
+    companyName: 'Google'
+  }]
+
+  db.getUserStonks.mockResolvedValue(fakeStonks)
+
+  it('calls checkJwt', () => {
+    return request(server)
+      .get('/api/v1/stonks/user/stonks')
+      .expect(200)
+      .then(() => {
+        expect(checkJwt).toHaveBeenCalled()
+        return null
+      })
+  })
+
+  it('calls getUserStonks', () => {
+    return request(server)
+      .get('/api/v1/stonks/user/stonks')
+      .expect(200)
+      .then(() => {
+        expect(db.getUserStonks).toHaveBeenCalledWith('auth0|12345')
+        return null
+      })
+  })
+
+  it('returns stonks when called', () => {
+    return request(server)
+      .get('/api/v1/stonks/user/stonks')
+      .expect(200)
+      .then(res => {
+        console.log(res)
+        expect(res.body).toEqual(fakeStonks)
         return null
       })
   })

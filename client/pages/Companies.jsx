@@ -23,6 +23,7 @@ function Companies () {
     (async () => {
       try {
         const token = await getAccessTokenSilently()
+        console.log(token)
         dispatch(fetchStonks(token))
       } catch (err) {
         console.error(err)
