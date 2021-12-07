@@ -1,5 +1,5 @@
 import React from 'react'
-import { Container, SimpleGrid } from '@chakra-ui/react'
+import { Container, SimpleGrid, Box } from '@chakra-ui/react'
 
 import CompanyRadar from './CompanyRadar'
 import CompanyInfoCard from './CompanyInfoCard'
@@ -12,33 +12,32 @@ function Comparison ({ stonks, activeStonks: activeSymbols }) {
 
   return (
     <>
-      <SimpleGrid
-        columns={2}
-        gap={[2, 4, 6]}
-        width='full'
-      >
-        {activeStonk1.stockSymbol && <CompanyInfoCard stonk={activeStonk1} />}
-        {activeStonk2.stockSymbol && <CompanyInfoCard stonk={activeStonk2} />}
+      {activeStonk1.stockSymbol && activeStonk2.stockSymbol && <Box>
+        <SimpleGrid
+          columns={2}
+          gap={[2, 4, 6]}
+          width='full'
+        >
+          <CompanyInfoCard stonk={activeStonk1} />
+          <CompanyInfoCard stonk={activeStonk2} />
 
-        {activeStonk1.stockSymbol &&
-        <CompanyPie stonk={activeStonk1} />}
-        {activeStonk2.stockSymbol &&
-        <CompanyPie stonk={activeStonk2} />}
-      </SimpleGrid>
+          <CompanyPie stonk={activeStonk1} />
+          <CompanyPie stonk={activeStonk2} />
+        </SimpleGrid>
 
-      <Container>
-        {activeStonk1 && activeStonk2 &&
-        <CompanyRadar stonk1={activeStonk1} stonk2={activeStonk2} width='full' height='500px' />}
-      </Container>
+        <Container>
+          <CompanyRadar stonk1={activeStonk1} stonk2={activeStonk2} width='full' height='500px' />
+        </Container>
 
-      <SimpleGrid
-        columns={2}
-        gap={[2, 4, 6]}
-        width='full'
-      >
-        {activeStonk1.stockSymbol && <CompanyGoals stockSymbol={activeStonk1.stockSymbol} />}
-        {activeStonk2.stockSymbol && <CompanyGoals stockSymbol={activeStonk2.stockSymbol} />}
-      </SimpleGrid>
+        <SimpleGrid
+          columns={2}
+          gap={[2, 4, 6]}
+          width='full'
+        >
+          <CompanyGoals stockSymbol={activeStonk1.stockSymbol} />
+          <CompanyGoals stockSymbol={activeStonk2.stockSymbol} />
+        </SimpleGrid>
+      </Box> }
     </>
   )
 }
