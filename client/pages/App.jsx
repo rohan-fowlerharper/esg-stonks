@@ -2,9 +2,12 @@ import React from 'react'
 import { Routes, Route } from 'react-router-dom'
 
 import Home from './Home'
-import Navigation from '../components/Navigation'
 import Companies from './Companies'
+import UserProfile from './UserProfile'
+
+import Navigation from '../components/Navigation'
 import CompanyInfoCard from '../components/CompanyInfoCard'
+import EditProfile from '../components/EditProfile'
 import Footer from '../components/Footer'
 
 function App () {
@@ -15,6 +18,8 @@ function App () {
         <Route path='/' element={<Home />} />
         <Route path='/companies' element={<Companies />} />
         <Route path='/info' element={<CompanyInfoCard />} />
+        <Route path='/profile' element={<UserProfile />} />
+        <Route path='/edit-profile' element={<EditProfile />} />
       </Routes>
       <Footer />
     </>
