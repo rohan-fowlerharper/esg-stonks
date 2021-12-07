@@ -1,6 +1,5 @@
 import React from 'react'
 import { Container } from '@chakra-ui/react'
-import Footer from '../components/Footer'
 
 const RegularLayout = ({ children }) => {
   return (
@@ -9,7 +8,6 @@ const RegularLayout = ({ children }) => {
         {children}
 
       </Container>
-      <Footer mt={48} />
     </>
   )
 }
