@@ -61,7 +61,7 @@ function Companies () {
       <Text mb={4} fontSize='xl' color={useColorModeValue('gray.800', 'gray.300')}>
         Select 2 companies to compare ESG scores
       </Text>
-      <SearchBar setSearchTerm={setSearchTerm}/>
+      <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm}/>
       <br />
       <Grid
         templateColumns={[
