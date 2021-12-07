@@ -3,9 +3,12 @@ import { Container } from '@chakra-ui/react'
 
 const RegularLayout = ({ children }) => {
   return (
-    <Container maxW='container.xl' px={[2, null, 4]}>
-      {children}
-    </Container>
+    <>
+      <Container position='relative' maxW='container.xl' minH='100vh' px={[2, null, 4]}>
+        {children}
+
+      </Container>
+    </>
   )
 }
 
