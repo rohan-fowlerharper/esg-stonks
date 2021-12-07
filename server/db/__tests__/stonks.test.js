@@ -77,3 +77,17 @@ describe('getStonksByName', () => {
       })
   })
 })
+
+describe('getUserStonks', () => {
+  const id = 'auth0|619abd1de3a44d00699e917d'
+  it('return an array of the users favourite stonks', () => {
+    expect.assertions(3)
+    return db.getUserStonks(id, testDb)
+      .then(stonks => {
+        expect(stonks).toHaveLength(5)
+        expect(stonks[0].stockSymbol).toBe('AQN')
+        expect(stonks[1].companyName).toBe('Facebook, Inc.')
+        return null
+      })
+  })
+})

@@ -19,7 +19,15 @@ function getStonkBySymbol (stockSymbol, db = connection) {
     .first()
 }
 
+function getUserStonks (id, db = connection) {
+  return db('favourite_stonks')
+    .join('stonks', 'favourite_stonks.stonk_id', 'stonks.id')
+    .where('favourite_stonks.user_id', id)
+    .select(allQueryFields)
+}
+
 module.exports = {
+  getUserStonks,
   getStonks,
   getStonksByName,
   getStonkBySymbol
