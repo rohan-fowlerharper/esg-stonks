@@ -5,7 +5,7 @@ import { useAuth0, withAuthenticationRequired } from '@auth0/auth0-react'
 import { getUserStonks } from '../apis/stonks'
 
 // import EditProfile from '../components/EditProfile'
-import StonkInformation from '../components/StonkInformation'
+import UserCompanyTile from '../components/UserCompanyTile'
 import RegularLayout from '../layouts/RegularLayout'
 
 function UserProfile () {
@@ -51,7 +51,7 @@ function UserProfile () {
             mt={6}
           >
             {userStonks.map(stonk => (
-              <StonkInformation stonk={stonk} key={stonk.id} />
+              <UserCompanyTile stonk={stonk} key={stonk.id} />
             ))}
           </Grid>
         </>
