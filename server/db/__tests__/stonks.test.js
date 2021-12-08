@@ -16,7 +16,7 @@ describe('getStonks', () => {
     expect.assertions(2)
     return db.getStonks(testDb)
       .then(stonks => {
-        expect(stonks).toHaveLength(6)
+        expect(stonks).toHaveLength(24)
         expect(stonks[0].companyName).toBe('Algonquin Power & Utilities Corp.')
         return null
       })
@@ -73,6 +73,51 @@ describe('getStonksByName', () => {
     return db.getStonksByName('NOT A NAME', testDb)
       .then(stonks => {
         expect(stonks).toHaveLength(0)
+        return null
+      })
+  })
+})
+
+describe('getUserStonks', () => {
+  const id = 'auth0|619abd1de3a44d00699e917d'
+  it('return an array of the users favourite stonks', () => {
+    expect.assertions(3)
+    return db.getUserStonks(id, testDb)
+      .then(stonks => {
+        expect(stonks).toHaveLength(4)
+        expect(stonks[0].stockSymbol).toBe('PFE')
+        expect(stonks[1].companyName).toBe('Facebook, Inc.')
+        return null
+      })
+  })
+})
+
+describe('addUserStonks', () => {
+  const id = 'auth0|619abd1de3a44d00699e917d'
+  const stonksId = 6
+  it('adds a new stonk to the users favourite stonks', () => {
+    return db.addUserFavourite(id, stonksId, testDb)
+      .then(() => {
+        expect(stonksId).toBe(6)
+        return db.getUserStonks(id, testDb)
+      })
+      .then(stonks => {
+        expect(stonks).toHaveLength(5)
+        expect(stonks[0].stockSymbol).toBe('PFE')
+        expect(stonks[0].companyName).toBe('Pfizer Inc.')
+        return null
+      })
+  })
+})
+
+describe('getUserFavourites', () => {
+  const userId = 'auth0|619abd1de3a44d00699e917d'
+  it('returns an array of the ids, of users favourite stonks', () => {
+    expect.assertions(2)
+    return db.getUserFavourites(userId, testDb)
+      .then(favourites => {
+        expect(favourites.user).toBe(userId)
+        expect(favourites.stonks).toHaveLength(4)
         return null
       })
   })

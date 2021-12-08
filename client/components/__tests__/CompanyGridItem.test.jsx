@@ -40,8 +40,7 @@ describe('<CompanyGridItem />', () => {
   it('renders correct headings from stonk', () => {
     const headings = screen.getAllByRole('heading')
     expect(headings[0]).toHaveTextContent('Algonquin Power & Utilities Corp.')
-    expect(headings[1]).toHaveTextContent('AQN')
-    expect(headings[2]).toHaveTextContent('TSE')
+    expect(headings[1]).toHaveTextContent('AQN | TSE')
   })
   it('renders correct logo image for stockSymbol', () => {
     const companyLogo = screen.getByRole('img')

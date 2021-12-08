@@ -17,9 +17,9 @@ export function setError (message) {
 }
 
 // todo: add token to this
-export function fetchStonks () {
+export function fetchStonks (token) {
   return dispatch => {
-    return getStonks()
+    return getStonks(token)
       .then(stonks => {
         dispatch(setStonks(stonks))
         return null

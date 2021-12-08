@@ -40,6 +40,6 @@ describe('<Navigation />', () => {
   it('nav bar links render to correct location', () => {
     const links = screen.getAllByRole('link')
     expect(links[0]).toHaveAttribute('href', '/')
-    expect(links[2]).toHaveAttribute('href', '/companies')
+    expect(links[1]).toHaveAttribute('href', '/companies')
   })
 })

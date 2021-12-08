@@ -30,13 +30,13 @@ function CompanyAccordion ({ stonk }) {
           </HStack>
 
           <Text {...styleProps}>Environment:</Text>
-          <RatingBar rating={stonk.environmentScore} max={1000} mb={2} />
+          <RatingBar rating={stonk.environmentScore} max={1000} mb={2} level={stonk.environmentLevel} />
 
           <Text {...styleProps}>Social:</Text>
-          <RatingBar rating={stonk.socialScore} max={1000} mb={2} />
+          <RatingBar rating={stonk.socialScore} max={1000} mb={2} level={stonk.socialLevel} />
 
           <Text {...styleProps}>Governance:</Text>
-          <RatingBar rating={stonk.governanceScore} max={1000} />
+          <RatingBar rating={stonk.governanceScore} max={1000} level={stonk.governanceLevel} />
         </AccordionPanel>
       </AccordionItem>
     </Accordion>

@@ -22,15 +22,21 @@ import {
   ChevronRightIcon
 } from '@chakra-ui/icons'
 import { Link as RouteLink } from 'react-router-dom'
+import { useAuth0 } from '@auth0/auth0-react'
 import ThemeToggleButton from './ThemeToggleButton'
+import LoginButton from './LoginButton'
+import LogoutButton from './LogoutButton'
 
 // TODO: use sign in/out buttons
 
 export default function WithSubnavigation () {
   const { isOpen, onToggle } = useDisclosure()
+  const { isAuthenticated } = useAuth0()
 
   return (
-    <Box>
+    <Box
+      mb={4}
+    >
       <Flex
         bg={useColorModeValue('white', 'gray.800')}
         color={useColorModeValue('gray.600', 'white')}
@@ -40,11 +46,13 @@ export default function WithSubnavigation () {
         borderBottom={1}
         borderStyle={'solid'}
         borderColor={useColorModeValue('gray.200', 'gray.900')}
-        align={'center'}>
+        align={'center'}
+      >
         <Flex
           flex={{ base: 1, md: 'auto' }}
           ml={{ base: -2 }}
-          display={{ base: 'flex', md: 'none' }}>
+          display={{ base: 'flex', md: 'none' }}
+        >
           <IconButton
             onClick={onToggle}
             icon={
@@ -55,9 +63,9 @@ export default function WithSubnavigation () {
           />
         </Flex>
         <Flex flex={{ base: 1 }} justify={{ base: 'center', md: 'start' }}>
-          <Image src="/images/esg-stonks_logo.png" maxHeight={{ base: '40px' }} w='auto' />
+          <Image src="/images/esg-stonks_logo.png" maxHeight={{ base: '20px', md: '30px', lg: '40px' }} w='auto' />
 
-          <Flex display={{ base: 'none', md: 'flex' }} ml={10}>
+          <Flex display={{ base: 'none', md: 'flex' }} ml={{ base: 5, lg: 10 }}>
             <DesktopNav />
           </Flex>
         </Flex>
@@ -66,8 +74,13 @@ export default function WithSubnavigation () {
           flex={{ base: 1, md: 0 }}
           justify={'flex-end'}
           direction={'row'}
-          spacing={2}>
+          spacing={2}
+        >
           <ThemeToggleButton />
+          {isAuthenticated
+            ? <LogoutButton display={{ base: 'none', md: 'flex' }}/>
+            : <LoginButton display={{ base: 'none', md: 'flex' }} />
+          }
         </Stack>
       </Flex>
 
@@ -79,19 +92,20 @@ export default function WithSubnavigation () {
 }
 
 const DesktopNav = () => {
+  const { isAuthenticated } = useAuth0()
   const linkColor = useColorModeValue('gray.600', 'gray.200')
   const linkHoverColor = useColorModeValue('gray.800', 'white')
   const popoverContentBgColor = useColorModeValue('white', 'gray.800')
 
   return (
-    <Stack direction={'row'} spacing={4} alignItems='center'>
+    <Stack direction={'row'} spacing={{ base: 2, lg: 4 }} alignItems='center'>
       {NAV_ITEMS.map((navItem) => (
         <Box key={navItem.label}>
           <Popover trigger={'hover'} placement={'bottom-start'}>
             <PopoverTrigger>
               <Link
                 as={RouteLink}
-                p={2}
+                p={{ base: 1, lg: 2 }}
                 to={navItem.href ?? '#'}
                 fontSize={'xl'}
                 fontWeight={500}
@@ -99,7 +113,8 @@ const DesktopNav = () => {
                 _hover={{
                   textDecoration: 'none',
                   color: linkHoverColor
-                }}>
+                }}
+              >
                 {navItem.label}
               </Link>
             </PopoverTrigger>
@@ -111,7 +126,8 @@ const DesktopNav = () => {
                 bg={popoverContentBgColor}
                 p={4}
                 rounded={'xl'}
-                minW={'sm'}>
+                minW={'sm'}
+              >
                 <Stack>
                   {navItem.children.map((child) => (
                     <DesktopSubNav key={child.label} {...child} />
@@ -122,6 +138,22 @@ const DesktopNav = () => {
           </Popover>
         </Box>
       ))}
+      {isAuthenticated && (
+        <Link
+          as={RouteLink}
+          p={{ base: 1, lg: 2 }}
+          to='/profile'
+          fontSize={'xl'}
+          fontWeight={500}
+          color={linkColor}
+          _hover={{
+            textDecoration: 'none',
+            color: linkHoverColor
+          }}
+        >
+          Profile
+        </Link>
+      )}
     </Stack>
   )
 }
@@ -135,7 +167,8 @@ const DesktopSubNav = ({ label, href, subLabel }) => {
       display={'block'}
       p={2}
       rounded={'md'}
-      _hover={{ bg: useColorModeValue('pink.50', 'gray.900') }}>
+      _hover={{ bg: useColorModeValue('pink.50', 'gray.900') }}
+    >
       <Stack direction={'row'} align={'center'}>
         <Box>
           <Text
@@ -153,7 +186,8 @@ const DesktopSubNav = ({ label, href, subLabel }) => {
           _groupHover={{ opacity: '100%', transform: 'translateX(0)' }}
           justify={'flex-end'}
           align={'center'}
-          flex={1}>
+          flex={1}
+        >
           <Icon color={'pink.400'} w={5} h={5} as={ChevronRightIcon} />
         </Flex>
       </Stack>
@@ -162,6 +196,7 @@ const DesktopSubNav = ({ label, href, subLabel }) => {
 }
 
 const MobileNav = () => {
+  const { isAuthenticated } = useAuth0()
   return (
     <Stack
       bg={useColorModeValue('white', 'gray.800')}
@@ -170,6 +205,13 @@ const MobileNav = () => {
       {NAV_ITEMS.map((navItem) => (
         <MobileNavItem key={navItem.label} {...navItem} />
       ))}
+      {isAuthenticated && (
+        <MobileNavItem
+          label={'Profile'}
+          href={'/profile'}
+        />
+      )}
+      {isAuthenticated ? (<LogoutButton />) : (<LoginButton />)}
     </Stack>
   )
 }
@@ -187,10 +229,12 @@ const MobileNavItem = ({ label, children, href }) => {
         align={'center'}
         _hover={{
           textDecoration: 'none'
-        }}>
+        }}
+      >
         <Text
           fontWeight={600}
-          color={useColorModeValue('gray.600', 'gray.200')}>
+          color={useColorModeValue('gray.600', 'gray.200')}
+        >
           {label}
         </Text>
         {children && (
@@ -211,7 +255,8 @@ const MobileNavItem = ({ label, children, href }) => {
           borderLeft={1}
           borderStyle={'solid'}
           borderColor={useColorModeValue('gray.200', 'gray.700')}
-          align={'start'}>
+          align={'start'}
+        >
           {children &&
             children.map((child) => (
               <Link as={RouteLink} key={child.label} py={2} to={child.href ?? '#'}>
@@ -230,15 +275,11 @@ const NAV_ITEMS = [
     href: '/'
   },
   {
-    label: 'About',
-    href: '#'
-  },
-  {
     label: 'ESG Scores',
     href: '/companies'
   },
   {
-    label: 'Contact',
+    label: 'About',
     href: '#'
   }
 ]

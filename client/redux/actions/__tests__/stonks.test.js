@@ -3,7 +3,7 @@ import { setStonks, setError, fetchStonks } from '../stonks'
 
 jest.mock('../../../apis/stonks')
 
-getStonks.mockImplementation(() => Promise.resolve({
+const fakeStonk = {
   id: 1,
   esg_id: 11119,
   company_name: 'Algonquin Power & Utilities Corp.',
@@ -22,7 +22,9 @@ getStonks.mockImplementation(() => Promise.resolve({
   social_score: 341,
   governance_score: 300,
   total: 1312
-}))
+}
+
+getStonks.mockImplementation(() => Promise.resolve(fakeStonk))
 
 describe('fetchStonks', () => {
   it('should fetch all stonks and calls setStonks', () => {

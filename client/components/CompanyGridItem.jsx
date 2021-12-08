@@ -7,19 +7,21 @@ import {
   useColorModeValue,
   Flex,
   Heading,
-  HStack,
-  Text
+  HStack
 } from '@chakra-ui/react'
+import { useAuth0 } from '@auth0/auth0-react'
 
 import RatingBar from './RatingBar'
 // CheckIcon and CloseIcon
 
 import ActiveStonkButton from './ActiveStonkButton'
-
+import FavouriteStonkButton from './FavouriteStonkButton'
+import TickersLabel from './TickersLabel'
 import CompanyAccordion from './CompanyAccordion'
 
 function CompanyGridItem ({ stonk }) {
   const image = `https://s3.polygon.io/logos/${stonk.stockSymbol.toLowerCase()}/logo.png`
+  const { isAuthenticated } = useAuth0()
 
   // gray colorModeValue 600 400 is used a lot, extract it to a var
   return (
@@ -55,33 +57,17 @@ function CompanyGridItem ({ stonk }) {
         >
           {stonk.companyName}
         </Heading>
-        <Flex mt={2} justifyContent='space-between'>
-          <HStack justifyContent='flex-start' spacing={1}>
-            <Heading
-              as='h5'
-              fontSize={['sm', '0.9rem', 'md']}
-              fontWeight='semibold'
-              lineHeight='tight'
-              color={useColorModeValue('gray.600', 'gray.400')}
-            >
-              {stonk.stockSymbol}
-            </Heading>
-            <Text color={useColorModeValue('gray.600', 'gray.400')}>|</Text>
-            <Heading
-              as='h5'
-              fontSize={['sm', '0.9rem', 'md']}
-              fontWeight='semibold'
-              lineHeight='tight'
-              color={useColorModeValue('gray.600', 'gray.400')}
-            >
-              {stonk.exchangeSymbol}
-            </Heading>
-          </HStack>
+        <Flex mt={1} justifyContent='space-between'>
+          <TickersLabel exchangeSymbol={stonk.exchangeSymbol} stockSymbol={stonk.stockSymbol} />
           {/* icon to be moved, todo: use closeicon and checkicon when it's selected */}
-          <ActiveStonkButton justifyContent='flex-end' stockSymbol={stonk.stockSymbol} />
+          <HStack spacing={[1, 2, null]}>
+            <ActiveStonkButton stockSymbol={stonk.stockSymbol} />
+            {isAuthenticated && <FavouriteStonkButton stonkId={stonk.id} />}
+          </HStack>
+
         </Flex>
 
-        <RatingBar rating={stonk.totalScore} max={3000} mt={4} />
+        <RatingBar rating={stonk.totalScore} max={3000} mt={4} level={stonk.totalLevel}/>
 
       </Box>
       <CompanyAccordion stonk={stonk}/>
