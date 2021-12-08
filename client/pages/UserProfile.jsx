@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { VStack, Image, Text, Button, Link, Grid, Flex, Heading } from '@chakra-ui/react'
+import { VStack, Center, Box, Image, Text, Button, Link, Grid, Flex, Heading } from '@chakra-ui/react'
 import { useAuth0, withAuthenticationRequired } from '@auth0/auth0-react'
 
 import { getUserStonks } from '../apis/stonks'
@@ -28,6 +28,13 @@ function UserProfile () {
     governance: _avgLevel(avgRatings.governance, 1000)
   }
 
+  const avgGrades = {
+    total: _avgGrade(avgRatings.total, 3000),
+    environment: _avgGrade(avgRatings.environment, 1000),
+    social: _avgGrade(avgRatings.social, 1000),
+    governance: _avgGrade(avgRatings.governance, 1000)
+  }
+
   useEffect(() => {
     (async () => {
       try {
@@ -44,8 +51,12 @@ function UserProfile () {
     <RegularLayout>
       {isAuthenticated ? (
         <>
-          <Flex direction={['column', 'row']} justifyContent='space-around'>
-            <VStack mt={10}>
+          <Center mb={4}>
+            <Heading as='h3'>Your Portfolio:</Heading>
+          </Center>
+
+          <Flex direction={['column', 'row']} justifyContent='space-evenly'>
+            <VStack>
               <Image src={user.picture} alt="Profile" />
               <Text> Welcome, {user.name}!</Text>
               <Button colorScheme="teal" onClick={() => console.log('clicked')}>
@@ -55,9 +66,10 @@ function UserProfile () {
               </Button>
             </VStack>
             {userStonks && userStonks.length > 0 && (
-              <VStack maxW='md' mx='2'>
-                <Heading as='h3'>Your Portfolio:</Heading>
+              <Box maxW='md' mx='2' minW='2xs'>
+
                 <Rating
+                  rating={avgGrades.total}
                   label='Overall'
                 />
                 <RatingBar
@@ -68,6 +80,7 @@ function UserProfile () {
                 />
 
                 <Rating
+                  rating={avgGrades.environment}
                   label='Environment'
                 />
                 <RatingBar
@@ -79,6 +92,7 @@ function UserProfile () {
 
                 <Rating
                   label='Social'
+                  rating={avgGrades.social}
                 />
                 <RatingBar
                   rating={avgRatings.social}
@@ -89,6 +103,7 @@ function UserProfile () {
 
                 <Rating
                   label='Governance'
+                  rating={avgGrades.governance}
                 />
                 <RatingBar
                   rating={avgRatings.governance}
@@ -96,7 +111,7 @@ function UserProfile () {
                   mb={2}
                   level={avgLevels.governance}
                 />
-              </VStack>)}
+              </Box>)}
           </Flex>
 
           <Grid
@@ -116,7 +131,6 @@ function UserProfile () {
         </>
       ) : <p>Please log in to view profile</p>}
     </RegularLayout>
-
   )
 }
 
@@ -132,4 +146,20 @@ function _avgLevel (rating, max) {
   if (value < 40) return 'Medium'
   if (value < 60) return 'High'
   else return 'Excellent'
+}
+
+function _avgGrade (rating, max) {
+  const value = rating / max * 100
+  if (value < 2.5) return 'D'
+  if (value < 5) return 'DD'
+  if (value < 7.5) return 'DDD'
+  if (value < 10) return 'C'
+  if (value < 15) return 'CC'
+  if (value < 20) return 'CCC'
+  if (value < 30) return 'B'
+  if (value < 40) return 'BB'
+  if (value < 50) return 'BBB'
+  if (value < 60) return 'A'
+  if (value < 90) return 'AA'
+  else return 'AAA'
 }
