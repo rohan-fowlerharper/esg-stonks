@@ -8,13 +8,6 @@ export function getStonks () {
     .then(res => res.body)
 }
 
-export function getUserStonks (token) {
-  return request
-    .get(`${stonksUrl}/user/stonks`)
-    .set('Authorization', `Bearer ${token}`)
-    .then(res => res.body)
-}
-
 export function getGoals (stockSymbol) {
   return request
     .get(`${stonksUrl}/goals/${stockSymbol}`)
@@ -23,9 +16,34 @@ export function getGoals (stockSymbol) {
     })
 }
 
-export function addUserStonks (stockSymbol) {
+export function getUserStonks (token) {
   return request
-    .post(`${stonksUrl}/user/stonks`)
-    .send({ stockSymbol })
+    .get(`${stonksUrl}/user/stonks`)
+    .set('Authorization', `Bearer ${token}`)
     .then(res => res.body)
+}
+
+export function getUserFavourites (token) {
+  return request
+    .get(`${stonksUrl}/user/favs`)
+    .set('Authorization', `Bearer ${token}`)
+    .then(res => res.body)
+}
+
+export function addUserFavourite (stonkId, token) {
+  console.log('add', stonkId)
+  return request
+    .post(`${stonksUrl}/user/favs`)
+    .set('Authorization', `Bearer ${token}`)
+    .send({ stonkId })
+    .then(res => res)
+}
+
+export function removeUserFavourite (stonkId, token) {
+  console.log('remove', stonkId)
+  return request
+    .delete(`${stonksUrl}/user/favs`)
+    .set('Authorization', `Bearer ${token}`)
+    .send({ stonkId })
+    .then(res => res)
 }
