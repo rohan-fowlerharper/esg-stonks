@@ -1,6 +1,6 @@
 import React from 'react'
 import '@testing-library/jest-dom'
-import { screen, render } from '@testing-library/react'
+import { screen, render, fireEvent } from '@testing-library/react'
 import { Provider } from 'react-redux'
 
 import SearchBar from '../SearchBar'
@@ -39,8 +39,17 @@ describe('<SearchBar />', () => {
         <SearchBar />
       </Provider>
     )
-    const inputValue = screen.getByPlaceholderText('Symbol... (e.g. AAPL)')
-    expect(inputValue.value).toBe('')
-    // screen.debug()
+    const searchBar = screen.getByPlaceholderText('Symbol... (e.g. AAPL)')
+    expect(searchBar.value).toBe('')
+  })
+  it('correct input value on search', () => {
+    render(
+      <Provider store={fakeStore}>
+        <SearchBar searchTerm={'fb'} />
+      </Provider>
+    )
+    const searchBar = screen.getByPlaceholderText('Symbol... (e.g. AAPL)')
+    fireEvent.change(searchBar, { target: { value: 'fb' } })
+    expect(searchBar.value).toBe('fb')
   })
 })
