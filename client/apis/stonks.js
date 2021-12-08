@@ -31,7 +31,6 @@ export function getUserFavourites (token) {
 }
 
 export function addUserFavourite (stonkId, token) {
-  console.log('add', stonkId)
   return request
     .post(`${stonksUrl}/user/favs`)
     .set('Authorization', `Bearer ${token}`)
@@ -40,7 +39,6 @@ export function addUserFavourite (stonkId, token) {
 }
 
 export function removeUserFavourite (stonkId, token) {
-  console.log('remove', stonkId)
   return request
     .delete(`${stonksUrl}/user/favs`)
     .set('Authorization', `Bearer ${token}`)
