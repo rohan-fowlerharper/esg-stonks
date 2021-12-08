@@ -1,6 +1,6 @@
 exports.up = function (knex) {
   return knex.schema.createTable('stonks', t => {
-    t.increments('id')
+    t.increments('id').unique().primary()
     t.string('company_name')
     t.integer('esg_id').notNullable().unique()
     t.string('exchange_symbol')
