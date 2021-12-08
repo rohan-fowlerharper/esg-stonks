@@ -8,6 +8,14 @@ jest.mock('../../db/stonks')
 jest.mock('../../util/goals')
 jest.mock('../../util/auth')
 
+beforeAll(() => {
+  checkJwt.mockImplementation((req, res, next) => {
+    req.user = {
+      sub: 'auth0|12345'
+    }
+    next()
+  })
+})
 describe('GET /api/v1/stonks/name/:name', () => {
   const fakeStonks = [{
     id: 1,
@@ -263,14 +271,7 @@ describe('ERROR handling', () => {
   })
 })
 
-describe('getUserStonks', () => {
-  checkJwt.mockImplementation((req, res, next) => {
-    req.user = {
-      sub: 'auth0|12345'
-    }
-    next()
-  })
-
+describe('GET /api/v1/stonks/user/stonks', () => {
   const fakeStonks = [{
     esgId: 1,
     stockSymbol: 'FB',
@@ -309,8 +310,107 @@ describe('getUserStonks', () => {
       .get('/api/v1/stonks/user/stonks')
       .expect(200)
       .then(res => {
-        console.log(res)
         expect(res.body).toEqual(fakeStonks)
+        return null
+      })
+  })
+})
+
+describe('POST /api/v1/stonks/user/stonks', () => {
+  checkJwt.mockImplementation((req, res, next) => {
+    req.user = {
+      sub: 'auth0|12345'
+    }
+    next()
+  })
+
+  db.addUserFavourite.mockResolvedValue([6])
+
+  it('should call addUserFavourite with params', () => {
+    return request(server)
+      .post('/api/v1/stonks/user/favs')
+      .send({
+        stonkId: 5
+      })
+      .expect(201)
+      .then(() => {
+        expect(checkJwt).toHaveBeenCalled()
+        expect(db.addUserFavourite).toHaveBeenCalledWith('auth0|12345', 5)
+        return null
+      })
+  })
+})
+
+describe('DEL /api/v1/stonks/user/favs', () => {
+  checkJwt.mockImplementation((req, res, next) => {
+    req.user = {
+      sub: 'auth0|12345'
+    }
+    next()
+  })
+
+  db.removeUserFavourite.mockResolvedValue(1)
+
+  it('should call removeUserFavourite with params', () => {
+    return request(server)
+      .delete('/api/v1/stonks/user/favs')
+      .send({
+        stonkId: 5
+      })
+      .expect(204)
+      .then(res => {
+        expect(checkJwt).toHaveBeenCalled()
+        expect(db.removeUserFavourite).toHaveBeenCalledWith('auth0|12345', 5)
+        return null
+      })
+  })
+})
+
+describe('GET /api/v1/stonks/user/favs', () => {
+  checkJwt.mockImplementation((req, res, next) => {
+    req.user = {
+      sub: 'auth0|12345'
+    }
+  })
+
+  db.getUserFavourites.mockResolvedValue({
+    user: 'auth0|12345',
+    stonks: [
+      1,
+      2,
+      3,
+      4,
+      5
+    ]
+  })
+
+  it('calls getUserFavourites', () => {
+    return request(server)
+      .get('/api/v1/stonks/user/favs')
+      .expect(200)
+      .then(() => {
+        expect(db.getUserFavourites).toHaveBeenCalledWith('auth0|12345')
+        return null
+      })
+  })
+
+  it('returns the ids of users favourite stonks', () => {
+    return request(server)
+      .get('/api/v1/stonks/user/favs')
+      .expect(200)
+      .then(res => {
+        expect(res.body).toEqual({
+          user: 'auth0|12345',
+          stonks: [
+            1,
+            2,
+            3,
+            4,
+            5
+          ]
+        })
+        expect(res.body.user).toEqual('auth0|12345')
+        expect(res.body.stonks[0]).toBe(1)
         return null
       })
   })

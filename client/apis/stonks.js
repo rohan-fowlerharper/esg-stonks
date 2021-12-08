@@ -8,6 +8,14 @@ export function getStonks () {
     .then(res => res.body)
 }
 
+export function getGoals (stockSymbol) {
+  return request
+    .get(`${stonksUrl}/goals/${stockSymbol}`)
+    .then(res => {
+      return res.body
+    })
+}
+
 export function getUserStonks (token) {
   return request
     .get(`${stonksUrl}/user/stonks`)
@@ -15,10 +23,25 @@ export function getUserStonks (token) {
     .then(res => res.body)
 }
 
-export function getGoals (stockSymbol) {
+export function getUserFavourites (token) {
   return request
-    .get(`${stonksUrl}/goals/${stockSymbol}`)
-    .then(res => {
-      return res.body
-    })
+    .get(`${stonksUrl}/user/favs`)
+    .set('Authorization', `Bearer ${token}`)
+    .then(res => res.body)
+}
+
+export function addUserFavourite (stonkId, token) {
+  return request
+    .post(`${stonksUrl}/user/favs`)
+    .set('Authorization', `Bearer ${token}`)
+    .send({ stonkId })
+    .then(res => res)
+}
+
+export function removeUserFavourite (stonkId, token) {
+  return request
+    .delete(`${stonksUrl}/user/favs`)
+    .set('Authorization', `Bearer ${token}`)
+    .send({ stonkId })
+    .then(res => res)
 }

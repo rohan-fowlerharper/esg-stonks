@@ -4,12 +4,14 @@ import {
   Center,
   Image,
   useColorModeValue,
-  Heading
+  Heading,
+  HStack
 } from '@chakra-ui/react'
 
 import RatingBar from './RatingBar'
 import Rating from './Rating'
 import TickersLabel from './TickersLabel'
+import FavouriteStonkButton from './FavouriteStonkButton'
 
 function UserCompanyTile ({ stonk }) {
   const image = stonk.stockSymbol && `https://s3.polygon.io/logos/${stonk.stockSymbol.toLowerCase()}/logo.png`
@@ -48,7 +50,11 @@ function UserCompanyTile ({ stonk }) {
         >
           {stonk.companyName}
         </Heading>
-        <TickersLabel exchangeSymbol={stonk.exchangeSymbol} stockSymbol={stonk.stockSymbol} />
+        <HStack justifyContent='space-between'>
+          <TickersLabel exchangeSymbol={stonk.exchangeSymbol} stockSymbol={stonk.stockSymbol} />
+          <FavouriteStonkButton stonkId={stonk.id} />
+        </HStack>
+
         <Rating
           rating={stonk.totalGrade}
           label='Overall'

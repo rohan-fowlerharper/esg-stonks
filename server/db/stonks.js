@@ -29,9 +29,40 @@ async function getUserStonks (id, db = connection) {
   return response
 }
 
+function getUserFavourites (id, db = connection) {
+  return db('favourite_stonks')
+    .where('favourite_stonks.user_id', id)
+    .select('stonk_id as stonkId')
+    .then(ids => {
+      return {
+        user: id,
+        stonks: ids.map(id => id.stonkId)
+      }
+    })
+}
+
+function addUserFavourite (id, stonksId, db = connection) {
+  return db('favourite_stonks')
+    .insert({
+      user_id: id,
+      stonk_id: stonksId
+    })
+}
+
+function removeUserFavourite (id, stonksId, db = connection) {
+  return db('favourite_stonks')
+    .where({
+      user_id: id,
+      stonk_id: stonksId
+    })
+    .del()
+}
 module.exports = {
   getUserStonks,
   getStonks,
   getStonksByName,
-  getStonkBySymbol
+  getStonkBySymbol,
+  addUserFavourite,
+  getUserFavourites,
+  removeUserFavourite
 }

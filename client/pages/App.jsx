@@ -1,5 +1,9 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Routes, Route } from 'react-router-dom'
+import { useAuth0 } from '@auth0/auth0-react'
+import { useDispatch } from 'react-redux'
+
+import { fetchUserFavourites } from '../redux/actions/favouriteStonks'
 
 import Home from './Home'
 import Companies from './Companies'
@@ -11,6 +15,22 @@ import EditProfile from '../components/EditProfile'
 import Footer from '../components/Footer'
 
 function App () {
+  const { isAuthenticated, getAccessTokenSilently } = useAuth0()
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    (async () => {
+      if (isAuthenticated) {
+        try {
+          const token = await getAccessTokenSilently()
+          dispatch(fetchUserFavourites(token))
+        } catch (err) {
+          console.error(err)
+        }
+      }
+    })()
+  }, [isAuthenticated])
+
   return (
     <>
       <Navigation />

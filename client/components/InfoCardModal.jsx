@@ -10,10 +10,10 @@ function InfoCardModal () {
 
       <Modal blockScrollOnMount={false} isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
-        <ModalContent>
+        <ModalContent mx={4}>
           <ModalHeader>ESG scores explained</ModalHeader>
           <ModalCloseButton />
-          <ModalBody>
+          <ModalBody mb={4}>
             <Image src="/images/esg-score-diagram.png" />
             <Text>
               <Text as={'span'} color={'green.400'} fontWeight='bold'>A{' '}</Text>
