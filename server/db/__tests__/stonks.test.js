@@ -81,18 +81,16 @@ describe('getStonksByName', () => {
 describe('getUserStonks', () => {
   const id = 'auth0|619abd1de3a44d00699e917d'
   it('return an array of the users favourite stonks', () => {
-    expect.assertions(3)
+    expect.assertions(1)
     return db.getUserStonks(id, testDb)
       .then(stonks => {
-        expect(stonks).toHaveLength(4)
-        expect(stonks[0].stockSymbol).toBe('PFE')
-        expect(stonks[1].companyName).toBe('Facebook, Inc.')
+        expect(stonks).toHaveLength(0)
         return null
       })
   })
 })
 
-describe('addUserStonks', () => {
+describe('addUserStonks, getUserFavourites', () => {
   const id = 'auth0|619abd1de3a44d00699e917d'
   const stonksId = 6
   it('adds a new stonk to the users favourite stonks', () => {
@@ -102,22 +100,13 @@ describe('addUserStonks', () => {
         return db.getUserStonks(id, testDb)
       })
       .then(stonks => {
-        expect(stonks).toHaveLength(5)
-        expect(stonks[0].stockSymbol).toBe('PFE')
-        expect(stonks[0].companyName).toBe('Pfizer Inc.')
-        return null
+        expect(stonks).toHaveLength(1)
+        expect(stonks[0].id).toBe(stonksId)
+        return db.getUserFavourites(id, testDb)
       })
-  })
-})
-
-describe('getUserFavourites', () => {
-  const userId = 'auth0|619abd1de3a44d00699e917d'
-  it('returns an array of the ids, of users favourite stonks', () => {
-    expect.assertions(2)
-    return db.getUserFavourites(userId, testDb)
-      .then(favourites => {
-        expect(favourites.user).toBe(userId)
-        expect(favourites.stonks).toHaveLength(4)
+      .then(favs => {
+        console.log(favs)
+        expect(favs.user).toBe(id)
         return null
       })
   })
