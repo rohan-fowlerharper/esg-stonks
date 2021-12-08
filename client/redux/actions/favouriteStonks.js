@@ -3,12 +3,13 @@ import { ADD_FAVOURITE_STONK, REMOVE_FAVOURITE_STONK, SET_FAVOURITE_STONKS } fro
 
 export function addFavouriteStonk (stonkId, token) {
   return dispatch => {
-    addUserFavourite(stonkId, token)
+    return addUserFavourite(stonkId, token)
       .then(() => {
-        return dispatch({
+        dispatch({
           type: ADD_FAVOURITE_STONK,
           stonkId
         })
+        return null
       })
       .catch(() => null)
   }
@@ -31,11 +32,10 @@ export function fetchUserFavourites (token) {
   return dispatch => {
     return getUserFavourites(token)
       .then(favourites => {
-        dispatch({
+        return dispatch({
           type: SET_FAVOURITE_STONKS,
           stonkIds: favourites.stonks
         })
-        return null
       })
       .catch(() => dispatch({
         type: SET_FAVOURITE_STONKS,
