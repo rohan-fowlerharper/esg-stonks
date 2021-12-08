@@ -41,10 +41,10 @@ function getUserFavourites (id, db = connection) {
     })
 }
 
-function addUserFavourite (id, stonksId, db = connection) {
+function addUserFavourite (userId, stonksId, db = connection) {
   return db('favourite_stonks')
     .insert({
-      user_id: id,
+      user_id: userId,
       stonk_id: stonksId
     })
 }
