@@ -116,7 +116,6 @@ describe('getUserFavourites', () => {
     expect.assertions(2)
     return db.getUserFavourites(userId, testDb)
       .then(favourites => {
-        console.log(favourites)
         expect(favourites).toHaveLength(5)
         expect(favourites[0].stonkId).toBe(1)
         return null
