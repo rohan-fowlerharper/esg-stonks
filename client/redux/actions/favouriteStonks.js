@@ -4,12 +4,11 @@ import { ADD_FAVOURITE_STONK, REMOVE_FAVOURITE_STONK, SET_FAVOURITE_STONKS } fro
 export function addFavouriteStonk (stonkId, token) {
   return dispatch => {
     addUserFavourite(stonkId, token)
-      .then(res => {
-        dispatch({
+      .then(() => {
+        return dispatch({
           type: ADD_FAVOURITE_STONK,
           stonkId
         })
-        return null
       })
       .catch(() => null)
   }
@@ -18,12 +17,11 @@ export function addFavouriteStonk (stonkId, token) {
 export function removeFavouriteStonk (stonkId, token) {
   return dispatch => {
     return removeUserFavourite(stonkId, token)
-      .then(res => {
-        dispatch({
+      .then(() => {
+        return dispatch({
           type: REMOVE_FAVOURITE_STONK,
           stonkId
         })
-        return null
       })
       .catch(() => null)
   }
