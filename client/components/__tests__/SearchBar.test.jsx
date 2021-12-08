@@ -33,18 +33,21 @@ const fakeStore = {
 }
 
 describe('<SearchBar />', () => {
-  beforeEach(() => {
+  it('input value empty by default', () => {
     render(
       <Provider store={fakeStore}>
         <SearchBar />
       </Provider>
     )
-  })
-  it('input value empty by default', () => {
     const searchBar = screen.getByPlaceholderText('Symbol... (e.g. AAPL)')
     expect(searchBar.value).toBe('')
   })
-  it.skip('correct input value on search', () => {
+  it('correct input value on search', () => {
+    render(
+      <Provider store={fakeStore}>
+        <SearchBar searchTerm={'fb'} />
+      </Provider>
+    )
     const searchBar = screen.getByPlaceholderText('Symbol... (e.g. AAPL)')
     fireEvent.change(searchBar, { target: { value: 'fb' } })
     expect(searchBar.value).toBe('fb')
