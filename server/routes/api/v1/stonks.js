@@ -68,7 +68,6 @@ router.get('/user/stonks', checkJwt, (req, res) => {
   const userId = req.user?.sub
   db.getUserStonks(userId)
     .then(stonks => {
-      console.log(stonks)
       return res.json(stonks)
     })
     .catch(err => {
@@ -93,7 +92,6 @@ router.get('/user/favs', checkJwt, (req, res) => {
 router.post('/user/favs', checkJwt, (req, res) => {
   const userId = req.user?.sub
   const stonkId = req.body.stonkId
-  console.log(userId, stonkId)
   db.addUserFavourite(userId, stonkId)
     .then(() => {
       return res.sendStatus(201)
