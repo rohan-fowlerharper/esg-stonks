@@ -77,13 +77,39 @@ router.get('/user/stonks', checkJwt, (req, res) => {
     })
 })
 
+router.get('/user/favs', checkJwt, (req, res) => {
+  const userId = req.user?.sub
+  db.getUserFavourites(userId)
+    .then(ids => {
+      return res.json(ids)
+    })
+    .catch(err => {
+      console.log(err)
+      return res.status(500).send('There was an error')
+    })
+})
+
 // TODO: Finish remaining tests for this route
-router.post('/user/stonks', checkJwt, (req, res) => {
+router.post('/user/favs', checkJwt, (req, res) => {
   const userId = req.user?.sub
   const stonkId = req.body.stonkId
-  db.addUserStonks(userId, stonkId)
+  console.log(userId, stonkId)
+  db.addUserFavourite(userId, stonkId)
     .then(() => {
-      return res.sendStatus(200)
+      return res.sendStatus(201)
+    })
+    .catch(err => {
+      console.log(err)
+      return res.status(500).send('There was an error')
+    })
+})
+
+router.delete('/user/favs', checkJwt, (req, res) => {
+  const userId = req.user?.sub
+  const stonkId = req.body.stonkId
+  db.removeUserFavourite(userId, stonkId)
+    .then(() => {
+      return res.sendStatus(204)
     })
     .catch(err => {
       console.log(err)

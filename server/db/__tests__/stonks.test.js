@@ -109,3 +109,17 @@ describe('addUserStonks', () => {
       })
   })
 })
+
+describe('getUserFavourites', () => {
+  const userId = 'auth0|619abd1de3a44d00699e917d'
+  it('returns an array of the ids, of users favourite stonks', () => {
+    expect.assertions(2)
+    return db.getUserFavourites(userId, testDb)
+      .then(favourites => {
+        console.log(favourites)
+        expect(favourites).toHaveLength(5)
+        expect(favourites[0].stonkId).toBe(1)
+        return null
+      })
+  })
+})

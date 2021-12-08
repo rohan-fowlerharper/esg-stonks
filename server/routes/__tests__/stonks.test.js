@@ -8,6 +8,14 @@ jest.mock('../../db/stonks')
 jest.mock('../../util/goals')
 jest.mock('../../util/auth')
 
+beforeAll(() => {
+  checkJwt.mockImplementation((req, res, next) => {
+    req.user = {
+      sub: 'auth0|12345'
+    }
+    next()
+  })
+})
 describe('GET /api/v1/stonks/name/:name', () => {
   const fakeStonks = [{
     id: 1,
@@ -264,13 +272,6 @@ describe('ERROR handling', () => {
 })
 
 describe('GET /api/v1/stonks/user/stonks', () => {
-  checkJwt.mockImplementation((req, res, next) => {
-    req.user = {
-      sub: 'auth0|12345'
-    }
-    next()
-  })
-
   const fakeStonks = [{
     esgId: 1,
     stockSymbol: 'FB',
@@ -329,7 +330,7 @@ describe('POST /api/v1/stonks/user/stonks', () => {
     companyName: 'Pfizer Inc.',
     stockSymbol: 'PFE'
   }
-  db.addUserStonks.mockResolvedValue(fakeStonk)
+  db.addUserStonk.mockResolvedValue(fakeStonk)
 
   it('calls checkJwt', () => {
     return request(server)
@@ -340,12 +341,65 @@ describe('POST /api/v1/stonks/user/stonks', () => {
         return null
       })
   })
-  it.skip('calls addUserStonks', () => {
+  it('calls addUserStonks', () => {
     return request(server)
       .post('/api/v1/stonks/user/stonks')
+      .send({
+        stonkId: 6
+      })
       .expect(200)
       .then(() => {
-        expect(db.addUserStonks).toHaveBeenCalledWith('auth0|12345', fakeStonk.id)
+        expect(db.addUserStonk).toHaveBeenCalledWith('auth0|12345', fakeStonk.id)
+        return null
+      })
+  })
+})
+
+describe('GET /api/v1/stonks/user/favs', () => {
+  checkJwt.mockImplementation((req, res, next) => {
+    req.user = {
+      sub: 'auth0|12345'
+    }
+  })
+
+  db.getUserFavourites.mockResolvedValue({
+    user: 'auth0|12345',
+    stonks: [
+      1,
+      2,
+      3,
+      4,
+      5
+    ]
+  })
+
+  it('calls getUserFavourites', () => {
+    return request(server)
+      .get('/api/v1/stonks/user/favs')
+      .expect(200)
+      .then(() => {
+        expect(db.getUserFavourites).toHaveBeenCalledWith('auth0|12345')
+        return null
+      })
+  })
+
+  it('returns the ids of users favourite stonks', () => {
+    return request(server)
+      .get('/api/v1/stonks/user/favs')
+      .expect(200)
+      .then(res => {
+        expect(res.body).toEqual({
+          user: 'auth0|12345',
+          stonks: [
+            1,
+            2,
+            3,
+            4,
+            5
+          ]
+        })
+        expect(res.body.user).toEqual('auth0|12345')
+        expect(res.body.stonks[0]).toBe(1)
         return null
       })
   })

@@ -26,7 +26,19 @@ function getUserStonks (id, db = connection) {
     .select(allQueryFields)
 }
 
-function addUserStonks (id, stonksId, db = connection) {
+function getUserFavourites (id, db = connection) {
+  return db('favourite_stonks')
+    .where('favourite_stonks.user_id', id)
+    .select('stonk_id as stonkId')
+    .then(ids => {
+      return {
+        user: id,
+        stonks: ids.map(id => id.stonkId)
+      }
+    })
+}
+
+function addUserFavourite (id, stonksId, db = connection) {
   return db('favourite_stonks')
     .insert({
       user_id: id,
@@ -35,10 +47,22 @@ function addUserStonks (id, stonksId, db = connection) {
     .then(() => getUserStonks(id, db))
 }
 
+// TODO: Add accompanying test for this function
+function removeUserFavourite (id, stonksId, db = connection) {
+  return db('favourite_stonks')
+    .where({
+      user_id: id,
+      stonk_id: stonksId
+    })
+    .del()
+    .then(() => getUserStonks(id, db))
+}
 module.exports = {
   getUserStonks,
   getStonks,
   getStonksByName,
   getStonkBySymbol,
-  addUserStonks
+  addUserFavourite,
+  getUserFavourites,
+  removeUserFavourite
 }
