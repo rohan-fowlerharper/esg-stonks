@@ -1,36 +1,29 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { AiOutlineStar, AiFillStar } from 'react-icons/ai'
 import { useAuth0 } from '@auth0/auth0-react'
-import { addUserStonks, getUserStonks } from '../apis/stonks'
+import { addUserFavourite, removeUserFavourite } from '../apis/stonks'
+import { useSelector } from 'react-redux'
 
-function FavouriteStonkButton ({ stockSymbol }) {
-  const [isFavourite, setIsFavourite] = useState(false)
+function FavouriteStonkButton ({ stonkId }) {
   const { getAccessTokenSilently } = useAuth0()
+  const isFavourite = useSelector(state => state.favouriteStonks.includes(stonkId))
 
-  useEffect(() => {
-    getUserStonks(getAccessTokenSilently)
-      .then(({ data }) => {
-        const { favourites } = data
-        setIsFavourite(favourites.includes(stockSymbol))
-        return null
-      })
-      .catch(err => console.log(err))
-  })
-
-  const handleClick = () => {
+  async function handleClick () {
+    const token = await getAccessTokenSilently()
     if (isFavourite) {
-      addUserStonks(stockSymbol)
+      await removeUserFavourite(stonkId, token)
+    } else {
+      await addUserFavourite(stonkId, token)
     }
   }
 
   return (
     <>
-      {/* { isFavourite
-        ? <AiFillStar onClick={handleClick} />
-        : <AiOutlineStar onClick={handleClick} />
-      } */}
-      {isFavourite && <AiFillStar onClick={handleClick} />}
-      {!isFavourite && <AiOutlineStar onClick={handleClick} />}
+      {isFavourite ? (
+        <AiFillStar onClick={handleClick} />
+      ) : (
+        <AiOutlineStar onClick={handleClick} />
+      )}
     </>
   )
 }

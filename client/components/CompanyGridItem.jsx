@@ -79,8 +79,11 @@ function CompanyGridItem ({ stonk }) {
             </Heading>
           </HStack>
           {/* icon to be moved, todo: use closeicon and checkicon when it's selected */}
-          <ActiveStonkButton justifyContent='flex-end' stockSymbol={stonk.stockSymbol} />
-          <FavouriteStonkButton justifyContent='flex-end' stockSymbol={stonk.stockSymbol} />
+          <HStack justifyContent='flex-end'>
+            <ActiveStonkButton stockSymbol={stonk.stockSymbol} />
+            <FavouriteStonkButton stonkId={stonk.id} />
+          </HStack>
+
         </Flex>
 
         <RatingBar rating={stonk.totalScore} max={3000} mt={4} />
