@@ -50,7 +50,6 @@ function addUserFavourite (id, stonksId, db = connection) {
     .then(() => getUserStonks(id, db))
 }
 
-// TODO: Add accompanying test for this function
 function removeUserFavourite (id, stonksId, db = connection) {
   return db('favourite_stonks')
     .where({
