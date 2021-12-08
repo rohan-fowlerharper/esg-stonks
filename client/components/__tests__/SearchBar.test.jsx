@@ -32,20 +32,19 @@ const fakeStore = {
   subscribe: jest.fn()
 }
 
-describe.skip('<SearchBar />', () => {
+describe('<SearchBar />', () => {
   beforeEach(() => {
     render(
       <Provider store={fakeStore}>
-        <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm}/>
+        <SearchBar />
       </Provider>
     )
   })
   it('input value empty by default', () => {
     const searchBar = screen.getByPlaceholderText('Symbol... (e.g. AAPL)')
     expect(searchBar.value).toBe('')
-    screen.debug()
   })
-  it('correct input value on search', () => {
+  it.skip('correct input value on search', () => {
     const searchBar = screen.getByPlaceholderText('Symbol... (e.g. AAPL)')
     fireEvent.change(searchBar, { target: { value: 'fb' } })
     expect(searchBar.value).toBe('fb')
