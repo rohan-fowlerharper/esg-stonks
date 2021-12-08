@@ -48,6 +48,10 @@ function Companies () {
       </Text>
       <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm}/>
       <br />
+      <Center>
+        <InfoCardModal />
+      </Center>
+      <br />
       <Grid
         templateColumns={[
           'repeat(2, minmax(150px, 1fr))',

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 
 import { getGoals } from '../apis/stonks'
 
-import { Box, Text, Heading, List, ListItem, ListIcon, HStack, Tooltip, Divider } from '@chakra-ui/react'
+import { Box, Text, Heading, List, ListItem, ListIcon, HStack, Tooltip, Divider, Center } from '@chakra-ui/react'
 import { ExternalLinkIcon } from '@chakra-ui/icons'
 
 const CompanyGoals = ({ stockSymbol }) => {
@@ -25,7 +25,9 @@ const CompanyGoals = ({ stockSymbol }) => {
     <Box
       w='full'
     >
-      <Heading as='h2' mb={2}>{stockSymbol}</Heading>
+      <Center>
+        <Heading as='h2' mb={2}>{stockSymbol}</Heading>
+      </Center>
       <List spacing={4}>
         {goalsToShow.map((goal, idx) => {
           return (
