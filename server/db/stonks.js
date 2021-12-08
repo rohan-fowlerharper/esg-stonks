@@ -47,7 +47,6 @@ function addUserFavourite (id, stonksId, db = connection) {
       user_id: id,
       stonk_id: stonksId
     })
-    .then(() => getUserStonks(id, db))
 }
 
 function removeUserFavourite (id, stonksId, db = connection) {
@@ -57,7 +56,6 @@ function removeUserFavourite (id, stonksId, db = connection) {
       stonk_id: stonksId
     })
     .del()
-    .then(() => getUserStonks(id, db))
 }
 module.exports = {
   getUserStonks,

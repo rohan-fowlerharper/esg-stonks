@@ -324,31 +324,43 @@ describe('POST /api/v1/stonks/user/stonks', () => {
     next()
   })
 
-  const fakeStonk = {
-    id: 6,
-    companyName: 'Pfizer Inc.',
-    stockSymbol: 'PFE'
-  }
-  db.addUserStonk.mockResolvedValue(fakeStonk)
+  db.addUserFavourite.mockResolvedValue([6])
 
-  it('calls checkJwt', () => {
+  it('should call addUserFavourite with params', () => {
     return request(server)
-      .post('/api/v1/stonks/user/stonks')
-      .expect(200)
+      .post('/api/v1/stonks/user/favs')
+      .send({
+        stonkId: 5
+      })
+      .expect(201)
       .then(() => {
         expect(checkJwt).toHaveBeenCalled()
+        expect(db.addUserFavourite).toHaveBeenCalledWith('auth0|12345', 5)
         return null
       })
   })
-  it('calls addUserStonks', () => {
+})
+
+describe('DEL /api/v1/stonks/user/favs', () => {
+  checkJwt.mockImplementation((req, res, next) => {
+    req.user = {
+      sub: 'auth0|12345'
+    }
+    next()
+  })
+
+  db.removeUserFavourite.mockResolvedValue(1)
+
+  it('should call removeUserFavourite with params', () => {
     return request(server)
-      .post('/api/v1/stonks/user/stonks')
+      .delete('/api/v1/stonks/user/favs')
       .send({
-        stonkId: 6
+        stonkId: 5
       })
-      .expect(200)
-      .then(() => {
-        expect(db.addUserStonk).toHaveBeenCalledWith('auth0|12345', fakeStonk.id)
+      .expect(204)
+      .then(res => {
+        expect(checkJwt).toHaveBeenCalled()
+        expect(db.removeUserFavourite).toHaveBeenCalledWith('auth0|12345', 5)
         return null
       })
   })
