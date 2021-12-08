@@ -63,6 +63,7 @@ function UserCompanyTile ({ stonk }) {
           rating={stonk.totalScore}
           max={3000}
           mb={4}
+          level={stonk.totalLevel}
         />
 
         <Rating
@@ -73,6 +74,7 @@ function UserCompanyTile ({ stonk }) {
           rating={stonk.environmentScore}
           max={1000}
           mb={2}
+          level={stonk.environmentLevel}
         />
 
         <Rating
@@ -83,6 +85,7 @@ function UserCompanyTile ({ stonk }) {
           rating={stonk.socialScore}
           max={1000}
           mb={2}
+          level={stonk.socialLevel}
         />
 
         <Rating
@@ -93,6 +96,7 @@ function UserCompanyTile ({ stonk }) {
           rating={stonk.governanceScore}
           max={1000}
           mb={2}
+          level={stonk.governanceLevel}
         />
       </Box>
     </Box>
