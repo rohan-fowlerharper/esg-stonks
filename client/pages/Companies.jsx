@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchStonks } from '../redux/actions/stonks'
-import { useAuth0 } from '@auth0/auth0-react'
 import { Heading, Text, Grid, useColorModeValue, Box, Center } from '@chakra-ui/react'
 
 import CompanyGridItem from '../components/CompanyGridItem'
@@ -17,19 +15,16 @@ function Companies () {
   const { stonks, activeStonks } = useSelector(state => state)
   const isFull = activeStonks?.every(el => el !== null)
   const [searchTerm, setSearchTerm] = useState('')
-  const { isAuthenticated, getAccessTokenSilently, user } = useAuth0()
 
   useEffect(() => {
     (async () => {
       try {
-        const token = await getAccessTokenSilently()
-        console.log(token)
-        dispatch(fetchStonks(token))
+        dispatch(fetchStonks())
       } catch (err) {
         console.error(err)
       }
     })()
-  }, [getAccessTokenSilently])
+  }, [])
 
   useEffect(() => {
     if (searchTerm === '') return true
@@ -43,19 +38,6 @@ function Companies () {
 
   return (
     <RegularLayout>
-      <Box>
-        {isAuthenticated ? (
-          <>
-            <Link to={'/profile'}>
-              <h2>Welcome {user.name}</h2>
-              <p>Here is some restricted content: </p>
-            </Link>
-          </>
-        ) : (
-          <p>Please log in to see your profile and restricted content</p>
-
-        )}
-      </Box>
       {/* extract as page header component */}
       <Heading as='h1' size='2xl' my={[2, null, 6]}>
         Company Listings
