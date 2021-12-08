@@ -66,10 +66,10 @@ function Companies () {
           mt={4}
           w='full'
         >
-          <Center>
+          <Center mb={4}>
             <InfoCardModal />
           </Center>
-          <br/>
+
           <CompanyComparisons activeStonks={activeStonks} stonks={stonks} />
         </Box>
       ) : (
