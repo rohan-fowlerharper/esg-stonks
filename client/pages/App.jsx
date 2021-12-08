@@ -23,7 +23,6 @@ function App () {
       if (isAuthenticated) {
         try {
           const token = await getAccessTokenSilently()
-          console.log(token)
           dispatch(fetchUserFavourites(token))
         } catch (err) {
           console.error(err)
