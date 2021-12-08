@@ -81,7 +81,7 @@ function CompanyGridItem ({ stonk }) {
           <ActiveStonkButton justifyContent='flex-end' stockSymbol={stonk.stockSymbol} />
         </Flex>
 
-        <RatingBar rating={stonk.totalScore} max={3000} mt={4} />
+        <RatingBar rating={stonk.totalScore} max={3000} mt={4} level={stonk.totalLevel}/>
 
       </Box>
       <CompanyAccordion stonk={stonk}/>
