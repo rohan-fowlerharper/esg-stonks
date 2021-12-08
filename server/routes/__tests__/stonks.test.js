@@ -310,7 +310,6 @@ describe('GET /api/v1/stonks/user/stonks', () => {
       .get('/api/v1/stonks/user/stonks')
       .expect(200)
       .then(res => {
-        console.log(res)
         expect(res.body).toEqual(fakeStonks)
         return null
       })
